@@ -1,5 +1,5 @@
 {
-  "name": "textlint-rule-ja-katakana-terminal-long-vowel",
+  "name": "@fal-works/textlint-rule-ja-katakana-terminal-long-vowel",
   "version": "0.1.0",
   "description": "textlint rule for Japanese katakana terminal long vowel based on Microsoft Japanese Localization Style Guide",
   "type": "module",
