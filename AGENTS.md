@@ -4,7 +4,7 @@
 
 - 開発過程で参照する資料の保存場所: `local/` ディレクトリ
 - 技術スタック:
-    - Node.js v24+
-    - `textlint` v15+
+    - Node.js (dev: v24+, support: v20+)
+    - `textlint` (v15+)
     - テストランナー: Mocha（`textlint-tester` が Mocha ベースのため）
     - パッケージマネージャ: pnpm
