@@ -4,6 +4,12 @@
   "description": "textlint rule for Japanese katakana terminal long vowel based on Microsoft Japanese Localization Style Guide",
   "type": "module",
   "exports": "./src/index.js",
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "Apache-2.0",
   "engines": {
     "node": ">=20"
   },
@@ -11,7 +17,6 @@
     "test": "mocha --timeout 10000 'test/**/*.test.js'"
   },
   "keywords": ["textlint", "textlint-rule", "japanese", "katakana"],
-  "license": "MIT",
   "peerDependencies": {
     "textlint": ">=15"
   },
