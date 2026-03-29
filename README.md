@@ -1,4 +1,4 @@
-# textlint-rule-ja-katakana-terminal-long-vowel
+# textlint-rule-ja-katakana-prolonged-sound-mark
 
 カタカナ語末尾の長音符（ー）を検査する [textlint](https://textlint.github.io/) ルールです。
 
@@ -7,7 +7,7 @@
 ## インストール
 
 ```sh
-pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-terminal-long-vowel
+pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-prolonged-sound-mark
 ```
 
 ## 使い方
@@ -17,7 +17,7 @@ pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-terminal-long-vowel
 ```json
 {
   "rules": {
-    "@fal-works/ja-katakana-terminal-long-vowel": true
+    "@fal-works/ja-katakana-prolonged-sound-mark": true
   }
 }
 ```
@@ -53,5 +53,5 @@ pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-terminal-long-vowel
 `--fix` オプションで自動修正できます。
 
 ```sh
-textlint --fix --rule @fal-works/ja-katakana-terminal-long-vowel <ファイル>
+textlint --fix --rule @fal-works/ja-katakana-prolonged-sound-mark <ファイル>
 ```
