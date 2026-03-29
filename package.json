@@ -1,0 +1,29 @@
+{
+  "name": "textlint-rule-ja-katakana-terminal-long-vowel",
+  "version": "0.1.0",
+  "description": "textlint rule for Japanese katakana terminal long vowel based on Microsoft Japanese Localization Style Guide",
+  "type": "module",
+  "exports": "./src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "mocha --timeout 10000 'test/**/*.test.js'"
+  },
+  "keywords": ["textlint", "textlint-rule", "japanese", "katakana"],
+  "license": "MIT",
+  "peerDependencies": {
+    "textlint": ">=15"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.5",
+    "textlint": "^15.5.2",
+    "textlint-tester": "^15.5.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "serialize-javascript": ">=7.0.5",
+      "diff": ">=8.0.3"
+    }
+  }
+}
