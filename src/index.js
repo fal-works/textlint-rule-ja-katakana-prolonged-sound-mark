@@ -1,7 +1,8 @@
 import dictionary from "./dictionary.js";
 
-// カタカナ・長音符にマッチ（ー は \u30FC）
-const KATAKANA_RE = /[\u30A0-\u30FF]+/g;
+// カタカナ（ァ-ヺ）と長音符（ー）のみにマッチ
+// \u30A0（゠）, \u30FB（・）, \u30FD-\u30FF（ヽヾヿ）は除外
+const KATAKANA_RE = /[\u30A1-\u30FA\u30FC]+/g;
 
 function createVisitor(context) {
   const { Syntax, report, RuleError, fixer, getSource, locator } = context;
