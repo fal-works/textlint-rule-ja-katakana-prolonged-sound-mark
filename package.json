@@ -17,11 +17,19 @@
     "access": "public"
   },
   "scripts": {
-    "test": "mocha --timeout 10000 'test/**/*.test.js'"
+    "test": "mocha --timeout 10000 'test/**/*.test.js'",
+    "prepublishOnly": "pnpm test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark/issues"
+  },
+  "homepage": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark#readme",
   "keywords": [
-    "textlint",
-    "textlint-rule",
+    "textlintrule",
     "japanese",
     "katakana"
   ],
