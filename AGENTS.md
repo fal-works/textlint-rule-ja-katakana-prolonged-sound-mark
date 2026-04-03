@@ -1,10 +1,13 @@
 # Introduction
 
-このプロジェクトは初期開発段階です。
+プロジェクト概要:
+- 任意の日本語テキストに含まれるカタカナ語末尾の長音符（`ー`）の有無を検査する textlint ルール
 
-- 開発過程で参照する資料の保存場所: `local/` ディレクトリ
-- 技術スタック:
-    - Node.js (dev: v24+, support: v20+)
-    - `textlint` (v15+)
-    - テストランナー: Mocha（`textlint-tester` が Mocha ベースのため）
-    - パッケージマネージャ: pnpm
+作業状況やその他の開発管理:
+- `local/` ディレクトリを参照
+
+技術スタック:
+- Node.js (dev: v24+, support: v20+)
+- `textlint` (v15+)
+- テストランナー: Mocha（`textlint-tester` が Mocha ベースのため）
+- パッケージマネージャー: pnpm
