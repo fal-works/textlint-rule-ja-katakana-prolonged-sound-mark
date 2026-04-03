@@ -13,6 +13,9 @@ importers:
 
   .:
     devDependencies:
+      '@fal-works/textlint-rule-ja-katakana-prolonged-sound-mark':
+        specifier: 'file:'
+        version: file:(textlint@15.5.2)
       mocha:
         specifier: ^11.7.5
         version: 11.7.5
@@ -44,6 +47,12 @@ packages:
 
   '@cacheable/utils@2.4.1':
     resolution: {integrity: sha512-eiFgzCbIneyMlLOmNG4g9xzF7Hv3Mga4LjxjcSC/ues6VYq2+gUbQI8JqNuw/ZM8tJIeIaBGpswAsqV2V7ApgA==}
+
+  '@fal-works/textlint-rule-ja-katakana-prolonged-sound-mark@file:':
+    resolution: {directory: '', type: directory}
+    engines: {node: '>=20'}
+    peerDependencies:
+      textlint: '>=15'
 
   '@hono/node-server@1.19.12':
     resolution: {integrity: sha512-txsUW4SQ1iilgE0l9/e9VQWmELXifEFvmdA1j6WFh/aFPj99hIntrSsq/if0UWyGVkmrRPKA1wCeP+UCr1B9Uw==}
@@ -1130,6 +1139,10 @@ snapshots:
     dependencies:
       hashery: 1.5.1
       keyv: 5.6.0
+
+  '@fal-works/textlint-rule-ja-katakana-prolonged-sound-mark@file:(textlint@15.5.2)':
+    dependencies:
+      textlint: 15.5.2
 
   '@hono/node-server@1.19.12(hono@4.12.9)':
     dependencies:
