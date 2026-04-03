@@ -27,12 +27,5 @@
     "mocha": "^11.7.5",
     "textlint": "^15.5.2",
     "textlint-tester": "^15.5.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "serialize-javascript": ">=7.0.5",
-      "diff": ">=8.0.3",
-      "lodash": ">=4.18.0"
-    }
   }
 }
