@@ -1,4 +1,4 @@
-// textlint-tester は exports.default 方式なので default の2段階 unwrap が必要
+// textlint-tester v15 は CJS (exports.default) のため ESM 側で2段階 unwrap が必要
 import _textlintTesterModule from "textlint-tester";
 const TextlintTester = _textlintTesterModule.default;
 
