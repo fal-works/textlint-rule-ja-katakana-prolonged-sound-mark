@@ -11,14 +11,16 @@ import { writeFileSync } from "node:fs";
 
 import dictRegularWithMark from "./dict-regular-with-mark.js";
 import dictRegularWithoutMark from "./dict-regular-without-mark.js";
-import dictConventional from "./dict-conventional.js";
+import dictConventionalWithMark from "./dict-conventional-with-mark.js";
+import dictConventionalWithoutMark from "./dict-conventional-without-mark.js";
 import dictAllowedBoth from "./dict-allowed-both.js";
 import { validate, generateWrongForms, renderModule } from "./builder.js";
 
 const sources = new Map([
   ["dict-regular-with-mark", dictRegularWithMark],
   ["dict-regular-without-mark", dictRegularWithoutMark],
-  ["dict-conventional", dictConventional],
+  ["dict-conventional-with-mark", dictConventionalWithMark],
+  ["dict-conventional-without-mark", dictConventionalWithoutMark],
   ["dict-allowed-both", dictAllowedBoth],
 ]);
 

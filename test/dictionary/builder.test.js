@@ -15,7 +15,8 @@ describe("validate", () => {
     const errors = validate(sources({
       a: { rule: "require-mark", words: ["ユーザー", "サーバー"] },
       b: { rule: "require-no-mark", words: ["メモリ", "ディレクトリ"] },
-      c: { rule: "no-check", words: ["コンパイラ", "サマリー"] },
+      c: { rule: "require-no-mark", words: ["コンパイラ"] },
+      c2: { rule: "require-mark", words: ["サマリー"] },
       d: { rule: "allow-both", words: ["スカラ"] },
     }));
     assert.deepEqual(errors, []);
@@ -48,7 +49,7 @@ describe("validate", () => {
   it("ソース間の重複を検知", () => {
     const errors = validate(sources({
       a: { rule: "require-mark", words: ["ユーザー"] },
-      b: { rule: "no-check", words: ["ユーザー"] },
+      b: { rule: "require-mark", words: ["ユーザー"] },
     }));
     assert.equal(errors.length, 1);
     assert.match(/** @type {string} */ (errors[0]), /ユーザー.*a と b の間で/);
@@ -61,17 +62,6 @@ describe("validate", () => {
     }));
     assert.equal(errors.length, 1);
     assert.match(/** @type {string} */ (errors[0]), /ユーザー/);
-  });
-
-  it("no-check は長音符の有無をチェックしない", () => {
-    const errors1 = validate(sources({
-      src: { rule: "no-check", words: ["コンパイラ"] },
-    }));
-    const errors2 = validate(sources({
-      src: { rule: "no-check", words: ["サマリー"] },
-    }));
-    assert.deepEqual(errors1, []);
-    assert.deepEqual(errors2, []);
   });
 
   it("allow-both は長音符の有無をチェックしない", () => {
@@ -122,13 +112,6 @@ describe("generateWrongForms", () => {
       src: { rule: "require-no-mark", words: ["メモリ"] },
     }));
     assert.deepEqual(result, ["メモリー"]);
-  });
-
-  it("no-check も同様にtoggleする", () => {
-    const result = generateWrongForms(sources({
-      src: { rule: "no-check", words: ["コンパイラ", "サマリー"] },
-    }));
-    assert.deepEqual(result, ["コンパイラー", "サマリ"]);
   });
 
   it("allow-both は含まない", () => {
