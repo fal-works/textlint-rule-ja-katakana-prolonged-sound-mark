@@ -45,6 +45,8 @@ export default {
     "コンシューマー",     // consumer (-er)
     "プロデューサー",     // producer (-er)
     "コンピューター",     // computer (-er)
+    "ディスパッチャー",   // dispatcher (-er)
+    "トランスフォーマー", // transformer (-er)
 
     // -er （インフラ・ネットワーク）
     "サーバー",           // server (-er)
@@ -93,10 +95,8 @@ export default {
     "アロケーター",       // allocator (-or)
     "コンバーター",       // converter (-or)
     "インターセプター",   // interceptor (-or)
-    "ディスパッチャー",   // dispatcher (-er)
     "オーケストレーター", // orchestrator (-or)
     "コーディネーター",   // coordinator (-or)
-    "トランスフォーマー", // transformer (-er)
     "アクセサー",         // accessor (-or)
     "インジケーター",     // indicator (-or)
 
