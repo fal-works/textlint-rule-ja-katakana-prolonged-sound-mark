@@ -21,7 +21,7 @@ describe("validate", () => {
     assert.deepEqual(errors, []);
   });
 
-  it("require-mark にーなしの語があればエラー", () => {
+  it("require-mark に長音符なしの語があればエラー", () => {
     const errors = validate(sources({
       src: { rule: "require-mark", words: ["ユーザ"] },
     }));
@@ -29,7 +29,7 @@ describe("validate", () => {
     assert.match(/** @type {string} */ (errors[0]), /src.*ユーザ.*ー/);
   });
 
-  it("require-no-mark にーありの語があればエラー", () => {
+  it("require-no-mark に長音符ありの語があればエラー", () => {
     const errors = validate(sources({
       src: { rule: "require-no-mark", words: ["メモリー"] },
     }));
@@ -63,7 +63,7 @@ describe("validate", () => {
     assert.match(/** @type {string} */ (errors[0]), /ユーザー/);
   });
 
-  it("no-check はーの有無をチェックしない", () => {
+  it("no-check は長音符の有無をチェックしない", () => {
     const errors1 = validate(sources({
       src: { rule: "no-check", words: ["コンパイラ"] },
     }));
@@ -74,7 +74,7 @@ describe("validate", () => {
     assert.deepEqual(errors2, []);
   });
 
-  it("allow-both はーの有無をチェックしない", () => {
+  it("allow-both は長音符の有無をチェックしない", () => {
     const errors = validate(sources({
       src: { rule: "allow-both", words: ["スカラ", "スカラー"] },
     }));
@@ -91,14 +91,14 @@ describe("validate", () => {
 });
 
 describe("generateWrongForms", () => {
-  it("require-mark の語はーを削って誤表記にする", () => {
+  it("require-mark の語は長音符を削って誤表記にする", () => {
     const result = generateWrongForms(sources({
       src: { rule: "require-mark", words: ["ユーザー"] },
     }));
     assert.deepEqual(result, ["ユーザ"]);
   });
 
-  it("require-no-mark の語はーを足して誤表記にする", () => {
+  it("require-no-mark の語は長音符を足して誤表記にする", () => {
     const result = generateWrongForms(sources({
       src: { rule: "require-no-mark", words: ["メモリ"] },
     }));

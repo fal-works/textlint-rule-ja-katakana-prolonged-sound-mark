@@ -26,7 +26,7 @@ pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-prolonged-sound-mark
 
 辞書に登録された語のみを完全一致で検査します。辞書にない語はスキップされます。
 
-### 末尾ーを付ける（英語語尾 `-er` / `-or` / `-ar`）
+### 末尾の長音符を付ける（英語語尾 `-er` / `-or` / `-ar`）
 
 | 誤表記 | 正表記 |
 |--------|--------|
@@ -35,7 +35,7 @@ pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-prolonged-sound-mark
 | フォルダ | フォルダー |
 | … | … |
 
-### 末尾ーを削る（英語語尾 `-ory` / `-ary` 等、3音節以上）
+### 末尾の長音符を削る（英語語尾 `-ory` / `-ary` 等、3音節以上）
 
 | 誤表記 | 正表記 |
 |--------|--------|

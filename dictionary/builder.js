@@ -26,7 +26,7 @@ export function validate(sources) {
   const errors = [];
 
   for (const [name, { words, rule }] of sources) {
-    // 末尾ーのバリデーション
+    // 末尾長音符有無のバリデーション
     if (rule === "require-mark") {
       for (const word of words) {
         if (!word.endsWith("ー")) {

@@ -7,7 +7,7 @@
  * @type {import("./builder.js").DictSource}
  */
 export default { rule: "no-check", words: [
-  // --- 慣例で末尾ーなしが正: -er/-or/-ar 語尾だが慣例でーが不要な語 ---
+  // --- 慣例で末尾長音符なしが正: -er/-or/-ar 語尾だが慣例で長音符が不要な語 ---
 
   // -er
   "コンパイラ",       // compiler (-er) 規則ではコンパイラー
@@ -36,7 +36,7 @@ export default { rule: "no-check", words: [
   "ペア",             // pair (-air) 規則ではペアー
   "ギア",             // gear (-ear) 規則ではギアー
 
-  // --- 慣例で末尾ーありが正: -er/-or/-ar 以外の語尾で慣例として末尾長音符を保持する語 ---
+  // --- 慣例で末尾長音符ありが正: -er/-or/-ar 以外の語尾で慣例として末尾長音符を保持する語 ---
   "サマリー",         // summary (-ary) 規則ではサマリ
   "レイテンシー",     // latency (-cy) 規則ではレイテンシ
   "フォトグラフィー", // photography (-phy) 規則ではフォトグラフィ
