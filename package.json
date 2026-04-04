@@ -18,12 +18,8 @@
   },
   "scripts": {
     "build:dict": "node dictionary/index.js",
-    "typecheck": "tsc",
-    "test": "pnpm run test:dict && pnpm run test:integration",
-    "test:integration": "pnpm run build:dict && mocha 'test/integration/**/*.test.js'",
-    "test:dict": "mocha 'test/dictionary/**/*.test.js'",
-    "test:prepublish": "mocha --timeout 30000 'test/prepublish/**/*.test.js'",
-    "prepublishOnly": "pnpm run build:dict && pnpm run typecheck && pnpm test && pnpm run test:prepublish"
+    "test": "tsc && pnpm run build:dict && mocha 'test/**/*.test.js' --ignore 'test/prepublish/**'",
+    "prepublishOnly": "pnpm test && mocha --timeout 30000 'test/prepublish/**/*.test.js'"
   },
   "repository": {
     "type": "git",
