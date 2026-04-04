@@ -6,6 +6,7 @@
   "exports": "./lib/ja-katakana-prolonged-sound-mark.js",
   "files": [
     "lib/",
+    "docs/",
     "README.md",
     "LICENSE"
   ],
