@@ -1,3 +1,4 @@
+/// <reference types="mocha" />
 /**
  * パッケージ配布物のE2Eテスト。
  *
@@ -34,6 +35,8 @@ const npmCleanEnv = Object.fromEntries(
 
 /**
  * `pnpm pack` を実行し、生成された tarball の絶対パスを返す。
+ * @param {string} destDir
+ * @returns {string}
  */
 function packTarball(destDir) {
   const output = execFileSync(
@@ -42,12 +45,15 @@ function packTarball(destDir) {
     { cwd: REPO_ROOT, encoding: "utf8" },
   );
   // pnpm pack の最終行が tarball の絶対パス
-  const lines = output.trim().split("\n");
-  return lines[lines.length - 1];
+  const tarball = output.trim().split("\n").pop();
+  if (!tarball) throw new Error("pnpm pack produced no output");
+  return tarball;
 }
 
-/** 
+/**
  * 一時ディレクトリに tarball をインストールし、設定ファイルとテスト対象を配置する。
+ * @param {string} tmpDir
+ * @param {string} tarballPath
  */
 function setupProject(tmpDir, tarballPath) {
   execFileSync("npm", ["install", "--no-package-lock", tarballPath], {
@@ -63,8 +69,9 @@ function setupProject(tmpDir, tarballPath) {
   writeFileSync(path.join(tmpDir, "target.txt"), "ユーザ\n");
 }
 
-/** 
+/**
  * textlint CLI で lint を実行し、JSON 結果を返す。検出時の exit 1 を正常系として扱う。
+ * @param {string} cwd
  */
 function runTextlintLint(cwd) {
   try {
@@ -73,20 +80,22 @@ function runTextlintLint(cwd) {
       encoding: "utf8",
     });
     assert.fail("Expected textlint to exit with code 1 (lint errors found)");
-  } catch (error) {
+  } catch (/** @type {any} */ error) {
     assert.equal(error.status, 1, `Unexpected exit code: ${error.status}`);
     return JSON.parse(error.stdout);
   }
 }
 
-/** 
+/**
  * textlint CLI で自動修正を実行する。
+ * @param {string} cwd
  */
 function runTextlintFix(cwd) {
   execFileSync(TEXTLINT_BIN, ["--fix", "target.txt"], { cwd });
 }
 
 describe("E2E: .textlintrc からルールを解決して lint/fix できる", () => {
+  /** @type {string} */
   let tmpDir;
 
   before(() => {
@@ -96,9 +105,7 @@ describe("E2E: .textlintrc からルールを解決して lint/fix できる", (
   });
 
   after(() => {
-    if (tmpDir) {
-      rmSync(tmpDir, { force: true, recursive: true });
-    }
+    rmSync(tmpDir, { force: true, recursive: true });
   });
 
   it("lint: ルール違反を検出する", () => {

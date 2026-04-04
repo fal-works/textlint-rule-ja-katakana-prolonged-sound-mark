@@ -11,12 +11,13 @@
   ],
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
+    "typecheck": "tsc",
     "test": "mocha 'test/*.test.js'",
     "test:prepublish": "mocha --timeout 30000 'test/prepublish/**/*.test.js'",
     "prepublishOnly": "pnpm test && pnpm run test:prepublish"
@@ -39,8 +40,12 @@
   },
   "devDependencies": {
     "@fal-works/textlint-rule-ja-katakana-prolonged-sound-mark": "file:",
+    "@textlint/types": "^15.5.2",
+    "@types/mocha": "^10",
+    "@types/node": "^22",
     "mocha": "^11.7.5",
     "textlint": "^15.5.2",
-    "textlint-tester": "^15.5.2"
+    "textlint-tester": "^15.5.2",
+    "typescript": "^6.0.2"
   }
 }

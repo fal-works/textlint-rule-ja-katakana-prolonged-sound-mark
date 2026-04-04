@@ -7,7 +7,8 @@
 - `dev/` ディレクトリを参照
 
 技術スタック:
-- Node.js (dev: v24+, support: v20+)
+- Node.js (dev: v24+, support: v22+)
+- TypeScript (v6+)
 - `textlint` (v15+)
 - テストランナー: Mocha（`textlint-tester` が Mocha ベースのため）
 - パッケージマネージャー: pnpm
