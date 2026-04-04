@@ -25,10 +25,10 @@ export default {
     "レイテンシー",      // latency (-cy) 同上
 
     // -gy
-    "テクノロジ",       // technology (-gy) Microsoft のドキュメントでも揺れているので自然なほうを選択
-    "ストラテジ",       // strategy (-gy) 同上
-    "トポロジ",         // topology (-gy) 同上
-    "メソドロジ",       // methodology (-gy) 同上
+    "テクノロジー",     // technology (-gy) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "ストラテジー",     // strategy (-gy) 同上
+    "トポロジー",       // topology (-gy) 同上
+    "メソドロジー",     // methodology (-gy) 同上
 
     // other
     "サマリー",         // summary (-ary) スタイルガイドに例外として明記
