@@ -116,8 +116,12 @@ function toggleProlongedSoundMark(word) {
 export function renderModule(wrongForms) {
   const entries = wrongForms.map((w) => `  "${w}",`).join("\n");
   return `\
-// このファイルは dictionary/build.js により自動生成されています。
+// このファイルは辞書ビルド処理により自動生成されています。
 // 手動で編集しないでください。
+
+/**
+ * 誤表記とみなすカタカナ語の集合。
+ */
 export const wrongForms = new Set([
 ${entries}
 ]);
