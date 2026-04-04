@@ -15,16 +15,13 @@ export default { rule: "require-no-mark", words: [
   "アクセサリ",       // accessory (-ory)
   "ヒストリ",         // history (-ory)
   "インベントリ",     // inventory (-ory)
-  "トレジャリ",       // treasury (-ury)
   "ファクトリ",       // factory (-ory)
-  "テリトリ",         // territory (-ory)
 
   // -ary
   "ライブラリ",       // library (-ary)
   "バイナリ",         // binary (-ary)
   "プライマリ",       // primary (-ary)
   "セカンダリ",       // secondary (-ary)
-  "グロッサリ",       // glossary (-ary)
   "バウンダリ",       // boundary (-ary)
   "テンポラリ",       // temporary (-ary)
 
@@ -58,7 +55,6 @@ export default { rule: "require-no-mark", words: [
   // -cy
   "レガシ",           // legacy (-cy)
   "プライバシ",       // privacy (-cy)
-  "デペンデンシ",     // dependency (-cy)
   "コンカレンシ",     // concurrency (-cy)
   "コンシステンシ",   // consistency (-cy)
 
@@ -67,12 +63,6 @@ export default { rule: "require-no-mark", words: [
   "ストラテジ",       // strategy (-gy)
   "トポロジ",         // topology (-gy)
   "メソドロジ",       // methodology (-gy)
-
-  // -my
-  "タクソノミ",       // taxonomy (-my)
-
-  // -py
-  "エントロピ",       // entropy (-py)
 
   // -ure
   "アーキテクチャ",         // architecture (-ure)
