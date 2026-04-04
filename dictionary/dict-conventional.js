@@ -28,6 +28,7 @@ export default {
     "フロンティア",     // frontier (-er)
 
     // -or
+    "アクセラレータ",   // accelerator (-or)
     "プロセッサ",       // processor (-or)
     "コネクタ",         // connector (-or)
     "ラジエータ",       // radiator (-or)

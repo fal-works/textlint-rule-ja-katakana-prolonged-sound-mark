@@ -19,7 +19,6 @@
  */
 export default {
   rule: "allow-both", words: [
-    "アクセラレータ",   // accelerator (-or)
     "スカラ",           // scalar (-ar) DQかもしれん
   ]
 };
