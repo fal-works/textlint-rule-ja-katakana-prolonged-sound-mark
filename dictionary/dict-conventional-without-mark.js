@@ -36,7 +36,7 @@ export default {
     "フロア",           // floor (-or)
 
     // -ear
-    "リニア",           // linear (-ar)
+    "リニア",           // linear (-ear)
     "クリア",           // clear (-ear)
     "ギア",             // gear (-ear)
 
