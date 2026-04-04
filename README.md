@@ -1,6 +1,6 @@
 # textlint-rule-ja-katakana-prolonged-sound-mark
 
-カタカナ語末尾の長音符（`ー`）の有無を検査して統一する [textlint](https://textlint.github.io/) ルールです。
+主に情報技術関連の日本語文書を対象に、カタカナ語末尾の長音符（`ー`）の有無を検査して統一する [textlint](https://textlint.github.io/) ルールです。
 
 原則としては Microsoft Japanese Localization Style Guide に基づきます。
 
