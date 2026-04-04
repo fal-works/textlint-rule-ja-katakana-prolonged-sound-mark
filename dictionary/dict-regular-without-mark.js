@@ -3,8 +3,10 @@
  *
  * -er/-or/-ar 以外の語尾で4音節以上のカタカナ語で、末尾に長音符 `ー` を付けないのが正しい表記。
  * 各エントリのコメント形式: 英語原語 (語尾パターン)
+ *
+ * @type {import("./builder.js").DictSource}
  */
-export default [
+export default { rule: "require-no-mark", words: [
   // -ory
   "メモリ",           // memory (-ory)
   "ディレクトリ",     // directory (-ory)
@@ -77,4 +79,4 @@ export default [
   "シグネチャ",             // signature (-ure)
   "インフラストラクチャ",   // infrastructure (-ure)
   "プロシージャ",           // procedure (-ure)
-];
+] };

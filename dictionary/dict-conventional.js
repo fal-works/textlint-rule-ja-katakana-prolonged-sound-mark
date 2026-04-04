@@ -3,8 +3,10 @@
  *
  * 一般規則に反するが、慣用表記を正とする語。正表記を管理する。
  * 各エントリのコメント形式: 英語原語 (語尾パターン) 慣例表記の説明
+ *
+ * @type {import("./builder.js").DictSource}
  */
-export default [
+export default { rule: "no-check", words: [
   // --- 慣例で末尾ーなしが正: -er/-or/-ar 語尾だが慣例でーが不要な語 ---
 
   // -er
@@ -41,4 +43,4 @@ export default [
   "カンパニー",       // company (-ny) 規則ではカンパニ
   "コンピテンシー",   // competency (-cy) 規則ではコンピテンシ
   "ポリシー",         // policy (-cy) 規則ではポリシ
-];
+] };

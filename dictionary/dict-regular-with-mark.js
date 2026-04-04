@@ -3,8 +3,10 @@
  *
  * -er/-or/-ar 語尾のカタカナ語で、末尾に長音符 `ー` を付けるのが正しい表記。
  * 各エントリのコメント形式: 英語原語 (語尾パターン)
+ *
+ * @type {import("./builder.js").DictSource}
  */
-export default [
+export default { rule: "require-mark", words: [
   // -er (プログラミング・開発)
   "ユーザー",           // user (-er)
   "パーサー",           // parser (-er)
@@ -92,4 +94,4 @@ export default [
 
   // -ar
   "カレンダー",         // calendar (-ar)
-];
+] };
