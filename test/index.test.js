@@ -1,8 +1,10 @@
-import _TextLintTesterModule from "textlint-tester";
-const TextLintTester = _TextLintTesterModule.default;
+// textlint-tester は  exports.default 方式なので default の2段階 unwrap が必要
+import _textlintTesterModule from "textlint-tester";
+const TextlintTester = _textlintTesterModule.default;
+
 import rule from "../lib/ja-katakana-prolonged-sound-mark.js";
 
-const tester = new TextLintTester();
+const tester = new TextlintTester();
 
 // =============================================================================
 // 1. 辞書エントリ: 末尾ー付加（英語語尾 -er/-or/-ar）
