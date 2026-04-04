@@ -15,11 +15,24 @@
  */
 export default {
   rule: "require-mark", words: [
-    "サマリー",         // summary (-ary)
-    "レイテンシー",     // latency (-cy)
-    "フォトグラフィー", // photography (-phy)
-    "カンパニー",       // company (-ny)
-    "コンピテンシー",   // competency (-cy)
-    "ポリシー",         // policy (-cy)
+    // -cy
+    "コンピテンシー",   // competency (-cy) スタイルガイドに例外として明記
+    "ポリシー",         // policy (-cy) 同上
+    "コンカレンシー",     // concurrency (-cy) Microsoft のドキュメントでも末尾長音符あり
+    "コンシステンシー",   // consistency (-cy) 同上
+    "レガシー",          // legacy (-cy) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "プライバシー",      // privacy (-cy) 同上
+    "レイテンシー",      // latency (-cy) 同上
+
+    // -gy
+    "テクノロジ",       // technology (-gy) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "ストラテジ",       // strategy (-gy) 同上
+    "トポロジ",         // topology (-gy) 同上
+    "メソドロジ",       // methodology (-gy) 同上
+
+    // other
+    "サマリー",         // summary (-ary) スタイルガイドに例外として明記
+    "フォトグラフィー", // photography (-phy) 同上
+    "カンパニー",       // company (-ny) 同上
   ]
 };

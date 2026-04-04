@@ -60,18 +60,6 @@ export default {
     "レスポンシビリティ",     // responsibility (-bility)
     "アカウンタビリティ",     // accountability (-bility)
 
-    // -cy
-    "レガシ",           // legacy (-cy)
-    "プライバシ",       // privacy (-cy)
-    "コンカレンシ",     // concurrency (-cy)
-    "コンシステンシ",   // consistency (-cy)
-
-    // -gy
-    "テクノロジ",       // technology (-gy)
-    "ストラテジ",       // strategy (-gy)
-    "トポロジ",         // topology (-gy)
-    "メソドロジ",       // methodology (-gy)
-
     // -ure
     "アーキテクチャ",         // architecture (-ure)
     "シグネチャ",             // signature (-ure)
