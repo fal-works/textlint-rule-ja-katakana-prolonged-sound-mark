@@ -76,10 +76,29 @@ describe("validate", () => {
 
   it("allow-both は長音符の有無をチェックしない", () => {
     const errors = validate(sources({
-      src: { rule: "allow-both", words: ["スカラ", "スカラー"] },
+      src: { rule: "allow-both", words: ["スカラ"] },
     }));
-    // 重複はないのでエラーなし
     assert.deepEqual(errors, []);
+  });
+
+  it("長音符トグル形が他ソースに存在すれば衝突エラー", () => {
+    const errors = validate(sources({
+      a: { rule: "require-mark", words: ["ユーザー"] },
+      b: { rule: "allow-both", words: ["ユーザ"] },
+    }));
+    assert.equal(errors.length, 2);
+    assert.ok(errors.some((e) => /衝突.*ユーザー.*ユーザ/.test(e)));
+    assert.ok(errors.some((e) => /衝突.*ユーザ.*ユーザー/.test(e)));
+  });
+
+  it("allow-both 同士でも長音符トグル形の衝突を検知", () => {
+    const errors = validate(sources({
+      a: { rule: "allow-both", words: ["スカラ"] },
+      b: { rule: "allow-both", words: ["スカラー"] },
+    }));
+    assert.equal(errors.length, 2);
+    assert.ok(errors.some((e) => /衝突.*スカラ[^ー].*スカラー/.test(e)));
+    assert.ok(errors.some((e) => /衝突.*スカラー.*スカラ[^ー]/.test(e)));
   });
 
   it("複数エラーをすべて報告", () => {

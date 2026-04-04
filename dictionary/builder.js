@@ -42,7 +42,7 @@ export function validate(sources) {
     }
   }
 
-  // 全ソース横断の重複検知（正表記ベース）
+  // 全ソース横断の重複検知
   /** @type {Map<string, string>} word → source name */
   const seen = new Map();
 
@@ -58,12 +58,24 @@ export function validate(sources) {
     }
   }
 
+  // 長音符トグル形の衝突検知
+  for (const [name, { words }] of sources) {
+    for (const word of words) {
+      const toggled = toggleProlongedSoundMark(word);
+      const other = seen.get(toggled);
+      if (other) {
+        const where = other === name ? `${name} 内で` : `${other} と ${name} の間で`;
+        errors.push(`衝突: 「${word}」と「${toggled}」が ${where} 衝突しています`);
+      }
+    }
+  }
+
   return errors;
 }
 
 /**
- * 正表記から誤表記の配列を生成する。
- * rule が "allow-both" のソースは登録対象外。
+ * 各ソースの語の長音符をトグルし、誤表記の配列を生成する。
+ * rule が "allow-both" のソースは登録対象外（正誤の区別がないため）。
  *
  * @param {Map<string, DictSource>} sources
  * @returns {string[]}
@@ -74,14 +86,14 @@ export function generateWrongForms(sources) {
   for (const [, { words, rule }] of sources) {
     if (rule === "allow-both") continue;
     for (const word of words) {
-      result.push(toWrongForm(word));
+      result.push(toggleProlongedSoundMark(word));
     }
   }
   return result;
 }
 
 /** @param {string} word */
-function toWrongForm(word) {
+function toggleProlongedSoundMark(word) {
   return word.endsWith("ー") ? word.slice(0, -1) : word + "ー";
 }
 
