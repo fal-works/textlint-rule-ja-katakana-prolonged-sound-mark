@@ -17,10 +17,11 @@
     "access": "public"
   },
   "scripts": {
+    "build:dict": "node dictionary/build.js",
     "typecheck": "tsc",
     "test": "mocha 'test/integration/**/*.test.js'",
     "test:prepublish": "mocha --timeout 30000 'test/prepublish/**/*.test.js'",
-    "prepublishOnly": "pnpm test && pnpm run test:prepublish"
+    "prepublishOnly": "pnpm run build:dict && pnpm run typecheck && pnpm test && pnpm run test:prepublish"
   },
   "repository": {
     "type": "git",
