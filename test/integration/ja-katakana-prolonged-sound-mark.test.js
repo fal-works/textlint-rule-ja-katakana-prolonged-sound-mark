@@ -2,7 +2,7 @@
 import _textlintTesterModule from "textlint-tester";
 const TextlintTester = _textlintTesterModule.default;
 
-import rule from "../lib/ja-katakana-prolonged-sound-mark.js";
+import rule from "../../lib/ja-katakana-prolonged-sound-mark.js";
 
 const tester = new TextlintTester();
 

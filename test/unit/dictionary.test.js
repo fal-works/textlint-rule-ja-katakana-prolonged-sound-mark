@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { correctForm } from "../lib/dictionary.js";
+import { correctForm } from "../../lib/dictionary.js";
 
 describe("correctForm", () => {
   it("末尾に「ー」がない辞書語 → 「ー」を付加", () => {
