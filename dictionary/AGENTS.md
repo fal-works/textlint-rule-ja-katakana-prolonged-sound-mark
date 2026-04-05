@@ -3,9 +3,19 @@
 このディレクトリでは、本プロジェクトの辞書の一次データを管理する。
 辞書エントリを追加・変更する際は、以下のワークフローに従う。
 
-対象: 技術文書・技術記事・ソースコードコメントで使われるカタカナ語。
+登録候補とする対象の語: 情報系（ソフト・ハード問わず）の技術文書や技術記事、ソースコードコメントなどで使われるカタカナ語。
 
-## Files
+## CLI Lookup Tool
+
+`cli-lookup.js`: 語の辞書登録状況を照会するCLIツール。
+
+- コマンド: `node dictionary/cli-lookup.js [--unregistered] [word1 word2 ...]`
+- 入力: 単語リスト。スペース区切りで引数に渡す
+- 出力（デフォルト）: 単語ごとに `word<TAB>filename` または `word<TAB>(unregistered)` の行を出力
+- オプション: `--unregistered` で未登録語のみを出力、 `--help` で詳細を確認
+- 備考: 末尾長音符の有無は正規化して検索するため、`メモリー` で検索しても `メモリ` がヒットする
+
+## Dictionary Entry Files
 
 - `dict-regular-with-mark.js` — 原則通り、末尾長音符ありを正表記とする語
 - `dict-regular-without-mark.js` — 原則通り、末尾長音符なしを正表記とする語
@@ -14,6 +24,11 @@
 - `dict-allowed-both.js` — 両表記を許容する語
 
 ## Workflow
+
+### Step 0: 登録状況を確認する
+
+`cli-lookup.js` で対象語の登録状況を確認する。
+登録済みの単語の情報は参考として使うだけで、本ワークフローによる登録対象からは除外する。
 
 ### Step 1: 原則で first guess を決める
 
