@@ -18,8 +18,9 @@
     "access": "public"
   },
   "scripts": {
+    "typecheck": "tsc",
     "build:dict": "node dictionary/index.js",
-    "test": "tsc && pnpm run build:dict && mocha 'test/**/*.test.js' --ignore 'test/prepublish/**'",
+    "test": "pnpm run typecheck && pnpm run build:dict && mocha 'test/**/*.test.js' --ignore 'test/prepublish/**'",
     "prepublishOnly": "pnpm test && mocha --timeout 30000 'test/prepublish/**/*.test.js'"
   },
   "repository": {

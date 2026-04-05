@@ -20,5 +20,6 @@
 
 npm scripts:
 - `pnpm test`: 型チェック -> 辞書ビルド -> 各種テスト実行（prepublish以外）
-- `pnpm run build:dict`: 辞書ソースから `lib/dictionary.js` を生成
+- `pnpm run typecheck`: 型チェックだけ
+- `pnpm run build:dict`: 辞書ビルドだけ。辞書ソースから `lib/dictionary.js` を生成
 - `pnpm run prepublishOnly`: `pnpm test` + パッケージ構造検証（publish時に自動実行）
