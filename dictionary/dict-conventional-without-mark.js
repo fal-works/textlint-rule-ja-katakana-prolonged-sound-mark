@@ -24,6 +24,11 @@ export default {
     "バリア",           // barrier (-er)
     "キャリア",         // carrier (-er)
     "フロンティア",     // frontier (-er)
+    "イニシャライザ",   // initializer (-er)
+    "オプティマイザ",   // optimizer (-er)
+    "シリアライザ",     // serializer (-er)
+    "デシリアライザ",   // deserializer (-er)
+    "インデクサ",       // indexer (-er)
 
     // -or
     "アクセラレータ",   // accelerator (-or)

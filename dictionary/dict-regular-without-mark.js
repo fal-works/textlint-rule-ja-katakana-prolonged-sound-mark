@@ -37,6 +37,11 @@ export default {
     "レジストリ",       // registry (-ry)
     "エントリ",         // entry (-ry)
     "インダストリ",     // industry (-ry)
+    "クエリ",           // query (-ry)
+    "テレメトリ",       // telemetry (-ry)
+    // "ジオメトリ",    // geometry (-ry) Microsoft のドキュメントでは末尾長音符なしだけがヒット
+    // "ディクショナリ", // dictionary (-ry) Microsoft のドキュメントでは末尾長音符なしだけがヒット
+    "アセンブリ",       // assembly (-bly)
 
     // -ty
     "プロパティ",       // property (-ty)
@@ -48,6 +53,11 @@ export default {
     "オーソリティ",     // authority (-ty)
     "ベロシティ",       // velocity (-ty)
     "アクティビティ",   // activity (-ty)
+    "エンティティ",     // entity (-ty)
+    "ユーティリティ",   // utility (-ty)
+    "ファシリティ",     // facility (-ty)
+    "パリティ",         // parity (-ty)
+    "オーセンティシティ", // authenticity (-ty)
 
     // -bility
     "アクセシビリティ",       // accessibility (-bility)
@@ -59,6 +69,14 @@ export default {
     "フレキシビリティ",       // flexibility (-bility)
     "レスポンシビリティ",     // responsibility (-bility)
     "アカウンタビリティ",     // accountability (-bility)
+    "オブザーバビリティ",     // observability (-bility)
+    "コンフィデンシャリティ", // confidentiality (-bility)
+    "ファンクショナリティ",   // functionality (-bility)
+    "イミュータビリティ",     // immutability (-bility)
+    "ミュータビリティ",       // mutability (-bility)
+    "リーダビリティ",         // readability (-bility)
+    "メンテナビリティ",       // maintainability (-bility)
+    "トレーサビリティ",       // traceability (-bility)
 
     // -ure
     "アーキテクチャ",         // architecture (-ure)

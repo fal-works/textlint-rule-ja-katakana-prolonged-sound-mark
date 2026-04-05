@@ -29,10 +29,20 @@ export default {
     "ストラテジー",     // strategy (-gy) 同上
     "トポロジー",       // topology (-gy) 同上
     "メソドロジー",     // methodology (-gy) 同上
+    "オントロジー",     // ontology (-gy) 同上
+
+    // -ry
+    "サマリー",         // summary (-ry) スタイルガイドに例外として明記
+    "バッテリー",       // battery (-ry) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "デリバリー",       // delivery (-ry) 同上
+    "リカバリー",       // recovery (-ry) 同上
+
+    // -ty
+    "アイデンティティー", // identity (-ty) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "キャパシティー",   // capacity (-ty) 同上
 
     // other
-    "サマリー",         // summary (-ary) スタイルガイドに例外として明記
-    "フォトグラフィー", // photography (-phy) 同上
+    "フォトグラフィー", // photography (-phy) スタイルガイドに例外として明記
     "カンパニー",       // company (-ny) 同上
   ]
 };
