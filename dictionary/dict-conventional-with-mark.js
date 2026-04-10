@@ -14,7 +14,7 @@
  * @type {import("./builder.js").DictSource}
  */
 export default {
-  rule: "require-mark", words: [
+  type: "require-mark", words: [
     // -cy
     "コンピテンシー",   // competency (-cy) スタイルガイドに例外として明記
     "ポリシー",         // policy (-cy) 同上

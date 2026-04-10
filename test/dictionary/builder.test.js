@@ -13,18 +13,18 @@ function sources(entries = {}) {
 describe("validate", () => {
   it("正常な入力でエラーなし", () => {
     const errors = validate(sources({
-      a: { rule: "require-mark", words: ["ユーザー", "サーバー"] },
-      b: { rule: "require-no-mark", words: ["メモリ", "ディレクトリ"] },
-      c: { rule: "require-no-mark", words: ["コンパイラ"] },
-      c2: { rule: "require-mark", words: ["サマリー"] },
-      d: { rule: "allow-both", words: ["スカラ"] },
+      a: { type: "require-mark", words: ["ユーザー", "サーバー"] },
+      b: { type: "require-no-mark", words: ["メモリ", "ディレクトリ"] },
+      c: { type: "require-no-mark", words: ["コンパイラ"] },
+      c2: { type: "require-mark", words: ["サマリー"] },
+      d: { type: "allow-both", words: ["スカラ"] },
     }));
     assert.deepEqual(errors, []);
   });
 
   it("require-mark に長音符なしの語があればエラー", () => {
     const errors = validate(sources({
-      src: { rule: "require-mark", words: ["ユーザ"] },
+      src: { type: "require-mark", words: ["ユーザ"] },
     }));
     assert.equal(errors.length, 1);
     assert.match(/** @type {string} */ (errors[0]), /src.*ユーザ.*ー/);
@@ -32,7 +32,7 @@ describe("validate", () => {
 
   it("require-no-mark に長音符ありの語があればエラー", () => {
     const errors = validate(sources({
-      src: { rule: "require-no-mark", words: ["メモリー"] },
+      src: { type: "require-no-mark", words: ["メモリー"] },
     }));
     assert.equal(errors.length, 1);
     assert.match(/** @type {string} */ (errors[0]), /src.*メモリー.*ー/);
@@ -40,7 +40,7 @@ describe("validate", () => {
 
   it("同一ソース内の重複を検知", () => {
     const errors = validate(sources({
-      src: { rule: "require-mark", words: ["ユーザー", "サーバー", "ユーザー"] },
+      src: { type: "require-mark", words: ["ユーザー", "サーバー", "ユーザー"] },
     }));
     assert.equal(errors.length, 1);
     assert.match(/** @type {string} */ (errors[0]), /ユーザー.*src 内で/);
@@ -48,8 +48,8 @@ describe("validate", () => {
 
   it("ソース間の重複を検知", () => {
     const errors = validate(sources({
-      a: { rule: "require-mark", words: ["ユーザー"] },
-      b: { rule: "require-mark", words: ["ユーザー"] },
+      a: { type: "require-mark", words: ["ユーザー"] },
+      b: { type: "require-mark", words: ["ユーザー"] },
     }));
     assert.equal(errors.length, 1);
     assert.match(/** @type {string} */ (errors[0]), /ユーザー.*a と b の間で/);
@@ -57,8 +57,8 @@ describe("validate", () => {
 
   it("allow-both と他ソースの重複を検知", () => {
     const errors = validate(sources({
-      a: { rule: "require-mark", words: ["ユーザー"] },
-      b: { rule: "allow-both", words: ["ユーザー"] },
+      a: { type: "require-mark", words: ["ユーザー"] },
+      b: { type: "allow-both", words: ["ユーザー"] },
     }));
     assert.equal(errors.length, 1);
     assert.match(/** @type {string} */ (errors[0]), /ユーザー/);
@@ -66,15 +66,15 @@ describe("validate", () => {
 
   it("allow-both は長音符の有無をチェックしない", () => {
     const errors = validate(sources({
-      src: { rule: "allow-both", words: ["スカラ"] },
+      src: { type: "allow-both", words: ["スカラ"] },
     }));
     assert.deepEqual(errors, []);
   });
 
   it("長音符トグル形が他ソースに存在すれば衝突エラー", () => {
     const errors = validate(sources({
-      a: { rule: "require-mark", words: ["ユーザー"] },
-      b: { rule: "allow-both", words: ["ユーザ"] },
+      a: { type: "require-mark", words: ["ユーザー"] },
+      b: { type: "allow-both", words: ["ユーザ"] },
     }));
     assert.equal(errors.length, 2);
     assert.ok(errors.some((e) => /衝突.*ユーザー.*ユーザ/.test(e)));
@@ -83,8 +83,8 @@ describe("validate", () => {
 
   it("allow-both 同士でも長音符トグル形の衝突を検知", () => {
     const errors = validate(sources({
-      a: { rule: "allow-both", words: ["スカラ"] },
-      b: { rule: "allow-both", words: ["スカラー"] },
+      a: { type: "allow-both", words: ["スカラ"] },
+      b: { type: "allow-both", words: ["スカラー"] },
     }));
     assert.equal(errors.length, 2);
     assert.ok(errors.some((e) => /衝突.*スカラ[^ー].*スカラー/.test(e)));
@@ -93,7 +93,7 @@ describe("validate", () => {
 
   it("複数エラーをすべて報告", () => {
     const errors = validate(sources({
-      src: { rule: "require-mark", words: ["ユーザ", "サーバ"] },
+      src: { type: "require-mark", words: ["ユーザ", "サーバ"] },
     }));
     assert.equal(errors.length, 2);
   });
@@ -102,21 +102,21 @@ describe("validate", () => {
 describe("generateWrongForms", () => {
   it("require-mark の語は長音符を削って誤表記にする", () => {
     const result = generateWrongForms(sources({
-      src: { rule: "require-mark", words: ["ユーザー"] },
+      src: { type: "require-mark", words: ["ユーザー"] },
     }));
     assert.deepEqual(result, ["ユーザ"]);
   });
 
   it("require-no-mark の語は長音符を足して誤表記にする", () => {
     const result = generateWrongForms(sources({
-      src: { rule: "require-no-mark", words: ["メモリ"] },
+      src: { type: "require-no-mark", words: ["メモリ"] },
     }));
     assert.deepEqual(result, ["メモリー"]);
   });
 
   it("allow-both は含まない", () => {
     const result = generateWrongForms(sources({
-      src: { rule: "allow-both", words: ["スカラ"] },
+      src: { type: "allow-both", words: ["スカラ"] },
     }));
     assert.deepEqual(result, []);
   });

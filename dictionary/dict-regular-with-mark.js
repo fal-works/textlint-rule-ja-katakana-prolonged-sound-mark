@@ -14,7 +14,7 @@
  * @type {import("./builder.js").DictSource}
  */
 export default {
-  rule: "require-mark", words: [
+  type: "require-mark", words: [
     // -er （プログラミング・開発）
     "ユーザー",           // user (-er)
     "パーサー",           // parser (-er)

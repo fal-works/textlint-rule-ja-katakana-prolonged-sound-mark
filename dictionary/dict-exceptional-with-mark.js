@@ -13,7 +13,7 @@
  * @type {import("./builder.js").DictSource}
  */
 export default {
-  rule: "require-mark", words: [
+  type: "require-mark", words: [
     // -cy
     "ディペンデンシー",          // dependency (-cy)
     "トランスペアレンシー",      // transparency (-cy)

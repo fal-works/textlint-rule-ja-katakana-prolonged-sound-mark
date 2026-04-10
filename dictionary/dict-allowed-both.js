@@ -18,7 +18,7 @@
  * @type {import("./builder.js").DictSource}
  */
 export default {
-  rule: "allow-both", words: [
+  type: "allow-both", words: [
     "スカラ",           // scalar (-ar) DQかもしれん
     "テクスチャ",       // texture (-ure) HHかもしれん
   ]

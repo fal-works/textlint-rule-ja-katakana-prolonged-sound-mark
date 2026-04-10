@@ -14,7 +14,7 @@
  * @type {import("./builder.js").DictSource}
  */
 export default {
-  rule: "require-no-mark", words: [
+  type: "require-no-mark", words: [
     // -ory
     "メモリ",           // memory (-ory)
     "ディレクトリ",     // directory (-ory)

@@ -6,7 +6,7 @@
  */
 
 /**
- * 辞書ソースに設定するルール。
+ * 辞書ソースの種類。
  *
  * 分類理由（原則vs慣例など）は問わず、辞書生成時の検査方法と収録方法を決定する効果のみを持つ。
  *
@@ -14,13 +14,13 @@
  * - `"require-no-mark"`: 辞書ソースには末尾長音符なしを登録し、これを正表記とする
  * - `"allow-both"`: 末尾長音符の有無を両方とも正表記として許容（i.e. いずれも誤表記として扱うことを禁止）
  *
- * @typedef {"require-mark" | "require-no-mark" | "allow-both"} Rule
+ * @typedef {"require-mark" | "require-no-mark" | "allow-both"} DictSourceType
  */
 
 /**
  * @typedef {{
+ *   type: DictSourceType,
  *   words: string[],
- *   rule: Rule,
  * }} DictSource
  */
 
@@ -35,15 +35,15 @@ export function validate(sources) {
   /** @type {string[]} */
   const errors = [];
 
-  for (const [name, { words, rule }] of sources) {
+  for (const [name, { type, words }] of sources) {
     // 末尾長音符有無のバリデーション
-    if (rule === "require-mark") {
+    if (type === "require-mark") {
       for (const word of words) {
         if (!word.endsWith("ー")) {
           errors.push(`${name}: 「${word}」が「ー」で終わっていません`);
         }
       }
-    } else if (rule === "require-no-mark") {
+    } else if (type === "require-no-mark") {
       for (const word of words) {
         if (word.endsWith("ー")) {
           errors.push(`${name}: 「${word}」が「ー」で終わっています`);
@@ -85,7 +85,7 @@ export function validate(sources) {
 
 /**
  * 各ソースの語の長音符をトグルし、誤表記の配列を生成する。
- * rule が "allow-both" のソースは登録対象外（正誤の区別がないため）。
+ * "allow-both" のソースは登録対象外（正誤の区別がないため）。
  *
  * @param {Map<string, DictSource>} sources
  * @returns {string[]}
@@ -93,8 +93,8 @@ export function validate(sources) {
 export function generateWrongForms(sources) {
   /** @type {string[]} */
   const result = [];
-  for (const [, { words, rule }] of sources) {
-    if (rule === "allow-both") continue;
+  for (const [, { type, words }] of sources) {
+    if (type === "allow-both") continue;
     for (const word of words) {
       result.push(toggleProlongedSoundMark(word));
     }
