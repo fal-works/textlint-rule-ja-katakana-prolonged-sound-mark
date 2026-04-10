@@ -1,16 +1,83 @@
 /**
- * Microsoft の原則通り、末尾長音符なしを正表記とする語。
+ * 英語原語の語尾が -er/-or/-ar 以外で、
+ * 末尾長音符あり表記の実効文字数が 4 以上のカタカナ語。
  *
- * 登録対象:
- * - 語尾が -er/-or/-ar 以外で、末尾長音符を付けた形での文字数が4以上（小書き文字を除く）のカタカナ語
- * - かつ、慣例優先・両方許容・カスタム例外のいずれにも該当しない語
- *
- * 登録対象の語:
- * - 末尾長音符なしで表記された語
+ * 原則（Microsoft スタイルガイド）に従えば末尾長音符なしが正表記。
  *
  * @type {import("./builder.js").DictSource}
  */
 export default {
+  requireMark: [
+    // -cy
+    "コンピテンシー",   // competency (-cy) スタイルガイドに例外として明記
+    "ポリシー",         // policy (-cy) 同上
+    "コンカレンシー",     // concurrency (-cy) Microsoft のドキュメントでも末尾長音符あり
+    "コンシステンシー",   // consistency (-cy) 同上
+    "レガシー",          // legacy (-cy) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "プライバシー",      // privacy (-cy) 同上
+    "レイテンシー",      // latency (-cy) 同上
+    "リテラシー",        // literacy (-cy) Microsoft のドキュメントでも末尾長音符あり
+    "ディペンデンシー",          // dependency (-cy)
+    "トランスペアレンシー",      // transparency (-cy)
+    "フリクエンシー",            // frequency (-cy)
+    "エマージェンシー",          // emergency (-cy)
+    "エージェンシー",            // agency (-cy)
+    "アキュラシー",              // accuracy (-cy)
+    "レジリエンシー",            // resiliency (-cy)
+    "インコンシステンシー",      // inconsistency (-cy)
+    "フルエンシー",              // fluency (-cy)
+    "プロフィシェンシー",        // proficiency (-cy)
+    "サフィシェンシー",          // sufficiency (-cy)
+    "エフィシェンシー",          // efficiency (-cy)
+    "リダンダンシー",            // redundancy (-cy)
+    "カレンシー",                // currency (-cy)
+    "デモクラシー",              // democracy (-cy)
+
+    // -gy
+    "テクノロジー",     // technology (-gy) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "ストラテジー",     // strategy (-gy) 同上
+    "トポロジー",       // topology (-gy) 同上
+    "メソドロジー",     // methodology (-gy) 同上
+    "オントロジー",     // ontology (-gy) 同上
+    "アナロジー",       // analogy (-gy) Microsoft のドキュメントでも末尾長音符あり
+    "エコロジー",       // ecology (-gy) 同上
+    "エナジー",         // energy (-gy) 同上
+    "シナジー",         // synergy (-gy) 同上
+    "ニューロロジー",            // neurology (-gy)
+    "バイオロジー",              // biology (-gy)
+    "クロノロジー",              // chronology (-gy)
+
+    // -ry
+    "サマリー",         // summary (-ry) スタイルガイドに例外として明記
+    "バッテリー",       // battery (-ry) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "デリバリー",       // delivery (-ry) 同上
+    "リカバリー",       // recovery (-ry) 同上
+    "ギャラリー",       // gallery (-ry) Microsoft のドキュメントでも末尾長音符あり
+    "ディスカバリー",   // discovery (-ry) 同上
+    "ドキュメンタリー", // documentary (-ary) 同上
+
+    // -ty
+    "アイデンティティー", // identity (-ty) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "キャパシティー",   // capacity (-ty) 同上
+
+    // -my
+    "タクソノミー",     // taxonomy (-my) Microsoft のドキュメントでも末尾長音符あり
+    "エコノミー",       // economy (-my) 同上
+    "オートノミー",              // autonomy (-my)
+
+    // -py
+    "エントロピー",     // entropy (-py) Microsoft のドキュメントでも揺れているので自然なほうを選択
+
+    // -ure
+    "エクスポージャー",  // exposure (-ure) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "フィーチャー",      // feature (-ure) Microsoft のドキュメントでも揺れているので自然なほうを選択
+
+    // other
+    "フォトグラフィー", // photography (-phy) スタイルガイドに例外として明記
+    "カンパニー",       // company (-ny) 同上
+    "ファミリー",       // family (-ly) Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "アノマリー",       // anomaly (-ly) 同上
+  ],
   requireNoMark: [
     // -ory
     "メモリ",           // memory (-ory)
@@ -140,5 +207,8 @@ export default {
 
     // other
     "プロキシ",               // proxy (-xy)
-  ]
+  ],
+  allowBoth: [
+    "テクスチャ",       // texture (-ure) HHかもしれん
+  ],
 };

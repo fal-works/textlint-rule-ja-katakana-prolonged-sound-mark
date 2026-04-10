@@ -1,19 +1,13 @@
-import regularWithMark from '../dict-regular-with-mark.js';
-import regularWithoutMark from '../dict-regular-without-mark.js';
-import conventionalWithMark from '../dict-conventional-with-mark.js';
-import conventionalWithoutMark from '../dict-conventional-without-mark.js';
-import exceptionalWithMark from '../dict-exceptional-with-mark.js';
-import allowedBoth from '../dict-allowed-both.js';
+import erOrAr from '../dict-er-or-ar.js';
+import short from '../dict-short.js';
+import long from '../dict-long.js';
 
 /** @type {Map<string, { file: string, key: string }>} */
 const wordMap = new Map();
 for (const { file, source } of [
-  { file: 'dict-regular-with-mark.js', source: regularWithMark },
-  { file: 'dict-regular-without-mark.js', source: regularWithoutMark },
-  { file: 'dict-conventional-with-mark.js', source: conventionalWithMark },
-  { file: 'dict-conventional-without-mark.js', source: conventionalWithoutMark },
-  { file: 'dict-exceptional-with-mark.js', source: exceptionalWithMark },
-  { file: 'dict-allowed-both.js', source: allowedBoth },
+  { file: 'dict-er-or-ar.js', source: erOrAr },
+  { file: 'dict-short.js', source: short },
+  { file: 'dict-long.js', source: long },
 ]) {
   for (const key of /** @type {const} */ (['requireMark', 'requireNoMark', 'allowBoth'])) {
     const words = source[key];

@@ -9,21 +9,15 @@
 
 import { writeFileSync } from "node:fs";
 
-import dictRegularWithMark from "./dict-regular-with-mark.js";
-import dictRegularWithoutMark from "./dict-regular-without-mark.js";
-import dictConventionalWithMark from "./dict-conventional-with-mark.js";
-import dictConventionalWithoutMark from "./dict-conventional-without-mark.js";
-import dictExceptionalWithMark from "./dict-exceptional-with-mark.js";
-import dictAllowedBoth from "./dict-allowed-both.js";
+import dictErOrAr from "./dict-er-or-ar.js";
+import dictShort from "./dict-short.js";
+import dictLong from "./dict-long.js";
 import { validate, generateWrongForms, renderModule } from "./builder.js";
 
 const sources = new Map([
-  ["dict-regular-with-mark", dictRegularWithMark],
-  ["dict-regular-without-mark", dictRegularWithoutMark],
-  ["dict-conventional-with-mark", dictConventionalWithMark],
-  ["dict-conventional-without-mark", dictConventionalWithoutMark],
-  ["dict-exceptional-with-mark", dictExceptionalWithMark],
-  ["dict-allowed-both", dictAllowedBoth],
+  ["dict-er-or-ar", dictErOrAr],
+  ["dict-short", dictShort],
+  ["dict-long", dictLong],
 ]);
 
 const errors = validate(sources);

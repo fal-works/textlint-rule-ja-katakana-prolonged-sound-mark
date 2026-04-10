@@ -1,12 +1,7 @@
 /**
- * Microsoft の原則通り、末尾長音符ありを正表記とする語。
+ * 英語原語の語尾が -er/-or/-ar のカタカナ語。
  *
- * 採録条件:
- * - 語尾が -er/-or/-ar のカタカナ語
- * - かつ、慣例優先・両方許容・カスタム例外のいずれにも該当しない語
- *
- * 登録対象の語:
- * - 末尾長音符ありで表記された語
+ * 原則（Microsoft スタイルガイド）に従えば末尾長音符ありが正表記。
  *
  * @type {import("./builder.js").DictSource}
  */
@@ -207,8 +202,42 @@ export default {
 
     // -over
     "フェイルオーバー",   // failover (-over)
+  ],
+  requireNoMark: [
+    // -er
+    "コンパイラ",       // compiler (-er)
+    "プログラマ",       // programmer (-er)
+    "フォーマッタ",     // formatter (-er)
+    "スケジューラ",     // scheduler (-er)
+    "レジスタ",         // register (-er)
+    "バリア",           // barrier (-er)
+    "キャリア",         // carrier (-er)
+    "フロンティア",     // frontier (-er)
+    "イニシャライザ",   // initializer (-er)
+    "オプティマイザ",   // optimizer (-er)
+    "シリアライザ",     // serializer (-er)
+    "デシリアライザ",   // deserializer (-er)
+    "インデクサ",       // indexer (-er)
+    "コンプレッサ",     // compressor (-er) Microsoft のドキュメントでも揺れているので慣例に従う
+    "マルチプレクサ",   // multiplexer (-er) 同上
 
-    // 短い語（実効文字数 < 4）
-    "コピー",             // copy (-py)
-  ]
+    // -or
+    "アクセラレータ",   // accelerator (-or)
+    "プロセッサ",       // processor (-or)
+    "コネクタ",         // connector (-or)
+    "ラジエータ",       // radiator (-or)
+    "ターミネータ",     // terminator (-or)
+    "トランジスタ",     // transistor (-or)
+    "ドア",             // door (-or)
+    "フロア",           // floor (-or)
+    "アクチュエータ",   // actuator (-or) Microsoft のドキュメントでも揺れているので慣例に従う
+
+    // -ear
+    "リニア",           // linear (-ear)
+    "クリア",           // clear (-ear)
+    "ギア",             // gear (-ear)
+  ],
+  allowBoth: [
+    "スカラ",           // scalar (-ar) DQかもしれん
+  ],
 };
