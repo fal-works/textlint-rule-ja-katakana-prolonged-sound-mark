@@ -14,9 +14,10 @@ export default {
     "リカバリー",       // recovery (-ry) 同上
     "ギャラリー",       // gallery (-ry) Microsoft のドキュメントでも末尾長音符あり
     "ディスカバリー",   // discovery (-ry) 同上
-
-    // -ary
-    "ドキュメンタリー", // documentary (-ary) Microsoft のドキュメントでも末尾長音符あり
+    "インダストリー",   // industry (-ry) 同上
+    "ドキュメンタリー", // documentary (-ry) 同上
+    "ジオメトリー",     // geometry (-ry) Microsoft のドキュメントでは末尾長音符なしだけがヒットするが不自然
+    "ディクショナリー", // dictionary (-ry) Microsoft のドキュメントでは末尾長音符なしだけがヒットするが不自然    
   ],
   requireNoMark: [
     // -ory
@@ -42,10 +43,7 @@ export default {
     // -ry
     "レジストリ",       // registry (-ry)
     "エントリ",         // entry (-ry)
-    "インダストリ",     // industry (-ry)
     "クエリ",           // query (-ry)
     "テレメトリ",       // telemetry (-ry)
-    // "ジオメトリ",    // geometry (-ry) Microsoft のドキュメントでは末尾長音符なしだけがヒット
-    // "ディクショナリ", // dictionary (-ry) Microsoft のドキュメントでは末尾長音符なしだけがヒット
   ],
 };

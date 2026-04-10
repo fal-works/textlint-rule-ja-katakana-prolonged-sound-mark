@@ -107,10 +107,10 @@ export default {
     "ミニマイザー",       // minimizer (-er)
     "マキシマイザー",     // maximizer (-er)
     "ランダマイザー",     // randomizer (-er)
-    // "トランスパイラー",   // transpiler (-er) Microsoft のドキュメントでは未確認
-    // "コンデンサー",       // condenser (-er) Microsoft のドキュメントでは未確認
-    // "インバーター",       // inverter (-er) Microsoft のドキュメントでは未確認
-    // "デマルチプレクサー", // demultiplexer (-er) Microsoft のドキュメントでは未確認
+    "トランスパイラー",   // transpiler (-er)
+    "コンデンサー",       // condenser (-er)
+    "インバーター",       // inverter (-er)
+    "デマルチプレクサー", // demultiplexer (-er)
 
     // -er （インフラ・ネットワーク）
     "サーバー",           // server (-er)
