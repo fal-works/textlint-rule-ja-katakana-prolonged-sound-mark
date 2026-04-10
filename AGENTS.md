@@ -27,3 +27,6 @@ npm scripts:
 一時ファイルの運用:
 - 作業過程で一時的に作成するファイルは `tmp/` ディレクトリ（gitignore対象）に保存する。
   作業後の削除は不要だが、いつ削除されてもよいものを配置すること。
+
+For Codex:
+- `pnpm run prepublishOnly` や `pnpm pack` / `npm install` を含むE2Eテストがsandbox内で失敗した場合は、ユーザーに許可を求めて同じコマンドをsandbox外で再実行すること。
