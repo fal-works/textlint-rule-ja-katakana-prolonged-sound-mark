@@ -8,9 +8,9 @@ describe("lookup", () => {
   });
 
   it("長音符トグルで検索できる", () => {
-    // メモリ は dict-long.js に登録、メモリー で検索してもヒット
+    // メモリ は dict-ry.js に登録、メモリー で検索してもヒット
     const result = lookup("メモリー");
-    assert.deepEqual(result, { file: "dict-long.js", key: "requireNoMark" });
+    assert.deepEqual(result, { file: "dict-ry.js", key: "requireNoMark" });
   });
 
   it("未登録の語は null を返す", () => {

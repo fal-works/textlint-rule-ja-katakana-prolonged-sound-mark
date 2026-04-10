@@ -1,7 +1,8 @@
 /**
- * 英語原語の語尾が -er/-or/-ar のカタカナ語。
+ * 英語原語の語尾が子音 + -er/-or/-ar のカタカナ語。
  *
- * 原則（Microsoft スタイルガイド）に従えば末尾長音符ありが正表記。
+ * 原則に従えば末尾長音符ありが正表記。
+ * 母音 + -er/-or/-ar（-ear, -ier, -oor 等）は dict-r-vowels.js を参照。
  *
  * @type {import("./builder.js").DictSource}
  */
@@ -210,9 +211,6 @@ export default {
     "フォーマッタ",     // formatter (-er)
     "スケジューラ",     // scheduler (-er)
     "レジスタ",         // register (-er)
-    "バリア",           // barrier (-er)
-    "キャリア",         // carrier (-er)
-    "フロンティア",     // frontier (-er)
     "イニシャライザ",   // initializer (-er)
     "オプティマイザ",   // optimizer (-er)
     "シリアライザ",     // serializer (-er)
@@ -228,14 +226,8 @@ export default {
     "ラジエータ",       // radiator (-or)
     "ターミネータ",     // terminator (-or)
     "トランジスタ",     // transistor (-or)
-    "ドア",             // door (-or)
-    "フロア",           // floor (-or)
     "アクチュエータ",   // actuator (-or) Microsoft のドキュメントでも揺れているので慣例に従う
 
-    // -ear
-    "リニア",           // linear (-ear)
-    "クリア",           // clear (-ear)
-    "ギア",             // gear (-ear)
   ],
   allowBoth: [
     "スカラ",           // scalar (-ar) DQかもしれん

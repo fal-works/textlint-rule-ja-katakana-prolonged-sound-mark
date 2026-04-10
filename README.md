@@ -2,7 +2,8 @@
 
 主に情報技術関連の日本語文書を対象に、カタカナ語末尾の長音符（`ー`）の有無を検査して統一する [textlint](https://textlint.github.io/) ルールです。
 
-原則としては Microsoft Japanese Localization Style Guide に基づきます。
+Microsoft Japanese Localization Style Guide をベースとしつつ、より自然な日本語を目指した独自拡張ルールで判定します。
+詳細は [ルール仕様](docs/rule-spec.md) を参照してください。
 
 ## インストール
 
@@ -35,8 +36,6 @@ pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-prolonged-sound-mark
 | リポジトリー | リポジトリ |
 | ディレクトリー | ディレクトリ |
 | … | … |
-
-詳細は [ルール仕様](docs/rule-spec.md) を参照してください。
 
 **制限事項**: 連続カタカナ完全一致で検出するため、複合語（例: `ユーザリスト`）に含まれる単語は検出されません（その複合語自体が辞書登録されている場合を除きます）。
 

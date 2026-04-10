@@ -1,7 +1,7 @@
 import { createInterface } from 'node:readline';
 import { parseArgs } from 'node:util';
 import { lookup } from './lookup.js';
-import { applyMsPrinciple } from './utils.js';
+import { applyPrinciple } from './utils.js';
 
 const { values, positionals } = parseArgs({
   options: {
@@ -110,8 +110,8 @@ Supports # comment lines (section headers) and blank lines.
 Output TSV columns:
   word<TAB>spell<TAB>first-guess<TAB>rationale<TAB>備考
 
-first-guess: with-mark / without-mark
-rationale:   er-or-ar / short / long
+first-guess: with-mark / without-mark / unknown
+rationale:   er-or-ar / r-vowels / y / ry / ty-phy / ure
 `);
     return;
   }
@@ -164,8 +164,10 @@ rationale:   er-or-ar / short / long
     }
 
     // 未登録 → 分類
-    const result = applyMsPrinciple(word, spell || null);
-    const firstGuess = result.withMark ? 'with-mark' : 'without-mark';
+    const result = applyPrinciple(word, spell || null);
+    const firstGuess = result.withMark === true ? 'with-mark'
+                     : result.withMark === false ? 'without-mark'
+                     : 'unknown';
 
     // バッファされたセクション見出し・空行をフラッシュ
     for (const pending of pendingLines) {
@@ -173,7 +175,7 @@ rationale:   er-or-ar / short / long
     }
     pendingLines = [];
 
-    process.stdout.write([word, spell, firstGuess, result.rationale, ...rest].join('\t') + '\n');
+    process.stdout.write([word, spell, firstGuess, result.rationale ?? '', ...rest].join('\t') + '\n');
   }
 
   if (skipCount > 0) {

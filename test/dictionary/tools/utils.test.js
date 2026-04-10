@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { normalizeWithMark, countEffectiveChars, applyMsPrinciple } from "../../../dictionary/tools/utils.js";
+import { normalizeWithMark, countEffectiveChars, applyPrinciple } from "../../../dictionary/tools/utils.js";
 
 describe("normalizeWithMark", () => {
   it("長音符なしの語に長音符を付与する", () => {
@@ -33,41 +33,101 @@ describe("countEffectiveChars", () => {
   });
 });
 
-describe("applyMsPrinciple", () => {
-  it("-er 語尾は withMark: true, rationale: er-or-ar", () => {
-    const result = applyMsPrinciple("コンパイラ", "compiler");
+describe("applyPrinciple", () => {
+  // Rule 1: 子音 + -er/-or/-ar → あり
+  it("子音 + -er → withMark: true, rationale: er-or-ar", () => {
+    const result = applyPrinciple("コンパイラ", "compiler");
     assert.equal(result.withMark, true);
     assert.equal(result.rationale, "er-or-ar");
   });
 
-  it("-or 語尾は withMark: true, rationale: er-or-ar", () => {
-    const result = applyMsPrinciple("モニター", "monitor");
+  it("子音 + -or → withMark: true, rationale: er-or-ar", () => {
+    const result = applyPrinciple("モニター", "monitor");
     assert.equal(result.withMark, true);
     assert.equal(result.rationale, "er-or-ar");
   });
 
-  it("-ar 語尾は withMark: true, rationale: er-or-ar", () => {
-    const result = applyMsPrinciple("カレンダー", "calendar");
+  it("子音 + -ar → withMark: true, rationale: er-or-ar", () => {
+    const result = applyPrinciple("カレンダー", "calendar");
     assert.equal(result.withMark, true);
     assert.equal(result.rationale, "er-or-ar");
   });
 
-  it("短い語 (実効4文字未満) は withMark: true, rationale: short", () => {
-    // ドアー → 3文字
-    const result = applyMsPrinciple("ドア", null);
+  // Rule 2: -y（-ry, -ty, -phy 以外）→ あり
+  it("-cy → withMark: true, rationale: y", () => {
+    const result = applyPrinciple("ポリシー", "policy");
     assert.equal(result.withMark, true);
-    assert.equal(result.rationale, "short");
+    assert.equal(result.rationale, "y");
   });
 
-  it("長い語 (er/or/ar 以外, 実効4文字以上) は withMark: false, rationale: long", () => {
-    const result = applyMsPrinciple("メモリ", "memory");
+  it("-gy → withMark: true, rationale: y", () => {
+    const result = applyPrinciple("テクノロジー", "technology");
+    assert.equal(result.withMark, true);
+    assert.equal(result.rationale, "y");
+  });
+
+  // Rule 3: -ry → なし
+  it("-ory → withMark: false, rationale: ry", () => {
+    const result = applyPrinciple("メモリ", "memory");
     assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "long");
+    assert.equal(result.rationale, "ry");
   });
 
-  it("english が null の場合は文字数のみで判定", () => {
-    const result = applyMsPrinciple("ディレクトリ", null);
+  it("-ary → withMark: false, rationale: ry", () => {
+    const result = applyPrinciple("ライブラリ", "library");
     assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "long");
+    assert.equal(result.rationale, "ry");
+  });
+
+  // Rule 4: -ty/-phy → なし
+  it("-ty → withMark: false, rationale: ty-phy", () => {
+    const result = applyPrinciple("プロパティ", "property");
+    assert.equal(result.withMark, false);
+    assert.equal(result.rationale, "ty-phy");
+  });
+
+  it("-bility → withMark: false, rationale: ty-phy", () => {
+    const result = applyPrinciple("スケーラビリティ", "scalability");
+    assert.equal(result.withMark, false);
+    assert.equal(result.rationale, "ty-phy");
+  });
+
+  it("-phy → withMark: false, rationale: ty-phy", () => {
+    const result = applyPrinciple("タイポグラフィ", "typography");
+    assert.equal(result.withMark, false);
+    assert.equal(result.rationale, "ty-phy");
+  });
+
+  // Rule 5: -ure → なし
+  it("-ure → withMark: false, rationale: ure", () => {
+    const result = applyPrinciple("アーキテクチャ", "architecture");
+    assert.equal(result.withMark, false);
+    assert.equal(result.rationale, "ure");
+  });
+
+  // Rule 6: 母音 + -er/-or/-ar → なし
+  it("母音 + -ear → withMark: false, rationale: r-vowels", () => {
+    const result = applyPrinciple("クリア", "clear");
+    assert.equal(result.withMark, false);
+    assert.equal(result.rationale, "r-vowels");
+  });
+
+  it("母音 + -oor → withMark: false, rationale: r-vowels", () => {
+    const result = applyPrinciple("ドア", "door");
+    assert.equal(result.withMark, false);
+    assert.equal(result.rationale, "r-vowels");
+  });
+
+  // Fallback
+  it("english が null の場合は withMark: null, rationale: null", () => {
+    const result = applyPrinciple("ディレクトリ", null);
+    assert.equal(result.withMark, null);
+    assert.equal(result.rationale, null);
+  });
+
+  it("分類不能な英語語尾は withMark: null, rationale: null", () => {
+    const result = applyPrinciple("テーブル", "table");
+    assert.equal(result.withMark, null);
+    assert.equal(result.rationale, null);
   });
 });

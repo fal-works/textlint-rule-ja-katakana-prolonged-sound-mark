@@ -10,14 +10,20 @@
 import { writeFileSync } from "node:fs";
 
 import dictErOrAr from "./dict-er-or-ar.js";
-import dictShort from "./dict-short.js";
-import dictLong from "./dict-long.js";
+import dictRVowels from "./dict-r-vowels.js";
+import dictY from "./dict-y.js";
+import dictRy from "./dict-ry.js";
+import dictTyPhy from "./dict-ty-phy.js";
+import dictUre from "./dict-ure.js";
 import { validate, generateWrongForms, renderModule } from "./builder.js";
 
 const sources = new Map([
   ["dict-er-or-ar", dictErOrAr],
-  ["dict-short", dictShort],
-  ["dict-long", dictLong],
+  ["dict-r-vowels", dictRVowels],
+  ["dict-y", dictY],
+  ["dict-ry", dictRy],
+  ["dict-ty-phy", dictTyPhy],
+  ["dict-ure", dictUre],
 ]);
 
 const errors = validate(sources);
