@@ -56,7 +56,7 @@ function packTarball(destDir) {
  * @param {string} tarballPath
  */
 function setupProject(tmpDir, tarballPath) {
-  execFileSync("npm", ["install", "--no-package-lock", tarballPath], {
+  execFileSync("npm", ["install", "--no-package-lock", "--cache", path.join(tmpDir, ".npm-cache"), tarballPath], {
     cwd: tmpDir,
     env: npmCleanEnv,
   });
