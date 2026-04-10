@@ -55,8 +55,8 @@ Input:
   Words as arguments, or newline-separated from stdin if no arguments given.
 
 Output (default):
-  word<TAB>filename        (registered)
-  word<TAB>(unregistered)  (not found)
+  word<TAB>filename<TAB>key  (registered)
+  word<TAB>(unregistered)      (not found)
 
 Output (--unregistered):
   word  (unregistered words only, one per line)
@@ -70,11 +70,13 @@ Notes:
 
   const input = words.length > 0 ? words : await readStdinWords();
   for (const word of input) {
-    const file = lookup(word);
+    const result = lookup(word);
     if (values.unregistered) {
-      if (!file) process.stdout.write(word + '\n');
+      if (!result) process.stdout.write(word + '\n');
+    } else if (result) {
+      process.stdout.write(word + '\t' + result.file + '\t' + result.key + '\n');
     } else {
-      process.stdout.write(word + '\t' + (file ?? '(unregistered)') + '\n');
+      process.stdout.write(word + '\t' + '(unregistered)' + '\n');
     }
   }
 }
@@ -155,8 +157,8 @@ rationale:   er-or-ar / short / long
     const spell = cols[1] ?? '';
     const rest = cols.slice(2);
 
-    const file = lookup(word);
-    if (file) {
+    const found = lookup(word);
+    if (found) {
       skipCount++;
       continue;
     }

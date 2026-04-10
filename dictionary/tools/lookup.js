@@ -5,7 +5,7 @@ import conventionalWithoutMark from '../dict-conventional-without-mark.js';
 import exceptionalWithMark from '../dict-exceptional-with-mark.js';
 import allowedBoth from '../dict-allowed-both.js';
 
-/** @type {Map<string, string>} */
+/** @type {Map<string, { file: string, key: string }>} */
 const wordMap = new Map();
 for (const { file, source } of [
   { file: 'dict-regular-with-mark.js', source: regularWithMark },
@@ -15,8 +15,12 @@ for (const { file, source } of [
   { file: 'dict-exceptional-with-mark.js', source: exceptionalWithMark },
   { file: 'dict-allowed-both.js', source: allowedBoth },
 ]) {
-  for (const word of source.words) {
-    wordMap.set(word, file);
+  for (const key of /** @type {const} */ (['requireMark', 'requireNoMark', 'allowBoth'])) {
+    const words = source[key];
+    if (!words) continue;
+    for (const word of words) {
+      wordMap.set(word, { file, key });
+    }
   }
 }
 
@@ -28,7 +32,7 @@ function toggle(word) {
 /**
  * 辞書から語を検索する。末尾長音符の有無を正規化して検索する。
  * @param {string} word - 検索する語
- * @returns {string | null} 登録先の辞書ファイル名、未登録なら null
+ * @returns {{ file: string, key: string } | null} 登録先情報、未登録なら null
  */
 export function lookup(word) {
   return wordMap.get(word) ?? wordMap.get(toggle(word)) ?? null;

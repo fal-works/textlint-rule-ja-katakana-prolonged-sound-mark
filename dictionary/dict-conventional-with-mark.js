@@ -8,13 +8,10 @@
  * 登録対象の語:
  * - 末尾長音符ありで表記された語
  *
- * 用途:
- * - ここに登録されたほうの表記を正表記として扱う
- *
  * @type {import("./builder.js").DictSource}
  */
 export default {
-  type: "require-mark", words: [
+  requireMark: [
     // -cy
     "コンピテンシー",   // competency (-cy) スタイルガイドに例外として明記
     "ポリシー",         // policy (-cy) 同上

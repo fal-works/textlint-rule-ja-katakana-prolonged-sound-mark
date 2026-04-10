@@ -6,21 +6,18 @@
  */
 
 /**
- * 辞書ソースの種類。
+ * 辞書ソース。
  *
- * 分類理由（原則vs慣例など）は問わず、辞書生成時の検査方法と収録方法を決定する効果のみを持つ。
+ * 各フィールドの名前が辞書生成時の検査方法と収録方法を決定する。
  *
- * - `"require-mark"`: 辞書ソースには末尾長音符ありを登録し、これを正表記とする
- * - `"require-no-mark"`: 辞書ソースには末尾長音符なしを登録し、これを正表記とする
- * - `"allow-both"`: 末尾長音符の有無を両方とも正表記として許容（i.e. いずれも誤表記として扱うことを禁止）
+ * - `requireMark`: 末尾長音符ありを正表記とする語
+ * - `requireNoMark`: 末尾長音符なしを正表記とする語
+ * - `allowBoth`: 末尾長音符の有無を両方とも正表記として許容する語
  *
- * @typedef {"require-mark" | "require-no-mark" | "allow-both"} DictSourceType
- */
-
-/**
  * @typedef {{
- *   type: DictSourceType,
- *   words: string[],
+ *   requireMark?: string[],
+ *   requireNoMark?: string[],
+ *   allowBoth?: string[],
  * }} DictSource
  */
 
@@ -35,19 +32,16 @@ export function validate(sources) {
   /** @type {string[]} */
   const errors = [];
 
-  for (const [name, { type, words }] of sources) {
-    // 末尾長音符有無のバリデーション
-    if (type === "require-mark") {
-      for (const word of words) {
-        if (!word.endsWith("ー")) {
-          errors.push(`${name}: 「${word}」が「ー」で終わっていません`);
-        }
+  // 末尾長音符有無のバリデーション
+  for (const [name, { requireMark = [], requireNoMark = [] }] of sources) {
+    for (const word of requireMark) {
+      if (!word.endsWith("ー")) {
+        errors.push(`${name}: 「${word}」が「ー」で終わっていません`);
       }
-    } else if (type === "require-no-mark") {
-      for (const word of words) {
-        if (word.endsWith("ー")) {
-          errors.push(`${name}: 「${word}」が「ー」で終わっています`);
-        }
+    }
+    for (const word of requireNoMark) {
+      if (word.endsWith("ー")) {
+        errors.push(`${name}: 「${word}」が「ー」で終わっています`);
       }
     }
   }
@@ -56,8 +50,8 @@ export function validate(sources) {
   /** @type {Map<string, string>} word → source name */
   const seen = new Map();
 
-  for (const [name, { words }] of sources) {
-    for (const word of words) {
+  for (const [name, { requireMark = [], requireNoMark = [], allowBoth = [] }] of sources) {
+    for (const word of [...requireMark, ...requireNoMark, ...allowBoth]) {
       const prev = seen.get(word);
       if (prev) {
         const where = prev === name ? `${name} 内で` : `${prev} と ${name} の間で`;
@@ -69,8 +63,8 @@ export function validate(sources) {
   }
 
   // 長音符トグル形の衝突検知
-  for (const [name, { words }] of sources) {
-    for (const word of words) {
+  for (const [name, { requireMark = [], requireNoMark = [], allowBoth = [] }] of sources) {
+    for (const word of [...requireMark, ...requireNoMark, ...allowBoth]) {
       const toggled = toggleProlongedSoundMark(word);
       const other = seen.get(toggled);
       if (other) {
@@ -93,9 +87,8 @@ export function validate(sources) {
 export function generateWrongForms(sources) {
   /** @type {string[]} */
   const result = [];
-  for (const [, { type, words }] of sources) {
-    if (type === "allow-both") continue;
-    for (const word of words) {
+  for (const [_name, { requireMark = [], requireNoMark = [] }] of sources) {
+    for (const word of [...requireMark, ...requireNoMark]) {
       result.push(toggleProlongedSoundMark(word));
     }
   }

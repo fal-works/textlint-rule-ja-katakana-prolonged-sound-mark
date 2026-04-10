@@ -8,13 +8,10 @@
  * 登録対象の語:
  * - 末尾長音符なしで表記された語
  *
- * 用途:
- * - ここに登録されたほうの表記を正表記として扱う
- *
  * @type {import("./builder.js").DictSource}
  */
 export default {
-  type: "require-no-mark", words: [
+  requireNoMark: [
     // -er
     "コンパイラ",       // compiler (-er)
     "プログラマ",       // programmer (-er)

@@ -10,15 +10,10 @@
  * - 「規則に反するが慣例として許容したい」ほうの語
  * - ただし、実際にはどちらを登録しても辞書生成結果とlint/fix挙動に変化はない
  *
- * 用途:
- * - 長音符あり・なしのどちらも正表記として扱う
- * - 生成する辞書には含めない
- * - 他ソースとの重複・衝突検知に使用する
- *
  * @type {import("./builder.js").DictSource}
  */
 export default {
-  type: "allow-both", words: [
+  allowBoth: [
     "スカラ",           // scalar (-ar) DQかもしれん
     "テクスチャ",       // texture (-ure) HHかもしれん
   ]
