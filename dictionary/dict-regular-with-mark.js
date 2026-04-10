@@ -4,7 +4,7 @@
  * 採録条件:
  * - 語尾が -er/-or/-ar のカタカナ語
  * - かつ、慣例優先・両方許容・カスタム例外のいずれにも該当しない語
- * 
+ *
  * 登録対象の語:
  * - 末尾長音符ありで表記された語
  *
@@ -71,6 +71,53 @@ export default {
     "カスタマイザー",     // customizer (-er)
     "サニタイザー",       // sanitizer (-er)
     "エクスプローラー",   // explorer (-er)
+    "ランナー",           // runner (-er)
+    "チェッカー",         // checker (-er)
+    "ラッパー",           // wrapper (-er)
+    "セッター",           // setter (-er)
+    "ゲッター",           // getter (-er)
+    "マッパー",           // mapper (-er)
+    "ソーター",           // sorter (-er)
+    "スプリッター",       // splitter (-er)
+    "トラッカー",         // tracker (-er)
+    "ウォーカー",         // walker (-er)
+    "クローラー",         // crawler (-er)
+    "スクレイパー",       // scraper (-er)
+    "バンドラー",         // bundler (-er)
+    "リゾルバー",         // resolver (-er)
+    "デプロイヤー",       // deployer (-er)
+    "スターター",         // starter (-er)
+    "レキサー",           // lexer (-er)
+    "ポーター",           // porter (-er)
+    "パッチャー",         // patcher (-er)
+    "ヘルパー",           // helper (-er)
+    "デベロッパー",       // developer (-er)
+    "ウォッチャー",       // watcher (-er)
+    "マッチャー",         // matcher (-er)
+    "レポーター",         // reporter (-er)
+    "プレーヤー",         // player (-er)
+    "シェーダー",         // shader (-er)
+    "ファインダー",       // finder (-er)
+    "ダウンローダー",     // downloader (-er)
+    "アップローダー",     // uploader (-er)
+    "パッケージャー",     // packager (-er)
+    "ストリーマー",       // streamer (-er)
+    "チューナー",         // tuner (-er)
+    "クリッパー",         // clipper (-er)
+    "ピッカー",           // picker (-er)
+    "スライダー",         // slider (-er)
+    "スピナー",           // spinner (-er)
+    "エミッター",         // emitter (-er) Microsoft のドキュメントでも末尾長音符あり
+    "シンセサイザー",     // synthesizer (-er) Microsoft のドキュメントでも末尾長音符あり
+    "イコライザー",       // equalizer (-er)
+    "スタビライザー",     // stabilizer (-er)
+    "ミニマイザー",       // minimizer (-er)
+    "マキシマイザー",     // maximizer (-er)
+    "ランダマイザー",     // randomizer (-er)
+    // "トランスパイラー",   // transpiler (-er) Microsoft のドキュメントでは未確認
+    // "コンデンサー",       // condenser (-er) Microsoft のドキュメントでは未確認
+    // "インバーター",       // inverter (-er) Microsoft のドキュメントでは未確認
+    // "デマルチプレクサー", // demultiplexer (-er) Microsoft のドキュメントでは未確認
 
     // -er （インフラ・ネットワーク）
     "サーバー",           // server (-er)
@@ -95,6 +142,15 @@ export default {
     "キャラクター",       // character (-er)
     "メンバー",           // member (-er)
     "ディスクリプター",   // descriptor (-er)
+
+    // -er （一般）
+    "ナンバー",           // number (-er)
+    "オーナー",           // owner (-er)
+    "リマインダー",       // reminder (-er)
+    "メッセンジャー",     // messenger (-er)
+    "デザイナー",         // designer (-er)
+    "パートナー",         // partner (-er)
+    "プランナー",         // planner (-er)
 
     // -or
     "モニター",           // monitor (-or)
@@ -130,8 +186,32 @@ export default {
     "アノテーター",       // annotator (-or)
     "ナビゲーター",       // navigator (-or)
     "オーサー",           // author (-or)
+    "ビジター",           // visitor (-or)
+    "コントリビューター", // contributor (-or)
+    "コンストラクター",   // constructor (-or) Microsoft のドキュメントでも末尾長音符あり
+    "デストラクター",     // destructor (-or)
+    "スーパーバイザー",   // supervisor (-or)
+    "モデレーター",       // moderator (-or)
+    "ファシリテーター",   // facilitator (-or)
+    "レギュレーター",     // regulator (-or)
+    "ディストリビューター", // distributor (-or)
+    "カリキュレーター",   // calculator (-or)
+    "プロジェクター",     // projector (-or)
+    "メディエーター",     // mediator (-or)
+    "ネゴシエーター",     // negotiator (-or)
+    "インキュベーター",   // incubator (-or)
+    "エスティメーター",   // estimator (-or)
+    "センサー",           // sensor (-or)
+    "ベクター",           // vector (-or)
 
     // -ar
     "カレンダー",         // calendar (-ar)
+    "レーダー",           // radar (-ar)
+
+    // -over
+    "フェイルオーバー",   // failover (-over)
+
+    // 短い語（実効文字数 < 4）
+    "コピー",             // copy (-py)
   ]
 };

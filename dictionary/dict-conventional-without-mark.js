@@ -29,6 +29,8 @@ export default {
     "シリアライザ",     // serializer (-er)
     "デシリアライザ",   // deserializer (-er)
     "インデクサ",       // indexer (-er)
+    "コンプレッサ",     // compressor (-er) Microsoft のドキュメントでも揺れているので慣例に従う
+    "マルチプレクサ",   // multiplexer (-er) 同上
 
     // -or
     "アクセラレータ",   // accelerator (-or)
@@ -39,6 +41,7 @@ export default {
     "トランジスタ",     // transistor (-or)
     "ドア",             // door (-or)
     "フロア",           // floor (-or)
+    "アクチュエータ",   // actuator (-or) Microsoft のドキュメントでも揺れているので慣例に従う
 
     // -ear
     "リニア",           // linear (-ear)

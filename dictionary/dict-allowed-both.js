@@ -20,5 +20,6 @@
 export default {
   rule: "allow-both", words: [
     "スカラ",           // scalar (-ar) DQかもしれん
+    "テクスチャ",       // texture (-ure) HHかもしれん
   ]
 };
