@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "textlint rule for Japanese katakana prolonged sound mark based on Microsoft Japanese Localization Style Guide",
   "type": "module",
-  "exports": "./lib/ja-katakana-prolonged-sound-mark.js",
+  "exports": {
+    ".": "./lib/ja-katakana-prolonged-sound-mark.js"
+  },
   "files": [
     "lib/",
     "docs/",
