@@ -13,7 +13,8 @@ import dictErOrAr from "./dict-er-or-ar.js";
 import dictRVowels from "./dict-r-vowels.js";
 import dictY from "./dict-y.js";
 import dictRy from "./dict-ry.js";
-import dictTyPhy from "./dict-ty-phy.js";
+import dictTy from "./dict-ty.js";
+import dictPhy from "./dict-phy.js";
 import dictUre from "./dict-ure.js";
 import { validate, generateWrongForms, renderModule } from "./builder.js";
 
@@ -22,7 +23,8 @@ const sources = new Map([
   ["dict-r-vowels", dictRVowels],
   ["dict-y", dictY],
   ["dict-ry", dictRy],
-  ["dict-ty-phy", dictTyPhy],
+  ["dict-ty", dictTy],
+  ["dict-phy", dictPhy],
   ["dict-ure", dictUre],
 ]);
 

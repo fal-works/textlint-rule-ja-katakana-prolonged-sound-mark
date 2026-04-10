@@ -2,7 +2,8 @@ import erOrAr from '../dict-er-or-ar.js';
 import rVowels from '../dict-r-vowels.js';
 import y from '../dict-y.js';
 import ry from '../dict-ry.js';
-import tyPhy from '../dict-ty-phy.js';
+import ty from '../dict-ty.js';
+import phy from '../dict-phy.js';
 import ure from '../dict-ure.js';
 
 /** @type {Map<string, { file: string, key: string }>} */
@@ -12,7 +13,8 @@ for (const { file, source } of [
   { file: 'dict-r-vowels.js', source: rVowels },
   { file: 'dict-y.js', source: y },
   { file: 'dict-ry.js', source: ry },
-  { file: 'dict-ty-phy.js', source: tyPhy },
+  { file: 'dict-ty.js', source: ty },
+  { file: 'dict-phy.js', source: phy },
   { file: 'dict-ure.js', source: ure },
 ]) {
   for (const key of /** @type {const} */ (['requireMark', 'requireNoMark', 'allowBoth'])) {

@@ -111,7 +111,7 @@ Output TSV columns:
   単語<TAB>english<TAB>first-guess<TAB>rationale<TAB>備考
 
 first-guess: with-mark / without-mark / unknown
-rationale:   er-or-ar / r-vowels / y / ry / ty-phy / ure (empty if unknown)
+rationale:   er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
 `);
     return;
   }

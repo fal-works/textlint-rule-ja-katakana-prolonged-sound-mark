@@ -30,12 +30,13 @@ export function countEffectiveChars(katakana) {
 }
 
 /**
- * @typedef {'er-or-ar' | 'r-vowels' | 'y' | 'ry' | 'ty-phy' | 'ure' | null} PrincipleRationale
+ * @typedef {'er-or-ar' | 'r-vowels' | 'y' | 'ry' | 'ty' | 'phy' | 'ure' | null} PrincipleRationale
  * - er-or-ar: 英語原語の語尾が 子音 + -er/-or/-ar
  * - r-vowels: 英語原語の語尾が 母音 + -er/-or/-ar
  * - y:        英語原語の語尾が -y（-ry, -ty, -phy を除く）
  * - ry:       英語原語の語尾が -ry（-ory, -ary を含む）
- * - ty-phy:   英語原語の語尾が -ty（-bility を含む）または -phy
+ * - ty:       英語原語の語尾が -ty（-bility を含む）
+ * - phy:      英語原語の語尾が -phy
  * - ure:      英語原語の語尾が -ure
  * - null:     分類不能
  */
@@ -57,8 +58,11 @@ export function applyPrinciple(_katakana, english) {
   // -ry（-ory, -ary を含む）→ なし（-y より先に評価）
   if (/ry$/i.test(lc)) return { withMark: false, rationale: 'ry' };
 
-  // -ty（-bility を含む）/ -phy → なし（-y より先に評価）
-  if (/(?:ty|phy)$/i.test(lc)) return { withMark: false, rationale: 'ty-phy' };
+  // -ty（-bility を含む）→ なし（-y より先に評価）
+  if (/ty$/i.test(lc)) return { withMark: false, rationale: 'ty' };
+
+  // -phy → なし（-y より先に評価）
+  if (/phy$/i.test(lc)) return { withMark: false, rationale: 'phy' };
 
   // その他の -y → あり
   if (/y$/i.test(lc)) return { withMark: true, rationale: 'y' };

@@ -79,33 +79,34 @@ describe("applyPrinciple", () => {
     assert.equal(result.rationale, "ry");
   });
 
-  // Rule 4: -ty/-phy → なし
-  it("-ty → withMark: false, rationale: ty-phy", () => {
+  // Rule 4: -ty → なし
+  it("-ty → withMark: false, rationale: ty", () => {
     const result = applyPrinciple("プロパティ", "property");
     assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "ty-phy");
+    assert.equal(result.rationale, "ty");
   });
 
-  it("-bility → withMark: false, rationale: ty-phy", () => {
+  it("-bility → withMark: false, rationale: ty", () => {
     const result = applyPrinciple("スケーラビリティ", "scalability");
     assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "ty-phy");
+    assert.equal(result.rationale, "ty");
   });
 
-  it("-phy → withMark: false, rationale: ty-phy", () => {
+  // Rule 5: -phy → なし
+  it("-phy → withMark: false, rationale: phy", () => {
     const result = applyPrinciple("タイポグラフィ", "typography");
     assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "ty-phy");
+    assert.equal(result.rationale, "phy");
   });
 
-  // Rule 5: -ure → なし
+  // Rule 6: -ure → なし
   it("-ure → withMark: false, rationale: ure", () => {
     const result = applyPrinciple("アーキテクチャ", "architecture");
     assert.equal(result.withMark, false);
     assert.equal(result.rationale, "ure");
   });
 
-  // Rule 6: 母音 + -er/-or/-ar → なし
+  // Rule 7: 母音 + -er/-or/-ar → なし
   it("母音 + -ear → withMark: false, rationale: r-vowels", () => {
     const result = applyPrinciple("クリア", "clear");
     assert.equal(result.withMark, false);

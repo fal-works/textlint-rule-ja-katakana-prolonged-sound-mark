@@ -1,5 +1,5 @@
 /**
- * 英語原語の語尾が -ty（-bility を含む）または -phy のカタカナ語。
+ * 英語原語の語尾が -ty（-bility を含む）のカタカナ語。
  *
  * 原則に従えば末尾長音符なしが正表記。
  *
@@ -7,12 +7,8 @@
  */
 export default {
   requireMark: [
-    // -ty
     "アイデンティティー", // identity (-ty) Microsoft のドキュメントでも揺れているので自然なほうを選択
     "キャパシティー",   // capacity (-ty) 同上
-
-    // -phy
-    "フォトグラフィー", // photography (-phy) スタイルガイドに例外として明記
   ],
   requireNoMark: [
     // -ty
@@ -81,15 +77,5 @@ export default {
     "リピータビリティ",       // repeatability (-bility)
     "プレディクタビリティ",   // predictability (-bility)
     "リユーザビリティ",       // reusability (-bility)
-
-    // -phy
-    "タイポグラフィ",         // typography (-phy)
-    "クリプトグラフィ",       // cryptography (-phy)
-    "デモグラフィ",           // demography (-phy)
-    "トポグラフィ",           // topography (-phy)
-    "ステガノグラフィ",       // steganography (-phy)
-    "バイオグラフィ",         // biography (-phy)
-    "フィロソフィ",           // philosophy (-phy)
-    "ビブリオグラフィ",       // bibliography (-phy)
   ],
 };
