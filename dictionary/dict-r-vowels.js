@@ -7,6 +7,9 @@
  */
 export default {
   requireNoMark: [
+    // -eer
+    "エンジニア",      // engineer (-eer)
+
     // -ear
     "リニア",           // linear (-ear)
     "クリア",           // clear (-ear)
@@ -15,7 +18,6 @@ export default {
     // -ier
     "バリア",           // barrier (-ier)
     "キャリア",         // carrier (-ier)
-    "フロンティア",     // frontier (-ier)
 
     // -oor
     "ドア",             // door (-oor)

@@ -88,8 +88,6 @@ export default {
     "デモグラフィ",           // demography (-phy)
     "トポグラフィ",           // topography (-phy)
     "ステガノグラフィ",       // steganography (-phy)
-    "コレオグラフィ",         // choreography (-phy)
-    "カートグラフィ",         // cartography (-phy)
     "バイオグラフィ",         // biography (-phy)
     "フィロソフィ",           // philosophy (-phy)
     "ビブリオグラフィ",       // bibliography (-phy)

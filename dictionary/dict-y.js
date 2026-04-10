@@ -30,7 +30,6 @@ export default {
     "エフィシェンシー",          // efficiency (-cy)
     "リダンダンシー",            // redundancy (-cy)
     "カレンシー",                // currency (-cy)
-    "デモクラシー",              // democracy (-cy)
 
     // -gy
     "テクノロジー",     // technology (-gy) Microsoft のドキュメントでも揺れているので自然なほうを選択
