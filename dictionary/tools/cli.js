@@ -179,6 +179,6 @@ rationale:   er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
   }
 
   if (skipCount > 0) {
-    process.stderr.write(`# ${skipCount} registered words skipped\n`);
+    process.stdout.write(`# ${skipCount} registered words skipped\n`);
   }
 }
