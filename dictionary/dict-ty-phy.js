@@ -46,6 +46,8 @@ export default {
     "グラニュラリティ", // granularity (-ty)
     "コモディティ",     // commodity (-ty)
     "インタラクティビティ", // interactivity (-ty)
+    "コンフィデンシャリティ", // confidentiality (-ty)
+    "ファンクショナリティ",   // functionality (-ty)
 
     // -bility
     "アクセシビリティ",       // accessibility (-bility)
@@ -58,8 +60,6 @@ export default {
     "レスポンシビリティ",     // responsibility (-bility)
     "アカウンタビリティ",     // accountability (-bility)
     "オブザーバビリティ",     // observability (-bility)
-    "コンフィデンシャリティ", // confidentiality (-bility)
-    "ファンクショナリティ",   // functionality (-bility)
     "イミュータビリティ",     // immutability (-bility)
     "ミュータビリティ",       // mutability (-bility)
     "リーダビリティ",         // readability (-bility)

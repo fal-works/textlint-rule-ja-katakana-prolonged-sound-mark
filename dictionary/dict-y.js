@@ -62,7 +62,7 @@ export default {
     "アノマリー",       // anomaly (-ly) 同上
   ],
   requireNoMark: [
-    "プロキシ",               // proxy (-xy)
-    "アセンブリ",             // assembly (-bly)
+    "プロキシ",               // proxy (-xy) 技術用語として長音符なしで定着
+    "アセンブリ",             // assembly (-bly) 技術用語として長音符なしで定着
   ],
 };
