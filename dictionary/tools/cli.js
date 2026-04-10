@@ -103,15 +103,15 @@ Reads a TSV candidate list from stdin, filters out registered words,
 and outputs unregistered words with their first-guess classification.
 
 Input TSV columns:
-  word<TAB>spell<TAB>備考 (optional)
+  単語<TAB>english<TAB>備考 (optional)
 
 Supports # comment lines (section headers) and blank lines.
 
 Output TSV columns:
-  word<TAB>spell<TAB>first-guess<TAB>rationale<TAB>備考
+  単語<TAB>english<TAB>first-guess<TAB>rationale<TAB>備考
 
 first-guess: with-mark / without-mark / unknown
-rationale:   er-or-ar / r-vowels / y / ry / ty-phy / ure
+rationale:   er-or-ar / r-vowels / y / ry / ty-phy / ure (empty if unknown)
 `);
     return;
   }
@@ -154,7 +154,7 @@ rationale:   er-or-ar / r-vowels / y / ry / ty-phy / ure
     seenDataSinceLastComment = true;
     const cols = line.split('\t');
     const word = /** @type {string} */ (cols[0]);
-    const spell = cols[1] ?? '';
+    const english = cols[1] ?? '';
     const rest = cols.slice(2);
 
     const found = lookup(word);
@@ -164,7 +164,7 @@ rationale:   er-or-ar / r-vowels / y / ry / ty-phy / ure
     }
 
     // 未登録 → 分類
-    const result = applyPrinciple(word, spell || null);
+    const result = applyPrinciple(word, english || null);
     const firstGuess = result.withMark === true ? 'with-mark'
                      : result.withMark === false ? 'without-mark'
                      : 'unknown';
@@ -175,7 +175,7 @@ rationale:   er-or-ar / r-vowels / y / ry / ty-phy / ure
     }
     pendingLines = [];
 
-    process.stdout.write([word, spell, firstGuess, result.rationale ?? '', ...rest].join('\t') + '\n');
+    process.stdout.write([word, english, firstGuess, result.rationale ?? '', ...rest].join('\t') + '\n');
   }
 
   if (skipCount > 0) {
