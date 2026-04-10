@@ -14,7 +14,7 @@ describe("lookup", () => {
   });
 
   it("未登録の語は null を返す", () => {
-    const file = lookup("ランナー");
+    const file = lookup("カタカナ");
     assert.equal(file, null);
   });
 });
