@@ -1,0 +1,10 @@
+{
+  "fileSuggestion": {
+    "type": "command",
+    "command": ".claude/file-suggestion.sh"
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
+  }
+}
