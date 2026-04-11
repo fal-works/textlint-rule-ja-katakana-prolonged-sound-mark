@@ -5,6 +5,8 @@
  * 辞書ファイル（dict-{name}.ts）および原則（requireMark / requireNoMark）を決定する。
  */
 
+import type { MarkPolicy } from './types.ts';
+
 /** 辞書カテゴリの識別名。英語語尾のパターンに対応する。 */
 export type CategoryName = 'er-or-ar' | 'r-vowels' | 'y' | 'ry' | 'ty' | 'phy' | 'ure';
 
@@ -13,8 +15,8 @@ export interface Category {
   /** カテゴリの識別名。辞書ファイル名 `dict-{name}.ts` に対応する。 */
   name: CategoryName;
 
-  /** このカテゴリの原則。長音符ありを正表記とするか、なしを正表記とするか。 */
-  principle: 'requireMark' | 'requireNoMark';
+  /** 長音符の扱いに関するこのカテゴリの原則。 */
+  principle: MarkPolicy;
 
   /** 英語原語の語尾にマッチする正規表現。 */
   pattern: RegExp;
