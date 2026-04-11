@@ -1,7 +1,7 @@
 import { createInterface } from 'node:readline';
 import { parseArgs } from 'node:util';
-import { lookup } from './lookup.js';
-import { classify } from '../categories.js';
+import { lookup } from './lookup.ts';
+import { classify } from '../categories.ts';
 
 const { values, positionals } = parseArgs({
   options: {
@@ -26,7 +26,7 @@ if (values.help && !subcommand) {
 
 function printTopLevelHelp() {
   process.stdout.write(`\
-Usage: node dictionary/tools/cli.js <subcommand> [options]
+Usage: node dictionary/tools/cli.ts <subcommand> [options]
 
 Subcommands:
   lookup    辞書の登録状況を照会する
@@ -41,11 +41,10 @@ Run with <subcommand> --help for subcommand-specific help.
 
 // ─── lookup ───
 
-/** @param {string[]} words */
-async function runLookup(words) {
+async function runLookup(words: string[]) {
   if (values.help) {
     process.stdout.write(`\
-Usage: node dictionary/tools/cli.js lookup [--unregistered] [word ...]
+Usage: node dictionary/tools/cli.ts lookup [--unregistered] [word ...]
 
 Options:
   -u, --unregistered  Output only unregistered words (one per line)
@@ -82,8 +81,8 @@ Notes:
 }
 
 /** stdin から単語を1行ずつ読み取る（空行スキップ） */
-async function readStdinWords() {
-  const words = /** @type {string[]} */ ([]);
+async function readStdinWords(): Promise<string[]> {
+  const words: string[] = [];
   const rl = createInterface({ input: process.stdin, crlfDelay: Infinity });
   for await (const line of rl) {
     const w = line.trim();
@@ -97,7 +96,7 @@ async function readStdinWords() {
 async function runClassify() {
   if (values.help) {
     process.stdout.write(`\
-Usage: node dictionary/tools/cli.js classify < candidates.tsv
+Usage: node dictionary/tools/cli.ts classify < candidates.tsv
 
 Reads a TSV candidate list from stdin, filters out registered words,
 and outputs unregistered words with their first-guess classification.
@@ -119,8 +118,7 @@ category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
   const rl = createInterface({ input: process.stdin, crlfDelay: Infinity });
   let headerDone = false;
   let skipCount = 0;
-  /** @type {string[]} */
-  let pendingLines = [];
+  let pendingLines: string[] = [];
   let seenDataSinceLastComment = false;
 
   for await (const line of rl) {
@@ -153,7 +151,7 @@ category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
     // データ行
     seenDataSinceLastComment = true;
     const cols = line.split('\t');
-    const word = /** @type {string} */ (cols[0]);
+    const word = cols[0]!;
     const english = cols[1] ?? '';
     const rest = cols.slice(2);
 

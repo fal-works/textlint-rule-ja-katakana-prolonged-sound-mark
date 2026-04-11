@@ -1,11 +1,11 @@
+import type { DictSource } from './types.ts';
+
 /**
  * 英語原語の語尾が -ty（-bility を含む）のカタカナ語。
  *
  * 原則に従えば末尾長音符なしが正表記。
- *
- * @type {import("./builder.js").DictSource}
  */
-export default {
+const dict: DictSource = {
   requireMark: [
     "アイデンティティー", // identity (-ty) Microsoft のドキュメントでも揺れているので自然なほうを選択
     "キャパシティー",   // capacity (-ty) 同上
@@ -79,3 +79,4 @@ export default {
     "リユーザビリティ",       // reusability (-bility)
   ],
 };
+export default dict;

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { lookup } from "../../../dictionary/tools/lookup.js";
+import { lookup } from "../../../dictionary/tools/lookup.ts";
 
 describe("lookup", () => {
   it("登録済みの語のカテゴリと配列名を返す", () => {

@@ -1,11 +1,11 @@
+import type { DictSource } from './types.ts';
+
 /**
  * 英語原語の語尾が -phy のカタカナ語。
  *
  * 原則に従えば末尾長音符なしが正表記。
- *
- * @type {import("./builder.js").DictSource}
  */
-export default {
+const dict: DictSource = {
   requireMark: [
     "フォトグラフィー", // photography (-phy) スタイルガイドに例外として明記
   ],
@@ -20,3 +20,4 @@ export default {
     "ビブリオグラフィ",       // bibliography (-phy)
   ],
 };
+export default dict;

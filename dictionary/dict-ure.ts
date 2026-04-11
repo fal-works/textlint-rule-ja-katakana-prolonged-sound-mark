@@ -1,11 +1,11 @@
+import type { DictSource } from './types.ts';
+
 /**
  * 英語原語の語尾が -ure のカタカナ語。
  *
  * 原則に従えば末尾長音符なしが正表記。
- *
- * @type {import("./builder.js").DictSource}
  */
-export default {
+const dict: DictSource = {
   requireMark: [
     "エクスポージャー",  // exposure (-ure) Microsoft のドキュメントでも揺れているので自然なほうを選択
     "フィーチャー",      // feature (-ure) Microsoft のドキュメントでも揺れているので自然なほうを選択
@@ -31,3 +31,4 @@ export default {
     "テクスチャ",       // texture (-ure)
   ],
 };
+export default dict;

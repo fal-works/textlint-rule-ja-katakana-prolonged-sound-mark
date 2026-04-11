@@ -21,9 +21,9 @@
   },
   "scripts": {
     "typecheck": "tsc",
-    "build:dict": "node dictionary/index.js",
-    "test": "pnpm run typecheck && pnpm run build:dict && mocha 'test/**/*.test.js' --ignore 'test/prepublish/**'",
-    "prepublishOnly": "pnpm test && mocha --timeout 30000 'test/prepublish/**/*.test.js'"
+    "build:dict": "node dictionary/index.ts",
+    "test": "pnpm run typecheck && pnpm run build:dict && mocha 'test/**/*.test.{js,ts}' --ignore 'test/prepublish/**'",
+    "prepublishOnly": "pnpm test && mocha --timeout 30000 'test/prepublish/**/*.test.{js,ts}'"
   },
   "repository": {
     "type": "git",

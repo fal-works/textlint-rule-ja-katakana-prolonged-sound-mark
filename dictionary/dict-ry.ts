@@ -1,11 +1,11 @@
+import type { DictSource } from './types.ts';
+
 /**
  * 英語原語の語尾が -ry（-ory, -ary を含む）のカタカナ語。
  *
  * 原則に従えば末尾長音符なしが正表記。
- *
- * @type {import("./builder.js").DictSource}
  */
-export default {
+const dict: DictSource = {
   requireMark: [
     // -ry
     "サマリー",         // summary (-ry) スタイルガイドに例外として明記
@@ -47,3 +47,4 @@ export default {
     "テレメトリ",       // telemetry (-ry)
   ],
 };
+export default dict;

@@ -1,12 +1,12 @@
+import type { DictSource } from './types.ts';
+
 /**
  * 英語原語の語尾が子音 + -er/-or/-ar のカタカナ語。
  *
  * 原則に従えば末尾長音符ありが正表記。
- * 母音 + -er/-or/-ar（-ear, -ier, -oor 等）は dict-r-vowels.js を参照。
- *
- * @type {import("./builder.js").DictSource}
+ * 母音 + -er/-or/-ar（-ear, -ier, -oor 等）は dict-r-vowels.ts を参照。
  */
-export default {
+const dict: DictSource = {
   requireMark: [
     // -er （プログラミング・開発）
     "ユーザー",           // user (-er)
@@ -233,3 +233,4 @@ export default {
     "スカラ",           // scalar (-ar) DQかもしれん
   ],
 };
+export default dict;

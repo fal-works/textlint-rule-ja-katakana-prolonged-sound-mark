@@ -4,19 +4,20 @@
  * dictionary/ 内の各ソースファイルから正表記を読み込み、
  * バリデーションを行ったうえで誤表記の Set を lib/dictionary.js に出力する。
  *
- * 使い方: node dictionary/index.js
+ * 使い方: node dictionary/index.ts
  */
 
 import { writeFileSync } from "node:fs";
 
-import { CATEGORIES } from "./categories.js";
-import { sourceByCategory } from "./sources.js";
-import { validate, generateWrongForms, renderModule } from "./builder.js";
+import type { DictSource } from "./types.ts";
+import { CATEGORIES } from "./categories.ts";
+import { sourceByCategory } from "./sources.ts";
+import { validate, generateWrongForms, renderModule } from "./builder.ts";
 
-const sources = new Map(
+const sources = new Map<string, DictSource>(
   CATEGORIES.map(({ name }) => [
     `dict-${name}`,
-    /** @type {import("./builder.js").DictSource} */ (sourceByCategory.get(name)),
+    sourceByCategory.get(name)!,
   ]),
 );
 

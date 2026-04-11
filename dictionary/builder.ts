@@ -5,32 +5,14 @@
  * 副作用（ファイル書き出し等）は担当しない。
  */
 
-/**
- * 辞書ソース。
- *
- * 各フィールドの名前が辞書生成時の検査方法と収録方法を決定する。
- *
- * - `requireMark`: 末尾長音符ありを正表記とする語
- * - `requireNoMark`: 末尾長音符なしを正表記とする語
- * - `allowBoth`: 末尾長音符の有無を両方とも正表記として許容する語
- *
- * @typedef {{
- *   requireMark?: string[],
- *   requireNoMark?: string[],
- *   allowBoth?: string[],
- * }} DictSource
- */
+import type { DictSource } from './types.ts';
 
 /**
  * 辞書ソースをバリデーションし、エラーメッセージの配列を返す。
  * 空配列ならバリデーション成功。
- *
- * @param {Map<string, DictSource>} sources
- * @returns {string[]} エラーメッセージの配列
  */
-export function validate(sources) {
-  /** @type {string[]} */
-  const errors = [];
+export function validate(sources: Map<string, DictSource>): string[] {
+  const errors: string[] = [];
 
   // 末尾長音符有無のバリデーション
   for (const [name, { requireMark = [], requireNoMark = [] }] of sources) {
@@ -47,8 +29,7 @@ export function validate(sources) {
   }
 
   // 全ソース横断の重複検知
-  /** @type {Map<string, string>} word → source name */
-  const seen = new Map();
+  const seen = new Map<string, string>();
 
   for (const [name, { requireMark = [], requireNoMark = [], allowBoth = [] }] of sources) {
     for (const word of [...requireMark, ...requireNoMark, ...allowBoth]) {
@@ -80,13 +61,9 @@ export function validate(sources) {
 /**
  * 各ソースの語の長音符をトグルし、誤表記の配列を生成する。
  * "allow-both" のソースは登録対象外（正誤の区別がないため）。
- *
- * @param {Map<string, DictSource>} sources
- * @returns {string[]}
  */
-export function generateWrongForms(sources) {
-  /** @type {string[]} */
-  const result = [];
+export function generateWrongForms(sources: Map<string, DictSource>): string[] {
+  const result: string[] = [];
   for (const [_name, { requireMark = [], requireNoMark = [] }] of sources) {
     for (const word of [...requireMark, ...requireNoMark]) {
       result.push(toggleProlongedSoundMark(word));
@@ -95,18 +72,14 @@ export function generateWrongForms(sources) {
   return result;
 }
 
-/** @param {string} word */
-function toggleProlongedSoundMark(word) {
+function toggleProlongedSoundMark(word: string): string {
   return word.endsWith("ー") ? word.slice(0, -1) : word + "ー";
 }
 
 /**
  * lib/dictionary.js の内容を文字列として生成する。
- *
- * @param {string[]} wrongForms
- * @returns {string}
  */
-export function renderModule(wrongForms) {
+export function renderModule(wrongForms: string[]): string {
   const entries = wrongForms.map((w) => `  "${w}",`).join("\n");
   return `\
 // このファイルは辞書ビルド処理により自動生成されています。

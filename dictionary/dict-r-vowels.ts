@@ -1,11 +1,11 @@
+import type { DictSource } from './types.ts';
+
 /**
  * 英語原語の語尾が母音 + -er/-or/-ar のカタカナ語。
  *
  * 原則に従えば末尾長音符なしが正表記。
- *
- * @type {import("./builder.js").DictSource}
  */
-export default {
+const dict: DictSource = {
   requireNoMark: [
     // -eer
     "エンジニア",      // engineer (-eer)
@@ -24,3 +24,4 @@ export default {
     "フロア",           // floor (-oor)
   ],
 };
+export default dict;

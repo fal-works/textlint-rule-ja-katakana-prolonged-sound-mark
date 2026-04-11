@@ -3,10 +3,8 @@ const SMALL_KATAKANA = new Set([...'ァィゥェォッャュョ']);
 
 /**
  * 末尾長音符を正規化して「あり」表記にする。
- * @param {string} katakana - 末尾長音符の有無は問わない
- * @returns {string} 末尾長音符あり表記
  */
-export function normalizeWithMark(katakana) {
+export function normalizeWithMark(katakana: string): string {
   return katakana.at(-1) === 'ー' ? katakana : katakana + 'ー';
 }
 
@@ -16,11 +14,8 @@ export function normalizeWithMark(katakana) {
  *
  * 本プロジェクトの原則では使用しないが、Microsoft スタイルガイドの
  * 原則（実効文字数 4 未満 → 長音符あり）を確認する際に有用。
- *
- * @param {string} katakana - 末尾長音符の有無は問わない。ただしカタカナ以外が一切含まれないようにすること
- * @returns {number}
  */
-export function countEffectiveChars(katakana) {
+export function countEffectiveChars(katakana: string): number {
   const word = normalizeWithMark(katakana);
   let count = 0;
   for (const ch of word) {

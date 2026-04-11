@@ -1,12 +1,9 @@
 import assert from "node:assert/strict";
-import { validate, generateWrongForms, renderModule } from "../../dictionary/builder.js";
+import type { DictSource } from "../../dictionary/types.ts";
+import { validate, generateWrongForms, renderModule } from "../../dictionary/builder.ts";
 
-/**
- * テスト用の sources Map を構築するヘルパー。
- * @param {Record<string, import("../../dictionary/builder.js").DictSource>} entries
- * @returns {Map<string, import("../../dictionary/builder.js").DictSource>}
- */
-function sources(entries = {}) {
+/** テスト用の sources Map を構築するヘルパー。 */
+function sources(entries: Record<string, DictSource> = {}): Map<string, DictSource> {
   return new Map(Object.entries(entries));
 }
 
@@ -27,7 +24,7 @@ describe("validate", () => {
       src: { requireMark: ["ユーザ"] },
     }));
     assert.equal(errors.length, 1);
-    assert.match(/** @type {string} */ (errors[0]), /src.*ユーザ.*ー/);
+    assert.match(errors[0]!, /src.*ユーザ.*ー/);
   });
 
   it("requireNoMark に長音符ありの語があればエラー", () => {
@@ -35,7 +32,7 @@ describe("validate", () => {
       src: { requireNoMark: ["メモリー"] },
     }));
     assert.equal(errors.length, 1);
-    assert.match(/** @type {string} */ (errors[0]), /src.*メモリー.*ー/);
+    assert.match(errors[0]!, /src.*メモリー.*ー/);
   });
 
   it("同一ソース内の重複を検知", () => {
@@ -43,7 +40,7 @@ describe("validate", () => {
       src: { requireMark: ["ユーザー", "サーバー", "ユーザー"] },
     }));
     assert.equal(errors.length, 1);
-    assert.match(/** @type {string} */ (errors[0]), /ユーザー.*src 内で/);
+    assert.match(errors[0]!, /ユーザー.*src 内で/);
   });
 
   it("ソース間の重複を検知", () => {
@@ -52,7 +49,7 @@ describe("validate", () => {
       b: { requireMark: ["ユーザー"] },
     }));
     assert.equal(errors.length, 1);
-    assert.match(/** @type {string} */ (errors[0]), /ユーザー.*a と b の間で/);
+    assert.match(errors[0]!, /ユーザー.*a と b の間で/);
   });
 
   it("allowBoth と他ソースの重複を検知", () => {
@@ -61,7 +58,7 @@ describe("validate", () => {
       b: { allowBoth: ["ユーザー"] },
     }));
     assert.equal(errors.length, 1);
-    assert.match(/** @type {string} */ (errors[0]), /ユーザー/);
+    assert.match(errors[0]!, /ユーザー/);
   });
 
   it("allowBoth は長音符の有無をチェックしない", () => {

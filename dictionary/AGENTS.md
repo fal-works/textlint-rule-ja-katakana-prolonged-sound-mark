@@ -8,11 +8,11 @@
 
 ## ツール
 
-`tools/cli.js` にサブコマンドがある。詳細は `--help` で確認。
+`tools/cli.ts` にサブコマンドがある。詳細は `--help` で確認。
 
 ```bash
-node dictionary/tools/cli.js lookup [--unregistered] [word ...]
-node dictionary/tools/cli.js classify < candidates.tsv
+node dictionary/tools/cli.ts lookup [--unregistered] [word ...]
+node dictionary/tools/cli.ts classify < candidates.tsv
 ```
 
 ## 辞書登録ワークフロー

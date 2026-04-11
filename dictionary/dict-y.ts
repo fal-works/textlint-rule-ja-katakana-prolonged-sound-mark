@@ -1,11 +1,11 @@
+import type { DictSource } from './types.ts';
+
 /**
  * 英語原語の語尾が -y（-ry, -ty, -phy を除く）のカタカナ語。
  *
  * 原則に従えば末尾長音符ありが正表記。
- *
- * @type {import("./builder.js").DictSource}
  */
-export default {
+const dict: DictSource = {
   requireMark: [
     // -cy
     "コンピテンシー",   // competency (-cy) スタイルガイドに例外として明記
@@ -65,3 +65,4 @@ export default {
     "アセンブリ",             // assembly (-bly) 技術用語として長音符なしで定着
   ],
 };
+export default dict;
