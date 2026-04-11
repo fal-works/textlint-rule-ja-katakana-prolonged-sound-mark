@@ -46,7 +46,6 @@ const dict: DictSource = {
     "テスター",           // tester (-er)
     "レビューアー",       // reviewer (-er)
     "レコーダー",         // recorder (-er)
-    "ロガー",             // logger (-er)
     "インストーラー",     // installer (-er)
     "アンインストーラー", // uninstaller (-er)
     "サブスクライバー",   // subscriber (-er)
