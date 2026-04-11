@@ -25,7 +25,7 @@ npm scripts:
 - `pnpm run prepublishOnly`: `pnpm test` + パッケージ構造検証（publish時に自動実行）
 
 一時ファイルの運用:
-- 作業過程で一時的に作成するファイルは `tmp/` ディレクトリ（gitignore対象）に保存する。
+- 作業過程で一時的に作成するファイルはプロジェクトルート下の `tmp/` ディレクトリ（gitignore対象）に保存する。
   作業後の削除は不要だが、いつ削除されてもよいものを配置すること。
 
 For Codex:
