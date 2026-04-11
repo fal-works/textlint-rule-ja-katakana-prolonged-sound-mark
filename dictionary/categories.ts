@@ -7,10 +7,14 @@
 
 import type { MarkPolicy } from './types.ts';
 
-/** 辞書カテゴリの識別名。英語語尾のパターンに対応する。 */
+/**
+ * 辞書カテゴリの識別名。英語語尾のパターンに対応する。
+ */
 export type CategoryName = 'er-or-ar' | 'r-vowels' | 'y' | 'ry' | 'ty' | 'phy' | 'ure';
 
-/** 辞書カテゴリ。英語語尾のパターンと、それに対応する長音符の原則を持つ。 */
+/**
+ * 辞書カテゴリ。英語語尾のパターンと、それに対応する長音符の原則を持つ。
+ */
 export interface Category {
   /** カテゴリの識別名。辞書ファイル名 `dict-{name}.ts` に対応する。 */
   name: CategoryName;

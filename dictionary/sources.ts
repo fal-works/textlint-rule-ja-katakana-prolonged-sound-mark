@@ -1,7 +1,3 @@
-/**
- * カテゴリ名から辞書ソースモジュールへの対応表を一元管理する。
- */
-
 import type { CategoryName } from './categories.ts';
 import type { DictSource } from './types.ts';
 import { CATEGORIES } from './categories.ts';
@@ -13,6 +9,9 @@ import dictTy from './dict-ty.ts';
 import dictPhy from './dict-phy.ts';
 import dictUre from './dict-ure.ts';
 
+/**
+ * カテゴリ名から辞書ソースモジュールへの対応表を一元管理する。
+ */
 export const sourceByCategory: ReadonlyMap<CategoryName, DictSource> = new Map([
   ['er-or-ar', dictErOrAr],
   ['r-vowels', dictRVowels],
