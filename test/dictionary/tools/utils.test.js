@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { normalizeWithMark, countEffectiveChars, applyPrinciple } from "../../../dictionary/tools/utils.js";
+import { normalizeWithMark, countEffectiveChars } from "../../../dictionary/tools/utils.js";
+import { classify } from "../../../dictionary/categories.js";
 
 describe("normalizeWithMark", () => {
   it("長音符なしの語に長音符を付与する", () => {
@@ -33,102 +34,98 @@ describe("countEffectiveChars", () => {
   });
 });
 
-describe("applyPrinciple", () => {
-  // Rule 1: 子音 + -er/-or/-ar → あり
-  it("子音 + -er → withMark: true, rationale: er-or-ar", () => {
-    const result = applyPrinciple("コンパイラ", "compiler");
-    assert.equal(result.withMark, true);
-    assert.equal(result.rationale, "er-or-ar");
+describe("classify", () => {
+  // 子音 + -er/-or/-ar → requireMark
+  it("子音 + -er → er-or-ar, requireMark", () => {
+    const c = classify("compiler");
+    assert.equal(c?.name, "er-or-ar");
+    assert.equal(c?.principle, "requireMark");
   });
 
-  it("子音 + -or → withMark: true, rationale: er-or-ar", () => {
-    const result = applyPrinciple("モニター", "monitor");
-    assert.equal(result.withMark, true);
-    assert.equal(result.rationale, "er-or-ar");
+  it("子音 + -or → er-or-ar, requireMark", () => {
+    const c = classify("monitor");
+    assert.equal(c?.name, "er-or-ar");
+    assert.equal(c?.principle, "requireMark");
   });
 
-  it("子音 + -ar → withMark: true, rationale: er-or-ar", () => {
-    const result = applyPrinciple("カレンダー", "calendar");
-    assert.equal(result.withMark, true);
-    assert.equal(result.rationale, "er-or-ar");
+  it("子音 + -ar → er-or-ar, requireMark", () => {
+    const c = classify("calendar");
+    assert.equal(c?.name, "er-or-ar");
+    assert.equal(c?.principle, "requireMark");
   });
 
-  // Rule 2: -y（-ry, -ty, -phy 以外）→ あり
-  it("-cy → withMark: true, rationale: y", () => {
-    const result = applyPrinciple("ポリシー", "policy");
-    assert.equal(result.withMark, true);
-    assert.equal(result.rationale, "y");
+  // -y（-ry, -ty, -phy 以外）→ requireMark
+  it("-cy → y, requireMark", () => {
+    const c = classify("policy");
+    assert.equal(c?.name, "y");
+    assert.equal(c?.principle, "requireMark");
   });
 
-  it("-gy → withMark: true, rationale: y", () => {
-    const result = applyPrinciple("テクノロジー", "technology");
-    assert.equal(result.withMark, true);
-    assert.equal(result.rationale, "y");
+  it("-gy → y, requireMark", () => {
+    const c = classify("technology");
+    assert.equal(c?.name, "y");
+    assert.equal(c?.principle, "requireMark");
   });
 
-  // Rule 3: -ry → なし
-  it("-ory → withMark: false, rationale: ry", () => {
-    const result = applyPrinciple("メモリ", "memory");
-    assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "ry");
+  // -ry → requireNoMark
+  it("-ory → ry, requireNoMark", () => {
+    const c = classify("memory");
+    assert.equal(c?.name, "ry");
+    assert.equal(c?.principle, "requireNoMark");
   });
 
-  it("-ary → withMark: false, rationale: ry", () => {
-    const result = applyPrinciple("ライブラリ", "library");
-    assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "ry");
+  it("-ary → ry, requireNoMark", () => {
+    const c = classify("library");
+    assert.equal(c?.name, "ry");
+    assert.equal(c?.principle, "requireNoMark");
   });
 
-  // Rule 4: -ty → なし
-  it("-ty → withMark: false, rationale: ty", () => {
-    const result = applyPrinciple("プロパティ", "property");
-    assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "ty");
+  // -ty → requireNoMark
+  it("-ty → ty, requireNoMark", () => {
+    const c = classify("property");
+    assert.equal(c?.name, "ty");
+    assert.equal(c?.principle, "requireNoMark");
   });
 
-  it("-bility → withMark: false, rationale: ty", () => {
-    const result = applyPrinciple("スケーラビリティ", "scalability");
-    assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "ty");
+  it("-bility → ty, requireNoMark", () => {
+    const c = classify("scalability");
+    assert.equal(c?.name, "ty");
+    assert.equal(c?.principle, "requireNoMark");
   });
 
-  // Rule 5: -phy → なし
-  it("-phy → withMark: false, rationale: phy", () => {
-    const result = applyPrinciple("タイポグラフィ", "typography");
-    assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "phy");
+  // -phy → requireNoMark
+  it("-phy → phy, requireNoMark", () => {
+    const c = classify("typography");
+    assert.equal(c?.name, "phy");
+    assert.equal(c?.principle, "requireNoMark");
   });
 
-  // Rule 6: -ure → なし
-  it("-ure → withMark: false, rationale: ure", () => {
-    const result = applyPrinciple("アーキテクチャ", "architecture");
-    assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "ure");
+  // -ure → requireNoMark
+  it("-ure → ure, requireNoMark", () => {
+    const c = classify("architecture");
+    assert.equal(c?.name, "ure");
+    assert.equal(c?.principle, "requireNoMark");
   });
 
-  // Rule 7: 母音 + -er/-or/-ar → なし
-  it("母音 + -ear → withMark: false, rationale: r-vowels", () => {
-    const result = applyPrinciple("クリア", "clear");
-    assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "r-vowels");
+  // 母音 + -er/-or/-ar → requireNoMark
+  it("母音 + -ear → r-vowels, requireNoMark", () => {
+    const c = classify("clear");
+    assert.equal(c?.name, "r-vowels");
+    assert.equal(c?.principle, "requireNoMark");
   });
 
-  it("母音 + -oor → withMark: false, rationale: r-vowels", () => {
-    const result = applyPrinciple("ドア", "door");
-    assert.equal(result.withMark, false);
-    assert.equal(result.rationale, "r-vowels");
+  it("母音 + -oor → r-vowels, requireNoMark", () => {
+    const c = classify("door");
+    assert.equal(c?.name, "r-vowels");
+    assert.equal(c?.principle, "requireNoMark");
   });
 
   // Fallback
-  it("english が null の場合は withMark: null, rationale: null", () => {
-    const result = applyPrinciple("ディレクトリ", null);
-    assert.equal(result.withMark, null);
-    assert.equal(result.rationale, null);
+  it("english が null の場合は null", () => {
+    assert.equal(classify(null), null);
   });
 
-  it("分類不能な英語語尾は withMark: null, rationale: null", () => {
-    const result = applyPrinciple("テーブル", "table");
-    assert.equal(result.withMark, null);
-    assert.equal(result.rationale, null);
+  it("分類不能な英語語尾は null", () => {
+    assert.equal(classify("table"), null);
   });
 });

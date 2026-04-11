@@ -9,24 +9,16 @@
 
 import { writeFileSync } from "node:fs";
 
-import dictErOrAr from "./dict-er-or-ar.js";
-import dictRVowels from "./dict-r-vowels.js";
-import dictY from "./dict-y.js";
-import dictRy from "./dict-ry.js";
-import dictTy from "./dict-ty.js";
-import dictPhy from "./dict-phy.js";
-import dictUre from "./dict-ure.js";
+import { CATEGORIES } from "./categories.js";
+import { sourceByCategory } from "./sources.js";
 import { validate, generateWrongForms, renderModule } from "./builder.js";
 
-const sources = new Map([
-  ["dict-er-or-ar", dictErOrAr],
-  ["dict-r-vowels", dictRVowels],
-  ["dict-y", dictY],
-  ["dict-ry", dictRy],
-  ["dict-ty", dictTy],
-  ["dict-phy", dictPhy],
-  ["dict-ure", dictUre],
-]);
+const sources = new Map(
+  CATEGORIES.map(({ name }) => [
+    `dict-${name}`,
+    /** @type {import("./builder.js").DictSource} */ (sourceByCategory.get(name)),
+  ]),
+);
 
 const errors = validate(sources);
 if (errors.length > 0) {

@@ -27,7 +27,7 @@ TSV（タブ区切り）で候補リストを作成する。ヘッダー行は `
 node dictionary/tools/cli.js classify < candidates.tsv > classified.tsv
 ```
 
-登録済みの語を除外し、未登録の語に first-guess（`with-mark` / `without-mark` / `unknown`）と rationale を付与する。
+登録済みの語を除外し、未登録の語に first-guess（`with-mark` / `without-mark` / `unknown`）と category を付与する。
 
 原則の詳細は [ルール仕様](../docs/rule-spec.md) を参照。基本的に英語原語の語尾で振り分ける。
 

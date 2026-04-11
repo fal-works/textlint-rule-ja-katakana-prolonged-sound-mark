@@ -1,7 +1,7 @@
 import { createInterface } from 'node:readline';
 import { parseArgs } from 'node:util';
 import { lookup } from './lookup.js';
-import { applyPrinciple } from './utils.js';
+import { classify } from '../categories.js';
 
 const { values, positionals } = parseArgs({
   options: {
@@ -55,7 +55,7 @@ Input:
   Words as arguments, or newline-separated from stdin if no arguments given.
 
 Output (default):
-  word<TAB>filename<TAB>key  (registered)
+  word<TAB>category<TAB>key  (registered)
   word<TAB>(unregistered)      (not found)
 
 Output (--unregistered):
@@ -74,7 +74,7 @@ Notes:
     if (values.unregistered) {
       if (!result) process.stdout.write(word + '\n');
     } else if (result) {
-      process.stdout.write(word + '\t' + result.file + '\t' + result.key + '\n');
+      process.stdout.write(word + '\t' + result.category + '\t' + result.key + '\n');
     } else {
       process.stdout.write(word + '\t' + '(unregistered)' + '\n');
     }
@@ -108,10 +108,10 @@ Input TSV columns:
 Supports # comment lines (section headers) and blank lines.
 
 Output TSV columns:
-  単語<TAB>english<TAB>first-guess<TAB>rationale<TAB>備考
+  単語<TAB>english<TAB>first-guess<TAB>category<TAB>備考
 
 first-guess: with-mark / without-mark / unknown
-rationale:   er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
+category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
 `);
     return;
   }
@@ -145,7 +145,7 @@ rationale:   er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
     if (!headerDone) {
       headerDone = true;
       const cols = line.split('\t');
-      const header = [cols[0], cols[1], 'first-guess', 'rationale', ...cols.slice(2)].join('\t');
+      const header = [cols[0], cols[1], 'first-guess', 'category', ...cols.slice(2)].join('\t');
       process.stdout.write(header + '\n');
       continue;
     }
@@ -164,10 +164,10 @@ rationale:   er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
     }
 
     // 未登録 → 分類
-    const result = applyPrinciple(word, english || null);
-    const firstGuess = result.withMark === true ? 'with-mark'
-                     : result.withMark === false ? 'without-mark'
-                     : 'unknown';
+    const category = classify(english || null);
+    const firstGuess = !category ? 'unknown'
+      : category.principle === 'requireMark' ? 'with-mark'
+      : 'without-mark';
 
     // バッファされたセクション見出し・空行をフラッシュ
     for (const pending of pendingLines) {
@@ -175,7 +175,7 @@ rationale:   er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
     }
     pendingLines = [];
 
-    process.stdout.write([word, english, firstGuess, result.rationale ?? '', ...rest].join('\t') + '\n');
+    process.stdout.write([word, english, firstGuess, category?.name ?? '', ...rest].join('\t') + '\n');
   }
 
   if (skipCount > 0) {
