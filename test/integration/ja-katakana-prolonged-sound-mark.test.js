@@ -264,15 +264,15 @@ tester.run("複数エラーの独立性", rule, {
 
 // =============================================================================
 // 7. 明示登録された派生語・偽同定防止語の完全一致検出
-//    derived / falsePositives として登録された語は、完全一致で検出される。
+//    variants / falsePositives として登録された語は、完全一致で検出される。
 //    エラーメッセージ・fix の range は語全体を参照する。
 // =============================================================================
 tester.run("明示登録語の完全一致検出", rule, {
   valid: [
     // 正表記
-    { text: "アンインストーラー" }, // derived: installer 派生
-    { text: "デシリアライザ" },     // derived: serializer 派生
-    { text: "ディスクロージャ" },   // derived: closure 派生
+    { text: "アンインストーラー" }, // variants: installer 派生
+    { text: "デシリアライザ" },     // variants: serializer 派生
+    { text: "ディスクロージャ" },   // variants: closure 派生
     { text: "ブリーダー" },         // falsePositive: breeder（reader と誤同定されないため登録）
     { text: "プランナー" },         // falsePositive: planner（runner と誤同定されないため登録）
     { text: "ニュークリア" },       // falsePositive: nuclear（clear と誤同定されないため登録）
@@ -357,14 +357,14 @@ tester.run("後方一致による複合語の検出", rule, {
 tester.run("完全一致の優先", rule, {
   valid: [],
   invalid: [
-    // アンインストーラ は derived として完全一致するため、後方一致の インストーラ ではなく
+    // アンインストーラ は variants として完全一致するため、後方一致の インストーラ ではなく
     // 語全体 アンインストーラ がメッセージに現れる
     {
       text: "アンインストーラ",
       errors: [{ message: "「アンインストーラ」は「アンインストーラー」と表記してください。" }],
       output: "アンインストーラー",
     },
-    // ディスパッチャ も同様（derived として完全一致、後方一致の パッチャ ではない）
+    // ディスパッチャ も同様（variants として完全一致、後方一致の パッチャ ではない）
     {
       text: "ディスパッチャ",
       errors: [{ message: "「ディスパッチャ」は「ディスパッチャー」と表記してください。" }],

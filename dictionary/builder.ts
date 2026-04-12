@@ -12,10 +12,10 @@ function entryWord(entry: DictEntry): string {
   return typeof entry === 'string' ? entry : entry.word;
 }
 
-/** DictEntry から付随語（derived + falsePositives）を取得する。 */
+/** DictEntry から付随語（variants + falsePositives）を取得する。 */
 function associatedWords(entry: DictEntry): string[] {
   if (typeof entry === 'string') return [];
-  return [...(entry.derived ?? []), ...(entry.falsePositives ?? [])];
+  return [...(entry.variants ?? []), ...(entry.falsePositives ?? [])];
 }
 
 function toggleProlongedSoundMark(word: string): string {
@@ -61,7 +61,7 @@ export function validate(sources: Map<string, DictSource>): string[] {
       for (const entry of source[policy] ?? []) {
         if (typeof entry === 'string') continue;
         const baseWrong = toggleProlongedSoundMark(entry.word);
-        for (const assoc of [...(entry.derived ?? []), ...(entry.falsePositives ?? [])]) {
+        for (const assoc of [...(entry.variants ?? []), ...(entry.falsePositives ?? [])]) {
           const assocWrong = toggleProlongedSoundMark(assoc);
           if (!assocWrong.endsWith(baseWrong)) {
             errors.push(
@@ -107,7 +107,7 @@ export function validate(sources: Map<string, DictSource>): string[] {
 
   // 単体エントリの冗長性検査: あるトップレベルエントリ X の誤表記が、
   // 別のトップレベルエントリ Y の誤表記で endsWith に該当する場合、
-  // X は Y の後方一致で検出可能なので、derived/falsePositives に移行するか削除すべき。
+  // X は Y の後方一致で検出可能なので、variants/falsePositives に移行するか削除すべき。
   const topLevelEntries: Array<{ word: string; source: string }> = [];
   for (const [name, source] of sources) {
     for (const policy of ['requireMark', 'requireNoMark'] as const) {
@@ -123,7 +123,7 @@ export function validate(sources: Map<string, DictSource>): string[] {
       const wy = toggleProlongedSoundMark(y.word);
       if (wx.length > wy.length && wx.endsWith(wy)) {
         errors.push(
-          `${x.source}: 「${x.word}」は別エントリ「${y.word}」(${y.source}) の後方一致で検出可能です。明示登録（derived または falsePositives）に移行するか削除してください`
+          `${x.source}: 「${x.word}」は別エントリ「${y.word}」(${y.source}) の後方一致で検出可能です。明示登録（variants または falsePositives）に移行するか削除してください`
         );
         break;
       }
@@ -137,7 +137,7 @@ export function validate(sources: Map<string, DictSource>): string[] {
  * 各ソースから runtime 用の誤表記・正表記配列を生成する。
  *
  * - `wrongForms`: requireMark / requireNoMark の語と付随語のトグル形
- * - `correctForms`: requireMark / requireNoMark の語と derived の正表記、
+ * - `correctForms`: requireMark / requireNoMark の語と variants の正表記、
  *   および allowBoth の両形
  *
  * いずれも文字数の降順でソートされる。
@@ -156,8 +156,8 @@ export function generateForms(sources: Map<string, DictSource>): {
         wrongForms.push(toggleProlongedSoundMark(assoc));
       }
       if (typeof entry !== 'string') {
-        for (const derived of entry.derived ?? []) {
-          correctForms.push(derived);
+        for (const variant of entry.variants ?? []) {
+          correctForms.push(variant);
         }
       }
     }

@@ -15,7 +15,7 @@ const dict: DictSource = {
     "リスナー",           // listener (-er)
     "プロバイダー",       // provider (-er)
     "ビルダー",           // builder (-er)
-    { word: "ローダー", derived: ["ダウンローダー", "アップローダー"] }, // loader (-er)
+    { word: "ローダー", variants: ["ダウンローダー", "アップローダー"] }, // loader (-er)
     { word: "リーダー", falsePositives: ["ブリーダー"] },                 // reader (-er) / 偽同定防止: breeder
     { word: "ライター", falsePositives: ["ハイライター"] },               // writer (-er) / 偽同定防止: highlighter
     "レンダラー",         // renderer (-er)
@@ -41,10 +41,10 @@ const dict: DictSource = {
     "トランスフォーマー", // transformer (-er)
     "マーカー",           // marker (-er)
     "ブローカー",         // broker (-er)
-    { word: "ビューアー", derived: ["レビューアー"] },       // viewer (-er)
+    { word: "ビューアー", variants: ["レビューアー"] },       // viewer (-er)
     { word: "テスター", falsePositives: ["プロテスター"] },  // tester (-er) / 偽同定防止: protester
     "レコーダー",         // recorder (-er)
-    { word: "インストーラー", derived: ["アンインストーラー"] }, // installer (-er)
+    { word: "インストーラー", variants: ["アンインストーラー"] }, // installer (-er)
     "サブスクライバー",   // subscriber (-er)
     "レシーバー",         // receiver (-er)
     "スケーラー",         // scaler (-er)
@@ -77,10 +77,10 @@ const dict: DictSource = {
     "レキサー",           // lexer (-er)
     {
       word: "ポーター",                                                // porter (-er)
-      derived: ["エクスポーター", "インポーター", "レポーター"],       // exporter, importer, reporter
+      variants: ["エクスポーター", "インポーター", "レポーター"],      // exporter, importer, reporter
       falsePositives: ["サポーター", "トランスポーター"],              // supporter, transporter
     },
-    { word: "パッチャー", derived: ["ディスパッチャー"] }, // patcher (-er)
+    { word: "パッチャー", variants: ["ディスパッチャー"] }, // patcher (-er)
     "ヘルパー",           // helper (-er)
     "デベロッパー",       // developer (-er)
     "ウォッチャー",       // watcher (-er)
@@ -207,7 +207,7 @@ const dict: DictSource = {
     "レジスタ",         // register (-er)
     "イニシャライザ",   // initializer (-er)
     "オプティマイザ",   // optimizer (-er)
-    { word: "シリアライザ", derived: ["デシリアライザ"] }, // serializer (-er)
+    { word: "シリアライザ", variants: ["デシリアライザ"] }, // serializer (-er)
     "インデクサ",       // indexer (-er)
     "コンプレッサ",     // compressor (-er) Microsoft のドキュメントでも揺れているので慣例に従う
     "マルチプレクサ",   // multiplexer (-er) 同上

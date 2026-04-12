@@ -101,11 +101,11 @@ describe("validate", () => {
     const errors = validate(sources({
       src: {
         requireMark: [
-          { word: "インストーラー", derived: ["アンインストーラー"] },
+          { word: "インストーラー", variants: ["アンインストーラー"] },
           { word: "リーダー", falsePositives: ["ブリーダー"] },
         ],
         requireNoMark: [
-          { word: "シリアライザ", derived: ["デシリアライザ"] },
+          { word: "シリアライザ", variants: ["デシリアライザ"] },
         ],
       },
     }));
@@ -118,7 +118,7 @@ describe("validate", () => {
     const errors = validate(sources({
       src: {
         requireMark: [
-          { word: "インストーラー", derived: ["アンインストーラ"] },
+          { word: "インストーラー", variants: ["アンインストーラ"] },
         ],
       },
     }));
@@ -129,7 +129,7 @@ describe("validate", () => {
     const errors = validate(sources({
       src: {
         requireNoMark: [
-          { word: "シリアライザ", derived: ["デシリアライザー"] },
+          { word: "シリアライザ", variants: ["デシリアライザー"] },
         ],
       },
     }));
@@ -142,7 +142,7 @@ describe("validate", () => {
     const errors = validate(sources({
       src: {
         requireMark: [
-          { word: "インストーラー", derived: ["ダウンローダー"] },
+          { word: "インストーラー", variants: ["ダウンローダー"] },
         ],
       },
     }));
@@ -179,7 +179,7 @@ describe("validate", () => {
       a: { requireMark: ["アンインストーラー"] },
       b: {
         requireMark: [
-          { word: "インストーラー", derived: ["アンインストーラー"] },
+          { word: "インストーラー", variants: ["アンインストーラー"] },
         ],
       },
     }));
@@ -209,11 +209,11 @@ describe("validate", () => {
     ));
   });
 
-  it("derived に移行していれば冗長性エラーは発生しない", () => {
+  it("variants に移行していれば冗長性エラーは発生しない", () => {
     const errors = validate(sources({
       src: {
         requireMark: [
-          { word: "インストーラー", derived: ["アンインストーラー"] },
+          { word: "インストーラー", variants: ["アンインストーラー"] },
         ],
       },
     }));
@@ -267,7 +267,7 @@ describe("generateForms", () => {
     const result = generateForms(sources({
       src: {
         requireMark: [
-          { word: "インストーラー", derived: ["アンインストーラー"], falsePositives: ["ブリーダー"] },
+          { word: "インストーラー", variants: ["アンインストーラー"], falsePositives: ["ブリーダー"] },
         ],
       },
     }));
@@ -275,10 +275,10 @@ describe("generateForms", () => {
     assert.deepEqual(result.correctForms, ["アンインストーラー", "インストーラー"]);
   });
 
-  it("correctForms はトップレベル語・derived・allowBoth 両形を含む", () => {
+  it("correctForms はトップレベル語・variants・allowBoth 両形を含む", () => {
     const result = generateForms(sources({
       src: {
-        requireMark: [{ word: "インストーラー", derived: ["アンインストーラー"] }],
+        requireMark: [{ word: "インストーラー", variants: ["アンインストーラー"] }],
         requireNoMark: ["メモリ"],
         allowBoth: ["スカラ"],
       },

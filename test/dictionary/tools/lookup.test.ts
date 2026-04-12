@@ -18,19 +18,19 @@ describe("lookup", () => {
     assert.equal(result, null);
   });
 
-  it("derived として登録された派生語も引ける（基幹語と同じ category/key）", () => {
-    // アンインストーラー は インストーラー の derived として dict-er-or-ar に登録
+  it("variants として登録された派生語も引ける（基幹語と同じ category/key）", () => {
+    // アンインストーラー は インストーラー の variants として dict-er-or-ar に登録
     const result = lookup("アンインストーラー");
     assert.deepEqual(result, { category: "er-or-ar", key: "requireMark" });
   });
 
-  it("derived の派生語は長音符トグルでも引ける", () => {
+  it("variants の派生語は長音符トグルでも引ける", () => {
     const result = lookup("アンインストーラ");
     assert.deepEqual(result, { category: "er-or-ar", key: "requireMark" });
   });
 
-  it("requireNoMark 側の derived も引ける", () => {
-    // デシリアライザ は シリアライザ の derived として dict-er-or-ar (requireNoMark) に登録
+  it("requireNoMark 側の variants も引ける", () => {
+    // デシリアライザ は シリアライザ の variants として dict-er-or-ar (requireNoMark) に登録
     const result = lookup("デシリアライザ");
     assert.deepEqual(result, { category: "er-or-ar", key: "requireNoMark" });
   });
@@ -41,8 +41,8 @@ describe("lookup", () => {
     assert.deepEqual(result, { category: "er-or-ar", key: "requireMark" });
   });
 
-  it("dict-ure 側の derived も引ける", () => {
-    // インフラストラクチャ は ストラクチャ の derived として dict-ure (requireNoMark) に登録
+  it("dict-ure 側の variants も引ける", () => {
+    // インフラストラクチャ は ストラクチャ の variants として dict-ure (requireNoMark) に登録
     const result = lookup("インフラストラクチャ");
     assert.deepEqual(result, { category: "ure", key: "requireNoMark" });
   });

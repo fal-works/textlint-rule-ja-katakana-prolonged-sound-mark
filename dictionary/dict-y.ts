@@ -10,7 +10,7 @@ const dict: DictSource = {
     // -cy
     "コンピテンシー",   // competency (-cy) スタイルガイドに例外として明記
     "ポリシー",         // policy (-cy) 同上
-    { word: "コンシステンシー", derived: ["インコンシステンシー"] }, // consistency (-cy) Microsoft のドキュメントでも末尾長音符あり
+    { word: "コンシステンシー", variants: ["インコンシステンシー"] }, // consistency (-cy) Microsoft のドキュメントでも末尾長音符あり
     "レガシー",          // legacy (-cy) Microsoft のドキュメントでも揺れているので自然なほうを選択
     "プライバシー",      // privacy (-cy) 同上
     "レイテンシー",      // latency (-cy) 同上
@@ -27,7 +27,7 @@ const dict: DictSource = {
     "サフィシェンシー",          // sufficiency (-cy)
     "エフィシェンシー",          // efficiency (-cy)
     "リダンダンシー",            // redundancy (-cy)
-    { word: "カレンシー", derived: ["コンカレンシー"] }, // currency (-cy)
+    { word: "カレンシー", variants: ["コンカレンシー"] }, // currency (-cy)
 
     // -gy
     "テクノロジー",     // technology (-gy) Microsoft のドキュメントでも揺れているので自然なほうを選択
