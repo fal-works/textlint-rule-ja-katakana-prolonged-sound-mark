@@ -1,6 +1,7 @@
 import { createInterface } from 'node:readline';
 import { parseArgs } from 'node:util';
 import { lookup } from './lookup.ts';
+import type { MarkPolicy } from '../types.ts';
 import { classify } from '../categories.ts';
 
 const { values, positionals } = parseArgs({
@@ -54,7 +55,7 @@ Input:
   Words as arguments, or newline-separated from stdin if no arguments given.
 
 Output (default):
-  word<TAB>category<TAB>key  (registered)
+  word<TAB>category<TAB>markPolicy  (registered)
   word<TAB>(unregistered)      (not found)
 
 Output (--unregistered):
@@ -73,7 +74,7 @@ Notes:
     if (values.unregistered) {
       if (!result) process.stdout.write(word + '\n');
     } else if (result) {
-      process.stdout.write(word + '\t' + result.category + '\t' + result.key + '\n');
+      process.stdout.write(word + '\t' + result.category + '\t' + result.markPolicy + '\n');
     } else {
       process.stdout.write(word + '\t' + '(unregistered)' + '\n');
     }
@@ -109,7 +110,7 @@ Supports # comment lines (section headers) and blank lines.
 Output TSV columns:
   単語<TAB>english<TAB>first-guess<TAB>category<TAB>備考
 
-first-guess: with-mark / without-mark / unknown
+first-guess: requireMark / requireNoMark / unknown
 category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
 `);
     return;
@@ -163,9 +164,7 @@ category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
 
     // 未登録 → 分類
     const category = classify(english || null);
-    const firstGuess = !category ? 'unknown'
-      : category.principle === 'requireMark' ? 'with-mark'
-      : 'without-mark';
+    const firstGuess: MarkPolicy | 'unknown' = category?.principle ?? 'unknown';
 
     // バッファされたセクション見出し・空行をフラッシュ
     for (const pending of pendingLines) {

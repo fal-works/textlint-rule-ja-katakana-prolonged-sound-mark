@@ -1,13 +1,19 @@
 import type { CategoryName } from '../categories.ts';
+import type { MarkPolicy } from '../types.ts';
 import { CATEGORIES } from '../categories.ts';
 import { sourceByCategory } from '../sources.ts';
 
-const wordMap = new Map<string, { category: CategoryName; key: string }>();
+export interface LookupResult {
+  category: CategoryName;
+  markPolicy: MarkPolicy;
+}
+
+const wordMap = new Map<string, LookupResult>();
 for (const { name } of CATEGORIES) {
   const source = sourceByCategory.get(name);
   if (!source) continue;
-  for (const key of ['requireMark', 'requireNoMark', 'allowBoth'] as const) {
-    const entries = source[key];
+  for (const markPolicy of ['requireMark', 'requireNoMark', 'allowBoth'] as const) {
+    const entries = source[markPolicy];
     if (!entries) continue;
     for (const entry of entries) {
       // 基幹語と variants を同じ category/key で索引する。
@@ -16,7 +22,7 @@ for (const { name } of CATEGORIES) {
         ? [entry]
         : [entry.word, ...(entry.variants ?? [])];
       for (const word of words) {
-        wordMap.set(word, { category: name, key });
+        wordMap.set(word, { category: name, markPolicy });
       }
     }
   }
@@ -29,6 +35,6 @@ function toggle(word: string): string {
 /**
  * 辞書から語を検索する。末尾長音符の有無を正規化して検索する。
  */
-export function lookup(word: string): { category: CategoryName; key: string } | null {
+export function lookup(word: string): LookupResult | null {
   return wordMap.get(word) ?? wordMap.get(toggle(word)) ?? null;
 }
