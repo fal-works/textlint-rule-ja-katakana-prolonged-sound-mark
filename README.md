@@ -2,7 +2,7 @@
 
 主に情報技術関連の日本語文書を対象に、カタカナ語末尾の長音符（`ー`）の有無を検査して統一する [textlint](https://textlint.github.io/) ルールです。
 
-Microsoft Japanese Localization Style Guide をベースとしつつ、より自然な日本語を目指した独自拡張ルールで判定します。
+Microsoft Japanese Localization Style Guide をベースに、より自然な日本語を目指した独自拡張ルールで判定します。
 詳細は [ルール仕様](docs/rule-spec.md) を参照してください。
 
 ## インストール

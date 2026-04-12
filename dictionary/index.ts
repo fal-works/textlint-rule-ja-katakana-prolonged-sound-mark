@@ -1,10 +1,10 @@
 /**
  * 辞書ビルドスクリプト。
  *
- * dictionary/ 内の各ソースファイルから正表記を読み込み、
- * バリデーションを行ったうえで runtime 用の form 配列を lib/dictionary.js に出力する。
+ * `dictionary/` 内の各ソースファイルから正表記を読み込み、
+ * バリデーションを行ったうえで、検査時に参照する表記配列を `lib/dictionary.js` に出力する。
  *
- * 使い方: node dictionary/index.ts
+ * 使い方: `node dictionary/index.ts`
  */
 
 import { writeFileSync } from "node:fs";

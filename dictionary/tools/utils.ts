@@ -12,7 +12,7 @@ export function normalizeWithMark(katakana: string): string {
  * 末尾長音符あり表記の実効文字数を返す。
  * 小書き文字（ァィゥェォッャュョ）は数えない。ー は 1 文字として数える。
  *
- * 本プロジェクトの原則では使用しないが、Microsoft スタイルガイドの
+ * 本プロジェクトの原則では使用しないが、Microsoftスタイルガイドの
  * 原則（実効文字数 4 未満 → 長音符あり）を確認する際に有用。
  */
 export function countEffectiveChars(katakana: string): number {

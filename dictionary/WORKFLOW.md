@@ -18,7 +18,7 @@ TSV（タブ区切り）で候補リストを作成する。ヘッダー行は `
 ランナー	runner	CI/CD でのジョブ実行者
 チェッカー	checker	型チェッカー等
 # -ure
-クロージャ	closure	表記ゆれ多
+クロージャ	closure	表記揺れが多い
 ```
 
 ## Step 1: CLIツールの classify で原則に基づいた機械分類
@@ -27,17 +27,17 @@ TSV（タブ区切り）で候補リストを作成する。ヘッダー行は `
 node dictionary/tools/cli.ts classify < candidates.tsv > classified.tsv
 ```
 
-登録済みの語を除外し、未登録の語に first-guess（`with-mark`/`without-mark`/`unknown`）と category を付与する。
+登録済みの語を除外し、未登録の語に first-guess (`with-mark`/`without-mark`/`unknown`) と category を付与する。
 
 原則の詳細は [ルール仕様](../docs/rule-spec.md) を参照。基本的に英語原語の語尾で振り分ける。
 
 ## Step 2: 確認が必要な語を判断
 
-classified.tsv の各語について、first-guess をそのまま採用してよいか判断する。
+`classified.tsv` の各語について、first-guess をそのまま採用してよいか判断する。
 以下のいずれかに該当する場合は Step 3 へ。該当しなければ first-guess を採用し Step 4 へ。
 
-- 同系統の語尾で慣例登録の前例が辞書に多い（例: `-ry` は慣例 with-mark が多数）
-- `-er`/`-or` で、特に技術文脈でしか使われない語（慣例 without-mark が多数）
+- 同系統の語尾で慣例登録の前例が辞書に多い（例: `-ry` は慣例 `with-mark` が多数）
+- `-er`/`-or` で、特に技術文脈でしか使われない語（慣例 `without-mark` が多数）
 - 一般的な技術文書で原則通りの表記に違和感がある
 - 訳語として慣用が強そう
 

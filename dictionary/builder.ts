@@ -201,7 +201,7 @@ export function validate(sources: Map<string, DictSource>): string[] {
 }
 
 /**
- * 各ソースから runtime 用の誤表記・正表記配列を生成する。
+ * 各ソースから、検査時に参照する誤表記・正表記配列を生成する。
  *
  * - `wrongForms`: requireMark / requireNoMark の語と variants のトグル形
  * - `correctForms`: requireMark / requireNoMark の語と variants の正表記、

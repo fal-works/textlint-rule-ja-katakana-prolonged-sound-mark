@@ -4,7 +4,7 @@
 
 ## ビルド
 
-`pnpm run build:dict` で辞書ソースから `lib/dictionary.js`（誤表記のSet）を生成。`pnpm test` でも実行される。
+`pnpm run build:dict` で辞書ソースから `lib/dictionary.js`（誤表記・正表記の配列）を生成。`pnpm test` でも実行される。
 
 ## ツール
 
