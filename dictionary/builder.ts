@@ -30,13 +30,13 @@ function toggleProlongedSoundMark(word: string): string {
 
 type TopLevelPolicy = "requireMark" | "requireNoMark" | "allowBoth";
 
-type TopLevelEntryInfo = {
+interface TopLevelEntryInfo {
   word: string;
   source: string;
   policy: TopLevelPolicy;
   variants: string[];
   falsePositives: string[];
-};
+}
 
 function entryForms(entry: TopLevelEntryInfo): string[] {
   return [entry.word, toggleProlongedSoundMark(entry.word)];

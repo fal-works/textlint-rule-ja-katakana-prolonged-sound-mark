@@ -14,9 +14,12 @@ import { CATEGORIES } from "./categories.ts";
 import { sourceByCategory } from "./sources.ts";
 import type { DictSource } from "./types.ts";
 
-const sources = new Map<string, DictSource>(
-  CATEGORIES.map(({ name }) => [`dict-${name}`, sourceByCategory.get(name)!]),
-);
+const sources = new Map<string, DictSource>();
+for (const { name } of CATEGORIES) {
+  const source = sourceByCategory.get(name);
+  if (!source) throw new Error(`Category "${name}" has no source`);
+  sources.set(`dict-${name}`, source);
+}
 
 const errors = validate(sources);
 if (errors.length > 0) {

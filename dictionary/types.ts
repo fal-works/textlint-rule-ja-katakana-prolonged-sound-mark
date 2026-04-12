@@ -39,7 +39,7 @@ export type DictEntry =
     };
 
 /** 辞書ソース。各 {@link MarkPolicy} に対応する語のリストを持つ。 */
-export type DictSource = {
+export interface DictSource {
   /** 末尾長音符ありを正表記とする語。 */
   requireMark?: DictEntry[];
 
@@ -48,4 +48,4 @@ export type DictSource = {
 
   /** 末尾長音符の有無を両方とも正表記として許容する語。 */
   allowBoth?: string[];
-};
+}

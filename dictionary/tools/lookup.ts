@@ -1,5 +1,4 @@
-import type { CategoryName } from "../categories.ts";
-import { CATEGORIES } from "../categories.ts";
+import { CATEGORIES, type CategoryName } from "../categories.ts";
 import { sourceByCategory } from "../sources.ts";
 import type { MarkPolicy } from "../types.ts";
 

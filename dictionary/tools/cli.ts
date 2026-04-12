@@ -77,7 +77,7 @@ Notes:
     } else if (result) {
       process.stdout.write(word + "\t" + result.category + "\t" + result.markPolicy + "\n");
     } else {
-      process.stdout.write(word + "\t" + "(unregistered)" + "\n");
+      process.stdout.write(word + "\t(unregistered)\n");
     }
   }
 }
@@ -153,7 +153,7 @@ category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
     // データ行
     seenDataSinceLastComment = true;
     const cols = line.split("\t");
-    const word = cols[0]!;
+    const word = cols[0] ?? "";
     const english = cols[1] ?? "";
     const rest = cols.slice(2);
 

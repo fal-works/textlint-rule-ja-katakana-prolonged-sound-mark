@@ -1,5 +1,4 @@
-import type { CategoryName } from "./categories.ts";
-import { CATEGORIES } from "./categories.ts";
+import { CATEGORIES, type CategoryName } from "./categories.ts";
 import dictErOrAr from "./dict-er-or-ar.ts";
 import dictPhy from "./dict-phy.ts";
 import dictRVowels from "./dict-r-vowels.ts";
