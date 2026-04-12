@@ -13,10 +13,9 @@ const dict: DictSource = {
   requireNoMark: [
     "アーキテクチャ",         // architecture (-ure)
     "シグネチャ",             // signature (-ure)
-    "インフラストラクチャ",   // infrastructure (-ure)
     "プロシージャ",           // procedure (-ure)
-    "クロージャ",             // closure (-ure)
-    "ストラクチャ",           // structure (-ure)
+    { word: "クロージャ", derived: ["ディスクロージャ"] },         // closure (-ure)
+    { word: "ストラクチャ", derived: ["インフラストラクチャ"] },   // structure (-ure)
     "フィクスチャ",           // fixture (-ure)
     "ピクチャ",               // picture (-ure)
     "フューチャ",             // future (-ure)
@@ -25,7 +24,6 @@ const dict: DictSource = {
     "ジェスチャ",             // gesture (-ure)
     "ベンチャ",               // venture (-ure)
     "レクチャ",               // lecture (-ure)
-    "ディスクロージャ",       // disclosure (-ure)
   ],
   allowBoth: [
     "テクスチャ",       // texture (-ure)

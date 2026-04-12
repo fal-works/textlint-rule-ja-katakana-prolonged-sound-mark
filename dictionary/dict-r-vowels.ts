@@ -12,7 +12,7 @@ const dict: DictSource = {
 
     // -ear
     "リニア",           // linear (-ear)
-    "クリア",           // clear (-ear)
+    { word: "クリア", falsePositives: ["ニュークリア"] }, // clear (-ear) / 偽同定防止: nuclear
     "ギア",             // gear (-ear)
 
     // -ier

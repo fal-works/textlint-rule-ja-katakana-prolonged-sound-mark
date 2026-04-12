@@ -105,6 +105,31 @@ export function validate(sources: Map<string, DictSource>): string[] {
     }
   }
 
+  // 単体エントリの冗長性検査: あるトップレベルエントリ X の誤表記が、
+  // 別のトップレベルエントリ Y の誤表記で endsWith に該当する場合、
+  // X は Y の後方一致で検出可能なので、derived/falsePositives に移行するか削除すべき。
+  const topLevelEntries: Array<{ word: string; source: string }> = [];
+  for (const [name, source] of sources) {
+    for (const policy of ['requireMark', 'requireNoMark'] as const) {
+      for (const entry of source[policy] ?? []) {
+        topLevelEntries.push({ word: entryWord(entry), source: name });
+      }
+    }
+  }
+  for (const x of topLevelEntries) {
+    const wx = toggleProlongedSoundMark(x.word);
+    for (const y of topLevelEntries) {
+      if (x === y) continue;
+      const wy = toggleProlongedSoundMark(y.word);
+      if (wx.length > wy.length && wx.endsWith(wy)) {
+        errors.push(
+          `${x.source}: 「${x.word}」は別エントリ「${y.word}」(${y.source}) の後方一致で検出可能です。明示登録（derived または falsePositives）に移行するか削除してください`
+        );
+        break;
+      }
+    }
+  }
+
   return errors;
 }
 

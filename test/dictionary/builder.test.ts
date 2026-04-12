@@ -185,6 +185,51 @@ describe("validate", () => {
     }));
     assert.ok(errors.some((e) => /重複.*アンインストーラー/.test(e)));
   });
+
+  // --- 単体エントリの冗長性検査 ---
+
+  it("単体エントリが別エントリの後方一致で検出可能ならエラー", () => {
+    const errors = validate(sources({
+      src: {
+        requireMark: ["インストーラー", "アンインストーラー"],
+      },
+    }));
+    assert.ok(errors.some((e) =>
+      /アンインストーラー.*インストーラー.*後方一致.*明示登録/.test(e)
+    ));
+  });
+
+  it("ソース間でも単体エントリの冗長性を検知", () => {
+    const errors = validate(sources({
+      a: { requireMark: ["インストーラー"] },
+      b: { requireMark: ["アンインストーラー"] },
+    }));
+    assert.ok(errors.some((e) =>
+      /アンインストーラー.*インストーラー.*後方一致/.test(e)
+    ));
+  });
+
+  it("derived に移行していれば冗長性エラーは発生しない", () => {
+    const errors = validate(sources({
+      src: {
+        requireMark: [
+          { word: "インストーラー", derived: ["アンインストーラー"] },
+        ],
+      },
+    }));
+    assert.deepEqual(errors, []);
+  });
+
+  it("falsePositives に登録していれば冗長性エラーは発生しない", () => {
+    const errors = validate(sources({
+      src: {
+        requireMark: [
+          { word: "リーダー", falsePositives: ["ブリーダー"] },
+        ],
+      },
+    }));
+    assert.deepEqual(errors, []);
+  });
 });
 
 describe("generateWrongForms", () => {
