@@ -106,6 +106,7 @@ const dict: DictSource = {
     "コンデンサー", // condenser
     "インバーター", // inverter
     "フェイルオーバー", // failover
+    { word: "リンター", falsePositives: ["プリンター", "スプリンター"] }, // linter / 偽同定防止: sprinter
 
     // -er （インフラ・ネットワーク）
     "サーバー", // server
