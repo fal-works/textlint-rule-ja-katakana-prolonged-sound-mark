@@ -10,8 +10,14 @@ for (const { name } of CATEGORIES) {
     const entries = source[key];
     if (!entries) continue;
     for (const entry of entries) {
-      const word = typeof entry === 'string' ? entry : entry.word;
-      wordMap.set(word, { category: name, key });
+      // 基幹語と付随語（derived / falsePositives）を同じ category/key で索引する。
+      // 付随語は基幹語と同じ MarkPolicy を継承するため、分類上も同じ扱いでよい。
+      const words = typeof entry === 'string'
+        ? [entry]
+        : [entry.word, ...(entry.derived ?? []), ...(entry.falsePositives ?? [])];
+      for (const word of words) {
+        wordMap.set(word, { category: name, key });
+      }
     }
   }
 }
