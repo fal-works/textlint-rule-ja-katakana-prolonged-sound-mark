@@ -1,7 +1,7 @@
-import type { CategoryName } from '../categories.ts';
-import type { MarkPolicy } from '../types.ts';
-import { CATEGORIES } from '../categories.ts';
-import { sourceByCategory } from '../sources.ts';
+import type { CategoryName } from "../categories.ts";
+import { CATEGORIES } from "../categories.ts";
+import { sourceByCategory } from "../sources.ts";
+import type { MarkPolicy } from "../types.ts";
 
 export interface LookupResult {
   category: CategoryName;
@@ -12,15 +12,13 @@ const wordMap = new Map<string, LookupResult>();
 for (const { name } of CATEGORIES) {
   const source = sourceByCategory.get(name);
   if (!source) continue;
-  for (const markPolicy of ['requireMark', 'requireNoMark', 'allowBoth'] as const) {
+  for (const markPolicy of ["requireMark", "requireNoMark", "allowBoth"] as const) {
     const entries = source[markPolicy];
     if (!entries) continue;
     for (const entry of entries) {
       // 基幹語と variants を同じ category/key で索引する。
       // falsePositives は cross-reference のみであり、実体は別エントリとして索引される。
-      const words = typeof entry === 'string'
-        ? [entry]
-        : [entry.word, ...(entry.variants ?? [])];
+      const words = typeof entry === "string" ? [entry] : [entry.word, ...(entry.variants ?? [])];
       for (const word of words) {
         wordMap.set(word, { category: name, markPolicy });
       }
@@ -29,7 +27,7 @@ for (const { name } of CATEGORIES) {
 }
 
 function toggle(word: string): string {
-  return word.endsWith('ー') ? word.slice(0, -1) : word + 'ー';
+  return word.endsWith("ー") ? word.slice(0, -1) : word + "ー";
 }
 
 /**

@@ -1,11 +1,11 @@
 /** 小書き文字（実効文字数のカウント対象外） */
-const SMALL_KATAKANA = new Set([...'ァィゥェォッャュョ']);
+const SMALL_KATAKANA = new Set("ァィゥェォッャュョ");
 
 /**
  * 末尾長音符を正規化して「あり」表記にする。
  */
 export function normalizeWithMark(katakana: string): string {
-  return katakana.at(-1) === 'ー' ? katakana : katakana + 'ー';
+  return katakana.at(-1) === "ー" ? katakana : katakana + "ー";
 }
 
 /**

@@ -1,13 +1,14 @@
-import { createInterface } from 'node:readline';
-import { parseArgs } from 'node:util';
-import { lookup } from './lookup.ts';
-import type { MarkPolicy } from '../types.ts';
-import { classify } from '../categories.ts';
+import { createInterface } from "node:readline";
+import { parseArgs } from "node:util";
+
+import { classify } from "../categories.ts";
+import type { MarkPolicy } from "../types.ts";
+import { lookup } from "./lookup.ts";
 
 const { values, positionals } = parseArgs({
   options: {
-    unregistered: { type: 'boolean', short: 'u', default: false },
-    help: { type: 'boolean', short: 'h', default: false },
+    unregistered: { type: "boolean", short: "u", default: false },
+    help: { type: "boolean", short: "h", default: false },
   },
   allowPositionals: true,
 });
@@ -16,9 +17,9 @@ const subcommand = positionals[0];
 
 if (values.help && !subcommand) {
   printTopLevelHelp();
-} else if (subcommand === 'lookup') {
+} else if (subcommand === "lookup") {
   await runLookup(positionals.slice(1));
-} else if (subcommand === 'classify') {
+} else if (subcommand === "classify") {
   await runClassify();
 } else {
   printTopLevelHelp();
@@ -72,11 +73,11 @@ Notes:
   for (const word of input) {
     const result = lookup(word);
     if (values.unregistered) {
-      if (!result) process.stdout.write(word + '\n');
+      if (!result) process.stdout.write(word + "\n");
     } else if (result) {
-      process.stdout.write(word + '\t' + result.category + '\t' + result.markPolicy + '\n');
+      process.stdout.write(word + "\t" + result.category + "\t" + result.markPolicy + "\n");
     } else {
-      process.stdout.write(word + '\t' + '(unregistered)' + '\n');
+      process.stdout.write(word + "\t" + "(unregistered)" + "\n");
     }
   }
 }
@@ -124,13 +125,13 @@ category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
 
   for await (const line of rl) {
     // 空行
-    if (line.trim() === '') {
+    if (line.trim() === "") {
       pendingLines.push(line);
       continue;
     }
 
     // コメント行（セクション見出し）
-    if (line.startsWith('#')) {
+    if (line.startsWith("#")) {
       if (seenDataSinceLastComment) {
         // 新しいセクションの開始 → 前セクションのバッファを破棄
         pendingLines = [];
@@ -143,17 +144,17 @@ category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
     // ヘッダー行（最初のデータ的な行）
     if (!headerDone) {
       headerDone = true;
-      const cols = line.split('\t');
-      const header = [cols[0], cols[1], 'first-guess', 'category', ...cols.slice(2)].join('\t');
-      process.stdout.write(header + '\n');
+      const cols = line.split("\t");
+      const header = [cols[0], cols[1], "first-guess", "category", ...cols.slice(2)].join("\t");
+      process.stdout.write(header + "\n");
       continue;
     }
 
     // データ行
     seenDataSinceLastComment = true;
-    const cols = line.split('\t');
+    const cols = line.split("\t");
     const word = cols[0]!;
-    const english = cols[1] ?? '';
+    const english = cols[1] ?? "";
     const rest = cols.slice(2);
 
     const found = lookup(word);
@@ -164,15 +165,17 @@ category:    er-or-ar / r-vowels / y / ry / ty / phy / ure (empty if unknown)
 
     // 未登録 → 分類
     const category = classify(english || null);
-    const firstGuess: MarkPolicy | 'unknown' = category?.principle ?? 'unknown';
+    const firstGuess: MarkPolicy | "unknown" = category?.principle ?? "unknown";
 
     // バッファされたセクション見出し・空行をフラッシュ
     for (const pending of pendingLines) {
-      process.stdout.write(pending + '\n');
+      process.stdout.write(pending + "\n");
     }
     pendingLines = [];
 
-    process.stdout.write([word, english, firstGuess, category?.name ?? '', ...rest].join('\t') + '\n');
+    process.stdout.write(
+      [word, english, firstGuess, category?.name ?? "", ...rest].join("\t") + "\n",
+    );
   }
 
   if (skipCount > 0) {

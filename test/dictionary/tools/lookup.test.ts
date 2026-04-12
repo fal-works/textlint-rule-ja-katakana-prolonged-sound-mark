@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+
 import { lookup } from "../../../dictionary/tools/lookup.ts";
 
 describe("lookup", () => {

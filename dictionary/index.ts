@@ -9,16 +9,13 @@
 
 import { writeFileSync } from "node:fs";
 
-import type { DictSource } from "./types.ts";
+import { validate, generateForms, renderModule } from "./builder.ts";
 import { CATEGORIES } from "./categories.ts";
 import { sourceByCategory } from "./sources.ts";
-import { validate, generateForms, renderModule } from "./builder.ts";
+import type { DictSource } from "./types.ts";
 
 const sources = new Map<string, DictSource>(
-  CATEGORIES.map(({ name }) => [
-    `dict-${name}`,
-    sourceByCategory.get(name)!,
-  ]),
+  CATEGORIES.map(({ name }) => [`dict-${name}`, sourceByCategory.get(name)!]),
 );
 
 const errors = validate(sources);
@@ -31,5 +28,5 @@ if (errors.length > 0) {
 const forms = generateForms(sources);
 writeFileSync("lib/dictionary.js", renderModule(forms));
 console.log(
-  `lib/dictionary.js を生成しました (wrongForms: ${forms.wrongForms.length} 件, correctForms: ${forms.correctForms.length} 件)`
+  `lib/dictionary.js を生成しました (wrongForms: ${forms.wrongForms.length} 件, correctForms: ${forms.correctForms.length} 件)`,
 );

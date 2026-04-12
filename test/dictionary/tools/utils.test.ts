@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
-import { normalizeWithMark, countEffectiveChars } from "../../../dictionary/tools/utils.ts";
+
 import { classify } from "../../../dictionary/categories.ts";
+import { normalizeWithMark, countEffectiveChars } from "../../../dictionary/tools/utils.ts";
 
 describe("normalizeWithMark", () => {
   it("長音符なしの語に長音符を付与する", () => {

@@ -2,9 +2,19 @@
   "name": "@fal-works/textlint-rule-ja-katakana-prolonged-sound-mark",
   "version": "0.1.0",
   "description": "textlint rule for Japanese katakana prolonged sound mark based on Microsoft Japanese Localization Style Guide",
-  "type": "module",
-  "exports": {
-    ".": "./lib/ja-katakana-prolonged-sound-mark.js"
+  "keywords": [
+    "japanese",
+    "katakana",
+    "textlintrule"
+  ],
+  "homepage": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark#readme",
+  "bugs": {
+    "url": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark/issues"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark.git"
   },
   "files": [
     "lib/",
@@ -12,9 +22,9 @@
     "README.md",
     "LICENSE"
   ],
-  "license": "Apache-2.0",
-  "engines": {
-    "node": ">=22"
+  "type": "module",
+  "exports": {
+    ".": "./lib/ja-katakana-prolonged-sound-mark.js"
   },
   "publishConfig": {
     "access": "public"
@@ -25,22 +35,6 @@
     "test": "pnpm run typecheck && pnpm run build:dict && mocha 'test/**/*.test.{js,ts}' --ignore 'test/prepublish/**'",
     "prepublishOnly": "pnpm test && mocha --timeout 30000 'test/prepublish/**/*.test.{js,ts}'"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark.git"
-  },
-  "bugs": {
-    "url": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark/issues"
-  },
-  "homepage": "https://github.com/fal-works/textlint-rule-ja-katakana-prolonged-sound-mark#readme",
-  "keywords": [
-    "textlintrule",
-    "japanese",
-    "katakana"
-  ],
-  "peerDependencies": {
-    "textlint": ">=15"
-  },
   "devDependencies": {
     "@fal-works/textlint-rule-ja-katakana-prolonged-sound-mark": "file:",
     "@textlint/types": "^15.5.2",
@@ -50,5 +44,11 @@
     "textlint": "^15.5.2",
     "textlint-tester": "^15.5.2",
     "typescript": "^6.0.2"
+  },
+  "peerDependencies": {
+    "textlint": ">=15"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

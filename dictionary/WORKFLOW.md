@@ -46,6 +46,7 @@ node dictionary/tools/cli.ts classify < candidates.tsv > classified.tsv
 根拠として参照するのは Microsoft 公式の日本語ページに限定する（フォーラムや Q&A 等のユーザー生成コンテンツは不可）。ただし Microsoft の判断に盲従するのではなく、ドキュメント内で表記揺れが見られる場合はより自然な表記を選択する。
 
 検索対象:
+
 - `site:learn.microsoft.com/ja-jp -inurl:/answers/`
 - `site:www.microsoft.com/ja-jp`
 - 補助: `site:support.microsoft.com/ja-jp`
@@ -56,15 +57,15 @@ node dictionary/tools/cli.ts classify < candidates.tsv > classified.tsv
 
 語の英語語尾に対応するファイルに登録する:
 
-| 英語語尾 | ファイル |
-|---------|---------|
-| 子音 + -er/-or/-ar | `dict-er-or-ar.ts` |
-| 母音 + -er/-or/-ar | `dict-r-vowels.ts` |
-| -y（-ry, -ty, -phy 以外） | `dict-y.ts` |
-| -ry（-ory, -ary 含む） | `dict-ry.ts` |
-| -ty（-bility 含む） | `dict-ty.ts` |
-| -phy | `dict-phy.ts` |
-| -ure | `dict-ure.ts` |
+| 英語語尾                  | ファイル           |
+| ------------------------- | ------------------ |
+| 子音 + -er/-or/-ar        | `dict-er-or-ar.ts` |
+| 母音 + -er/-or/-ar        | `dict-r-vowels.ts` |
+| -y（-ry, -ty, -phy 以外） | `dict-y.ts`        |
+| -ry（-ory, -ary 含む）    | `dict-ry.ts`       |
+| -ty（-bility 含む）       | `dict-ty.ts`       |
+| -phy                      | `dict-phy.ts`      |
+| -ure                      | `dict-ure.ts`      |
 
 ### 配列の決定
 

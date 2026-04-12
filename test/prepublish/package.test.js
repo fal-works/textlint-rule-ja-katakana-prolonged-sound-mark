@@ -35,15 +35,15 @@ const npmCleanEnv = Object.fromEntries(
 
 /**
  * `pnpm pack` を実行し、生成された tarball の絶対パスを返す。
+ *
  * @param {string} destDir
  * @returns {string}
  */
 function packTarball(destDir) {
-  const output = execFileSync(
-    "pnpm",
-    ["pack", "--pack-destination", destDir],
-    { cwd: REPO_ROOT, encoding: "utf8" },
-  );
+  const output = execFileSync("pnpm", ["pack", "--pack-destination", destDir], {
+    cwd: REPO_ROOT,
+    encoding: "utf8",
+  });
   // pnpm pack の最終行が tarball の絶対パス
   const tarball = output.trim().split("\n").pop();
   if (!tarball) throw new Error("pnpm pack produced no output");
@@ -52,14 +52,19 @@ function packTarball(destDir) {
 
 /**
  * 一時ディレクトリに tarball をインストールし、設定ファイルとテスト対象を配置する。
+ *
  * @param {string} tmpDir
  * @param {string} tarballPath
  */
 function setupProject(tmpDir, tarballPath) {
-  execFileSync("npm", ["install", "--no-package-lock", "--cache", path.join(tmpDir, ".npm-cache"), tarballPath], {
-    cwd: tmpDir,
-    env: npmCleanEnv,
-  });
+  execFileSync(
+    "npm",
+    ["install", "--no-package-lock", "--cache", path.join(tmpDir, ".npm-cache"), tarballPath],
+    {
+      cwd: tmpDir,
+      env: npmCleanEnv,
+    },
+  );
 
   writeFileSync(
     path.join(tmpDir, ".textlintrc.json"),
@@ -71,6 +76,7 @@ function setupProject(tmpDir, tarballPath) {
 
 /**
  * textlint CLI で lint を実行し、JSON 結果を返す。検出時の exit 1 を正常系として扱う。
+ *
  * @param {string} cwd
  */
 function runTextlintLint(cwd) {
@@ -88,6 +94,7 @@ function runTextlintLint(cwd) {
 
 /**
  * textlint CLI で自動修正を実行する。
+ *
  * @param {string} cwd
  */
 function runTextlintFix(cwd) {

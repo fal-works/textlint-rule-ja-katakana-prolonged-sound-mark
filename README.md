@@ -17,9 +17,9 @@ pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-prolonged-sound-mark
 
 ```json
 {
-  "rules": {
-    "@fal-works/ja-katakana-prolonged-sound-mark": true
-  }
+    "rules": {
+        "@fal-works/ja-katakana-prolonged-sound-mark": true
+    }
 }
 ```
 
@@ -27,15 +27,15 @@ pnpm add -D textlint @fal-works/textlint-rule-ja-katakana-prolonged-sound-mark
 
 辞書に登録された誤表記を検出します。入力カタカナ連続列の末尾と辞書候補との最長一致で判定し、完全一致（語全体）と後方一致（複合語の末尾部分）の両方をカバーします。
 
-| 誤表記 | 正表記 |
-|--------|--------|
-| ユーザ | ユーザー |
-| サーバ | サーバー |
-| フォルダ | フォルダー |
-| メモリー | メモリ |
-| リポジトリー | リポジトリ |
+| 誤表記         | 正表記       |
+| -------------- | ------------ |
+| ユーザ         | ユーザー     |
+| サーバ         | サーバー     |
+| フォルダ       | フォルダー   |
+| メモリー       | メモリ       |
+| リポジトリー   | リポジトリ   |
 | ディレクトリー | ディレクトリ |
-| … | … |
+| …              | …            |
 
 末尾が辞書の誤表記と一致する複合語も検出されます。例: `ウェブサーバ` → `ウェブサーバー`。
 
