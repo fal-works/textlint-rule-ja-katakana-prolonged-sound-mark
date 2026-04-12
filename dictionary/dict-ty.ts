@@ -48,7 +48,8 @@ const dict: DictSource = {
     "アクセシビリティ",       // accessibility (-bility)
     "スケーラビリティ",       // scalability (-bility)
     { word: "ユーザビリティ", variants: ["リユーザビリティ"] },    // usability (-bility)
-    { word: "ポータビリティ", variants: ["サポータビリティ"] },    // portability (-bility)
+    { word: "ポータビリティ", falsePositives: ["サポータビリティ"] }, // portability (-bility) / 偽同定防止: supportability
+    "サポータビリティ",      // supportability (-bility)
     "リライアビリティ",       // reliability (-bility)
     "コンパティビリティ",     // compatibility (-bility)
     "フレキシビリティ",       // flexibility (-bility)

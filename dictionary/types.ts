@@ -8,18 +8,42 @@
 export type MarkPolicy = 'requireMark' | 'requireNoMark' | 'allowBoth';
 
 /**
- * 辞書エントリ。単純な文字列か、派生語・偽同定防止語を持つオブジェクト。
- *
- * - `variants`: 基幹語と同じ規則に従う派生語（例: アンインストーラー）
- * - `falsePositives`: 後方一致の偽同定を防止するための語（例: ブリーダー）
+ * 辞書エントリ。
+ * 単純な文字列か、基幹語に関連語を紐付けたオブジェクト。
  */
 export type DictEntry = string | {
+  /**
+   * 基幹語（所属する `MarkPolicy` に従う正表記）。
+   */
   word: string;
+
+  /**
+   * 基幹語の派生語（語源・意味を基幹語と共有する語）。
+   * 基幹語の `MarkPolicy` を継承し、生成辞書にも追加される。
+   *
+   * 例: `{ word: "インストーラー", variants: ["アンインストーラー"] }`
+   */
   variants?: string[];
+
+  /**
+   * 基幹語の後方一致範囲に入るが、派生語ではない独立語への cross-reference。
+   * 基幹語エントリには名前が記されるだけで、実体は辞書のどこかに別エントリとして登録される必要がある。
+   * 基幹語と `MarkPolicy` が同じでも異なっていてもよい。
+   *
+   * 例: `{ word: "ランナー", falsePositives: ["プランナー"] }`
+   * ここで runner と planner は語源・意味ともに無関係で、`プランナー` は別エントリとして登録される。
+   */
   falsePositives?: string[];
 };
 
-/**
- * 辞書ソース。各キー（{@link MarkPolicy}）に対応する語のリストを持つ。
- */
-export type DictSource = Partial<Record<MarkPolicy, DictEntry[]>>;
+/** 辞書ソース。各 {@link MarkPolicy} に対応する語のリストを持つ。 */
+export type DictSource = {
+  /** 末尾長音符ありを正表記とする語。 */
+  requireMark?: DictEntry[];
+
+  /** 末尾長音符なしを正表記とする語。 */
+  requireNoMark?: DictEntry[];
+
+  /** 末尾長音符の有無を両方とも正表記として許容する語。 */
+  allowBoth?: string[];
+};

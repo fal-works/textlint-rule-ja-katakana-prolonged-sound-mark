@@ -12,14 +12,63 @@ function entryWord(entry: DictEntry): string {
   return typeof entry === 'string' ? entry : entry.word;
 }
 
-/** DictEntry から付随語（variants + falsePositives）を取得する。 */
-function associatedWords(entry: DictEntry): string[] {
+/** DictEntry から variants を取得する。 */
+function variantWords(entry: DictEntry): string[] {
   if (typeof entry === 'string') return [];
-  return [...(entry.variants ?? []), ...(entry.falsePositives ?? [])];
+  return entry.variants ?? [];
+}
+
+/** DictEntry から falsePositives を取得する。 */
+function falsePositiveWords(entry: DictEntry): string[] {
+  if (typeof entry === 'string') return [];
+  return entry.falsePositives ?? [];
 }
 
 function toggleProlongedSoundMark(word: string): string {
   return word.endsWith("ー") ? word.slice(0, -1) : word + "ー";
+}
+
+type TopLevelPolicy = 'requireMark' | 'requireNoMark' | 'allowBoth';
+
+type TopLevelEntryInfo = {
+  word: string;
+  source: string;
+  policy: TopLevelPolicy;
+  variants: string[];
+  falsePositives: string[];
+};
+
+function entryForms(entry: TopLevelEntryInfo): string[] {
+  return [entry.word, toggleProlongedSoundMark(entry.word)];
+}
+
+function collectTopLevelEntries(sources: Map<string, DictSource>): TopLevelEntryInfo[] {
+  const result: TopLevelEntryInfo[] = [];
+
+  for (const [name, source] of sources) {
+    for (const policy of ['requireMark', 'requireNoMark'] as const) {
+      for (const entry of source[policy] ?? []) {
+        result.push({
+          word: entryWord(entry),
+          source: name,
+          policy,
+          variants: variantWords(entry),
+          falsePositives: falsePositiveWords(entry),
+        });
+      }
+    }
+    for (const word of source.allowBoth ?? []) {
+      result.push({
+        word,
+        source: name,
+        policy: 'allowBoth',
+        variants: [],
+        falsePositives: [],
+      });
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -29,16 +78,19 @@ function toggleProlongedSoundMark(word: string): string {
 export function validate(sources: Map<string, DictSource>): string[] {
   const errors: string[] = [];
 
-  // 末尾長音符有無のバリデーション（付随語を含む）
+  const topLevelEntries = collectTopLevelEntries(sources);
+  const topLevelByWord = new Map(topLevelEntries.map((entry) => [entry.word, entry]));
+
+  // 末尾長音符有無のバリデーション（variants を含む）
   for (const [name, source] of sources) {
     for (const entry of source.requireMark ?? []) {
       const word = entryWord(entry);
       if (!word.endsWith("ー")) {
         errors.push(`${name}: 「${word}」が「ー」で終わっていません`);
       }
-      for (const assoc of associatedWords(entry)) {
-        if (!assoc.endsWith("ー")) {
-          errors.push(`${name}: 「${assoc}」（「${word}」の付随語）が「ー」で終わっていません`);
+      for (const variant of variantWords(entry)) {
+        if (!variant.endsWith("ー")) {
+          errors.push(`${name}: 「${variant}」（「${word}」の variants）が「ー」で終わっていません`);
         }
       }
     }
@@ -47,25 +99,25 @@ export function validate(sources: Map<string, DictSource>): string[] {
       if (word.endsWith("ー")) {
         errors.push(`${name}: 「${word}」が「ー」で終わっています`);
       }
-      for (const assoc of associatedWords(entry)) {
-        if (assoc.endsWith("ー")) {
-          errors.push(`${name}: 「${assoc}」（「${word}」の付随語）が「ー」で終わっています`);
+      for (const variant of variantWords(entry)) {
+        if (variant.endsWith("ー")) {
+          errors.push(`${name}: 「${variant}」（「${word}」の variants）が「ー」で終わっています`);
         }
       }
     }
   }
 
-  // 付随語の後方一致関係の検証
+  // variants の後方一致関係の検証
   for (const [name, source] of sources) {
     for (const policy of ['requireMark', 'requireNoMark'] as const) {
       for (const entry of source[policy] ?? []) {
         if (typeof entry === 'string') continue;
         const baseWrong = toggleProlongedSoundMark(entry.word);
-        for (const assoc of [...(entry.variants ?? []), ...(entry.falsePositives ?? [])]) {
-          const assocWrong = toggleProlongedSoundMark(assoc);
-          if (!assocWrong.endsWith(baseWrong)) {
+        for (const variant of entry.variants ?? []) {
+          const variantWrong = toggleProlongedSoundMark(variant);
+          if (!variantWrong.endsWith(baseWrong)) {
             errors.push(
-              `${name}: 「${assoc}」の誤表記「${assocWrong}」が基幹語「${entry.word}」の誤表記「${baseWrong}」で終わっていません`
+              `${name}: 「${variant}」の誤表記「${variantWrong}」が基幹語「${entry.word}」の誤表記「${baseWrong}」で終わっていません`
             );
           }
         }
@@ -73,7 +125,31 @@ export function validate(sources: Map<string, DictSource>): string[] {
     }
   }
 
-  // 全ソース横断の重複検知（付随語を含む）
+  // falsePositives の cross-reference 検証
+  for (const [name, source] of sources) {
+    for (const policy of ['requireMark', 'requireNoMark'] as const) {
+      for (const entry of source[policy] ?? []) {
+        if (typeof entry === 'string') continue;
+        const baseWrong = toggleProlongedSoundMark(entry.word);
+        for (const falsePositive of entry.falsePositives ?? []) {
+          const target = topLevelByWord.get(falsePositive);
+          if (!target) {
+            errors.push(
+              `${name}: 「${falsePositive}」は「${entry.word}.falsePositives」で参照されていますが、辞書内に top-level 登録されていません`
+            );
+            continue;
+          }
+          if (!entryForms(target).some((form) => form.endsWith(baseWrong))) {
+            errors.push(
+              `${name}: 「${falsePositive}」のどの形も基幹語「${entry.word}」の誤表記「${baseWrong}」で終わっていません`
+            );
+          }
+        }
+      }
+    }
+  }
+
+  // 全ソース横断の重複検知（top-level + variants）
   const seen = new Map<string, string>();
 
   for (const [name, source] of sources) {
@@ -83,7 +159,7 @@ export function validate(sources: Map<string, DictSource>): string[] {
       ...(source.allowBoth ?? []),
     ];
     for (const entry of allEntries) {
-      for (const word of [entryWord(entry), ...associatedWords(entry)]) {
+      for (const word of [entryWord(entry), ...variantWords(entry)]) {
         const prev = seen.get(word);
         if (prev) {
           const where = prev === name ? `${name} 内で` : `${prev} と ${name} の間で`;
@@ -105,25 +181,16 @@ export function validate(sources: Map<string, DictSource>): string[] {
     }
   }
 
-  // 単体エントリの冗長性検査: あるトップレベルエントリ X の誤表記が、
-  // 別のトップレベルエントリ Y の誤表記で endsWith に該当する場合、
-  // X は Y の後方一致で検出可能なので、variants/falsePositives に移行するか削除すべき。
-  const topLevelEntries: Array<{ word: string; source: string }> = [];
-  for (const [name, source] of sources) {
-    for (const policy of ['requireMark', 'requireNoMark'] as const) {
-      for (const entry of source[policy] ?? []) {
-        topLevelEntries.push({ word: entryWord(entry), source: name });
-      }
-    }
-  }
+  // 単体エントリの冗長性検査: X の任意の形が Y の wrongForm に後方一致するなら、
+  // X は Y から variants / falsePositives として言及されているべき。
   for (const x of topLevelEntries) {
-    const wx = toggleProlongedSoundMark(x.word);
     for (const y of topLevelEntries) {
-      if (x === y) continue;
-      const wy = toggleProlongedSoundMark(y.word);
-      if (wx.length > wy.length && wx.endsWith(wy)) {
+      if (x.word === y.word || y.policy === 'allowBoth') continue;
+      const yWrong = toggleProlongedSoundMark(y.word);
+      const overlaps = entryForms(x).some((form) => form.length > yWrong.length && form.endsWith(yWrong));
+      if (overlaps && !y.variants.includes(x.word) && !y.falsePositives.includes(x.word)) {
         errors.push(
-          `${x.source}: 「${x.word}」は別エントリ「${y.word}」(${y.source}) の後方一致で検出可能です。明示登録（variants または falsePositives）に移行するか削除してください`
+          `${x.source}: 「${x.word}」は別エントリ「${y.word}」(${y.source}) の後方一致で検出可能です。variants または falsePositives に登録してください`
         );
         break;
       }
@@ -136,7 +203,7 @@ export function validate(sources: Map<string, DictSource>): string[] {
 /**
  * 各ソースから runtime 用の誤表記・正表記配列を生成する。
  *
- * - `wrongForms`: requireMark / requireNoMark の語と付随語のトグル形
+ * - `wrongForms`: requireMark / requireNoMark の語と variants のトグル形
  * - `correctForms`: requireMark / requireNoMark の語と variants の正表記、
  *   および allowBoth の両形
  *
@@ -152,13 +219,9 @@ export function generateForms(sources: Map<string, DictSource>): {
     for (const entry of [...requireMark, ...requireNoMark]) {
       wrongForms.push(toggleProlongedSoundMark(entryWord(entry)));
       correctForms.push(entryWord(entry));
-      for (const assoc of associatedWords(entry)) {
-        wrongForms.push(toggleProlongedSoundMark(assoc));
-      }
-      if (typeof entry !== 'string') {
-        for (const variant of entry.variants ?? []) {
-          correctForms.push(variant);
-        }
+      for (const variant of variantWords(entry)) {
+        wrongForms.push(toggleProlongedSoundMark(variant));
+        correctForms.push(variant);
       }
     }
   }

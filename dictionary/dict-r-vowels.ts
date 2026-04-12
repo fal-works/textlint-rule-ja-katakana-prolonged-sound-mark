@@ -23,5 +23,8 @@ const dict: DictSource = {
     "ドア",             // door (-oor)
     "フロア",           // floor (-oor)
   ],
+  allowBoth: [
+    "ニュークリア",     // nuclear (-ear)
+  ],
 };
 export default dict;

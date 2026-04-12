@@ -107,6 +107,7 @@ describe("validate", () => {
         requireNoMark: [
           { word: "シリアライザ", variants: ["デシリアライザ"] },
         ],
+        allowBoth: ["ブリーダー"],
       },
     }));
     assert.deepEqual(errors, []);
@@ -122,7 +123,7 @@ describe("validate", () => {
         ],
       },
     }));
-    assert.ok(errors.some((e) => /アンインストーラ.*付随語.*ー.*終わっていません/.test(e)));
+    assert.ok(errors.some((e) => /アンインストーラ.*variants.*ー.*終わっていません/.test(e)));
   });
 
   it("requireNoMark の付随語が長音符ありならエラー", () => {
@@ -133,12 +134,12 @@ describe("validate", () => {
         ],
       },
     }));
-    assert.ok(errors.some((e) => /デシリアライザー.*付随語.*ー.*終わっています/.test(e)));
+    assert.ok(errors.some((e) => /デシリアライザー.*variants.*ー.*終わっています/.test(e)));
   });
 
-  // --- 付随語の後方一致関係 ---
+  // --- variants / falsePositives の後方一致関係 ---
 
-  it("付随語の誤表記が基幹語の誤表記で終わらなければエラー", () => {
+  it("variant の誤表記が基幹語の誤表記で終わらなければエラー", () => {
     const errors = validate(sources({
       src: {
         requireMark: [
@@ -149,32 +150,58 @@ describe("validate", () => {
     assert.ok(errors.some((e) => /ダウンローダー.*誤表記.*インストーラー.*終わっていません/.test(e)));
   });
 
-  it("falsePositives も後方一致関係を検証する", () => {
+  it("falsePositives の参照先が top-level 登録されていなければエラー", () => {
     const errors = validate(sources({
       src: {
         requireMark: [
-          { word: "リーダー", falsePositives: ["マネージャー"] },
-        ],
-      },
-    }));
-    assert.ok(errors.some((e) => /マネージャー.*誤表記.*リーダー.*終わっていません/.test(e)));
-  });
-
-  // --- 付随語の重複検知 ---
-
-  it("付随語が他エントリと重複していればエラー", () => {
-    const errors = validate(sources({
-      a: {
-        requireMark: [
-          "ブリーダー",
           { word: "リーダー", falsePositives: ["ブリーダー"] },
         ],
       },
     }));
-    assert.ok(errors.some((e) => /重複.*ブリーダー/));
+    assert.ok(errors.some((e) => /ブリーダー.*top-level 登録されていません/.test(e)));
   });
 
-  it("付随語がソース間で重複していればエラー", () => {
+  it("falsePositives の参照先のどの形も基幹語 wrongForm で終わらなければエラー", () => {
+    const errors = validate(sources({
+      a: {
+        requireMark: [
+          { word: "リーダー", falsePositives: ["マネージャー"] },
+          "マネージャー",
+        ],
+      },
+    }));
+    assert.ok(errors.some((e) => /マネージャー.*どの形も.*リーダー.*終わっていません/.test(e)));
+  });
+
+  it("cross-policy の falsePositives 参照は成立すれば正常", () => {
+    const errors = validate(sources({
+      a: {
+        requireMark: [
+          { word: "リーダー", falsePositives: ["フリーダ"] },
+        ],
+      },
+      b: {
+        requireNoMark: ["フリーダ"],
+      },
+    }));
+    assert.deepEqual(errors, []);
+  });
+
+  // --- variants の重複検知 ---
+
+  it("variant が他エントリと重複していればエラー", () => {
+    const errors = validate(sources({
+      a: {
+        requireMark: [
+          "アンインストーラー",
+          { word: "インストーラー", variants: ["アンインストーラー"] },
+        ],
+      },
+    }));
+    assert.ok(errors.some((e) => /重複.*アンインストーラー/));
+  });
+
+  it("variant がソース間で重複していればエラー", () => {
     const errors = validate(sources({
       a: { requireMark: ["アンインストーラー"] },
       b: {
@@ -195,7 +222,7 @@ describe("validate", () => {
       },
     }));
     assert.ok(errors.some((e) =>
-      /アンインストーラー.*インストーラー.*後方一致.*明示登録/.test(e)
+      /アンインストーラー.*インストーラー.*後方一致.*variants.*falsePositives/.test(e)
     ));
   });
 
@@ -220,12 +247,15 @@ describe("validate", () => {
     assert.deepEqual(errors, []);
   });
 
-  it("falsePositives に登録していれば冗長性エラーは発生しない", () => {
+  it("falsePositives に登録され、参照先が別エントリなら冗長性エラーは発生しない", () => {
     const errors = validate(sources({
-      src: {
+      a: {
         requireMark: [
           { word: "リーダー", falsePositives: ["ブリーダー"] },
         ],
+      },
+      b: {
+        allowBoth: ["ブリーダー"],
       },
     }));
     assert.deepEqual(errors, []);
@@ -263,16 +293,17 @@ describe("generateForms", () => {
     });
   });
 
-  it("DictEntry の派生語・偽同定防止語の誤表記も含む", () => {
+  it("wrongForms は variants を含み、falsePositives は含まない", () => {
     const result = generateForms(sources({
       src: {
         requireMark: [
           { word: "インストーラー", variants: ["アンインストーラー"], falsePositives: ["ブリーダー"] },
         ],
+        allowBoth: ["ブリーダー"],
       },
     }));
-    assert.deepEqual(result.wrongForms, ["アンインストーラ", "インストーラ", "ブリーダ"]);
-    assert.deepEqual(result.correctForms, ["アンインストーラー", "インストーラー"]);
+    assert.deepEqual(result.wrongForms, ["アンインストーラ", "インストーラ"]);
+    assert.deepEqual(result.correctForms, ["アンインストーラー", "インストーラー", "ブリーダー", "ブリーダ"]);
   });
 
   it("correctForms はトップレベル語・variants・allowBoth 両形を含む", () => {

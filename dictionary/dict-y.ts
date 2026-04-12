@@ -27,7 +27,8 @@ const dict: DictSource = {
     "サフィシェンシー",          // sufficiency (-cy)
     "エフィシェンシー",          // efficiency (-cy)
     "リダンダンシー",            // redundancy (-cy)
-    { word: "カレンシー", variants: ["コンカレンシー"] }, // currency (-cy)
+    { word: "カレンシー", falsePositives: ["コンカレンシー"] }, // currency (-cy) / 偽同定防止: concurrency
+    "コンカレンシー",    // concurrency (-cy)
 
     // -gy
     "テクノロジー",     // technology (-gy) Microsoft のドキュメントでも揺れているので自然なほうを選択

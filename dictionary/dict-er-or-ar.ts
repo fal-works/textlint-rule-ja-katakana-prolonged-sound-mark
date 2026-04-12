@@ -17,7 +17,7 @@ const dict: DictSource = {
     "ビルダー",           // builder (-er)
     { word: "ローダー", variants: ["ダウンローダー", "アップローダー"] }, // loader (-er)
     { word: "リーダー", falsePositives: ["ブリーダー"] },                 // reader (-er) / 偽同定防止: breeder
-    { word: "ライター", falsePositives: ["ハイライター"] },               // writer (-er) / 偽同定防止: highlighter
+    { word: "ライター", variants: ["ハイライター"] },                    // writer (-er) / highlighter
     "レンダラー",         // renderer (-er)
     "トリガー",           // trigger (-er)
     "ヘッダー",           // header (-er)
@@ -42,7 +42,7 @@ const dict: DictSource = {
     "マーカー",           // marker (-er)
     "ブローカー",         // broker (-er)
     { word: "ビューアー", variants: ["レビューアー"] },       // viewer (-er)
-    { word: "テスター", falsePositives: ["プロテスター"] },  // tester (-er) / 偽同定防止: protester
+    { word: "テスター", falsePositives: ["プロテスター"] }, // tester (-er) / 偽同定防止: protester
     "レコーダー",         // recorder (-er)
     { word: "インストーラー", variants: ["アンインストーラー"] }, // installer (-er)
     "サブスクライバー",   // subscriber (-er)
@@ -58,7 +58,7 @@ const dict: DictSource = {
     "カスタマイザー",     // customizer (-er)
     "サニタイザー",       // sanitizer (-er)
     "エクスプローラー",   // explorer (-er)
-    { word: "ランナー", falsePositives: ["プランナー"] }, // runner (-er) / 偽同定防止: planner (語源的に無関係だが一貫性のため)
+    { word: "ランナー", falsePositives: ["プランナー"] }, // runner (-er) / 偽同定防止: planner
     "チェッカー",         // checker (-er)
     "ラッパー",           // wrapper (-er)
     "セッター",           // setter (-er)
@@ -77,10 +77,10 @@ const dict: DictSource = {
     "レキサー",           // lexer (-er)
     {
       word: "ポーター",                                                // porter (-er)
-      variants: ["エクスポーター", "インポーター", "レポーター"],      // exporter, importer, reporter
-      falsePositives: ["サポーター", "トランスポーター"],              // supporter, transporter
+      variants: ["エクスポーター", "インポーター", "トランスポーター"], // exporter, importer, transporter
+      falsePositives: ["レポーター", "サポーター"],                    // reporter, supporter
     },
-    { word: "パッチャー", variants: ["ディスパッチャー"] }, // patcher (-er)
+    { word: "パッチャー", falsePositives: ["ディスパッチャー"] }, // patcher (-er) / 偽同定防止: dispatcher
     "ヘルパー",           // helper (-er)
     "デベロッパー",       // developer (-er)
     "ウォッチャー",       // watcher (-er)
@@ -138,6 +138,10 @@ const dict: DictSource = {
     "メッセンジャー",     // messenger (-er)
     "デザイナー",         // designer (-er)
     "パートナー",         // partner (-er)
+    "プランナー",         // planner (-er)
+    "サポーター",         // supporter (-er)
+    "レポーター",         // reporter (-er)
+    "ディスパッチャー",   // dispatcher (-er)
 
     // -or
     "モニター",           // monitor (-or)
@@ -189,11 +193,13 @@ const dict: DictSource = {
     "インキュベーター",   // incubator (-or)
     "エスティメーター",   // estimator (-or)
     { word: "センサー", falsePositives: ["ライセンサー"] }, // sensor (-or) / 偽同定防止: licenser
+    "ライセンサー",       // licenser (-or)
     "ベクター",           // vector (-or)
 
     // -ar
     "カレンダー",         // calendar (-ar)
     { word: "レーダー", falsePositives: ["トレーダー"] },   // radar (-ar) / 偽同定防止: trader
+    "トレーダー",         // trader (-ar)
 
     // -over
     "フェイルオーバー",   // failover (-over)
@@ -210,7 +216,7 @@ const dict: DictSource = {
     { word: "シリアライザ", variants: ["デシリアライザ"] }, // serializer (-er)
     "インデクサ",       // indexer (-er)
     "コンプレッサ",     // compressor (-er) Microsoft のドキュメントでも揺れているので慣例に従う
-    "マルチプレクサ",   // multiplexer (-er) 同上
+    { word: "マルチプレクサ", falsePositives: ["デマルチプレクサー"] }, // multiplexer (-er) / 偽同定防止: demultiplexer
 
     // -or
     "アクセラレータ",   // accelerator (-or)
@@ -224,6 +230,9 @@ const dict: DictSource = {
   ],
   allowBoth: [
     "スカラ",           // scalar (-ar) DQかもしれん
+    "ブリーダー",       // breeder (-er)
+    "プロテスター",     // protester (-er)
+    "スプリンター",     // sprinter (-er)
   ],
 };
 export default dict;

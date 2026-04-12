@@ -35,9 +35,14 @@ describe("lookup", () => {
     assert.deepEqual(result, { category: "er-or-ar", key: "requireNoMark" });
   });
 
-  it("falsePositives として登録された偽同定防止語も引ける", () => {
-    // ブリーダー は リーダー の falsePositives として dict-er-or-ar に登録
+  it("allowBoth に移した偽同定防止語も独立エントリとして引ける", () => {
+    // ブリーダー は allowBoth として dict-er-or-ar に登録され、リーダー からは cross-ref される
     const result = lookup("ブリーダー");
+    assert.deepEqual(result, { category: "er-or-ar", key: "allowBoth" });
+  });
+
+  it("cross-ref から requireMark に昇格した語も引ける", () => {
+    const result = lookup("サポーター");
     assert.deepEqual(result, { category: "er-or-ar", key: "requireMark" });
   });
 
