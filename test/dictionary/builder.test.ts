@@ -340,6 +340,28 @@ describe("generateForms", () => {
       }
     }
   });
+
+  it("wrongForms と correctForms に共通要素がない", () => {
+    // runtime の最長一致ロジックは
+    // 「同じ表層の語が wrongForms と correctForms の 両方に入らない」ことを前提にしている。
+    // 実際には validate() の重複・衝突検査で間接的に守られるが、
+    // generateForms 自体が保証するよう invariant をテストで固定しておく。
+
+    const result = generateForms(sources({
+      a: {
+        requireMark: [
+          "サーバー",
+          { word: "インストーラー", variants: ["アンインストーラー"] },
+          { word: "リーダー", falsePositives: ["ブリーダー"] },
+        ],
+        requireNoMark: ["メモリ"],
+        allowBoth: ["スカラ", "ブリーダー"],
+      },
+    }));
+    const wrongSet = new Set(result.wrongForms);
+    const overlap = result.correctForms.filter((form) => wrongSet.has(form));
+    assert.deepEqual(overlap, []);
+  });
 });
 
 describe("renderModule", () => {
