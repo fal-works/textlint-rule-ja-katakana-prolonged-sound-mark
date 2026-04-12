@@ -94,6 +94,97 @@ describe("validate", () => {
     }));
     assert.equal(errors.length, 2);
   });
+
+  // --- DictEntry オブジェクト形式 ---
+
+  it("DictEntry オブジェクト形式の正常な入力でエラーなし", () => {
+    const errors = validate(sources({
+      src: {
+        requireMark: [
+          { word: "インストーラー", derived: ["アンインストーラー"] },
+          { word: "リーダー", falsePositives: ["ブリーダー"] },
+        ],
+        requireNoMark: [
+          { word: "シリアライザ", derived: ["デシリアライザ"] },
+        ],
+      },
+    }));
+    assert.deepEqual(errors, []);
+  });
+
+  // --- 付随語の MarkPolicy 整合性 ---
+
+  it("requireMark の付随語が長音符なしならエラー", () => {
+    const errors = validate(sources({
+      src: {
+        requireMark: [
+          { word: "インストーラー", derived: ["アンインストーラ"] },
+        ],
+      },
+    }));
+    assert.ok(errors.some((e) => /アンインストーラ.*付随語.*ー.*終わっていません/.test(e)));
+  });
+
+  it("requireNoMark の付随語が長音符ありならエラー", () => {
+    const errors = validate(sources({
+      src: {
+        requireNoMark: [
+          { word: "シリアライザ", derived: ["デシリアライザー"] },
+        ],
+      },
+    }));
+    assert.ok(errors.some((e) => /デシリアライザー.*付随語.*ー.*終わっています/.test(e)));
+  });
+
+  // --- 付随語の後方一致関係 ---
+
+  it("付随語の誤表記が基幹語の誤表記で終わらなければエラー", () => {
+    const errors = validate(sources({
+      src: {
+        requireMark: [
+          { word: "インストーラー", derived: ["ダウンローダー"] },
+        ],
+      },
+    }));
+    assert.ok(errors.some((e) => /ダウンローダー.*誤表記.*インストーラー.*終わっていません/.test(e)));
+  });
+
+  it("falsePositives も後方一致関係を検証する", () => {
+    const errors = validate(sources({
+      src: {
+        requireMark: [
+          { word: "リーダー", falsePositives: ["マネージャー"] },
+        ],
+      },
+    }));
+    assert.ok(errors.some((e) => /マネージャー.*誤表記.*リーダー.*終わっていません/.test(e)));
+  });
+
+  // --- 付随語の重複検知 ---
+
+  it("付随語が他エントリと重複していればエラー", () => {
+    const errors = validate(sources({
+      a: {
+        requireMark: [
+          "ブリーダー",
+          { word: "リーダー", falsePositives: ["ブリーダー"] },
+        ],
+      },
+    }));
+    assert.ok(errors.some((e) => /重複.*ブリーダー/));
+  });
+
+  it("付随語がソース間で重複していればエラー", () => {
+    const errors = validate(sources({
+      a: { requireMark: ["アンインストーラー"] },
+      b: {
+        requireMark: [
+          { word: "インストーラー", derived: ["アンインストーラー"] },
+        ],
+      },
+    }));
+    assert.ok(errors.some((e) => /重複.*アンインストーラー/.test(e)));
+  });
 });
 
 describe("generateWrongForms", () => {
@@ -117,12 +208,39 @@ describe("generateWrongForms", () => {
     }));
     assert.deepEqual(result, []);
   });
+
+  it("DictEntry の派生語・偽同定防止語の誤表記も含む", () => {
+    const result = generateWrongForms(sources({
+      src: {
+        requireMark: [
+          { word: "インストーラー", derived: ["アンインストーラー"] },
+        ],
+      },
+    }));
+    // 文字数降順: アンインストーラ(8) > インストーラ(6)
+    assert.deepEqual(result, ["アンインストーラ", "インストーラ"]);
+  });
+
+  it("結果が文字数の降順でソートされる", () => {
+    const result = generateWrongForms(sources({
+      src: {
+        requireMark: ["サーバー", "インストーラー"],
+        requireNoMark: ["メモリ"],
+      },
+    }));
+    for (let i = 1; i < result.length; i++) {
+      assert.ok(
+        result[i - 1]!.length >= result[i]!.length,
+        `${result[i - 1]} (${result[i - 1]!.length}) should be >= ${result[i]} (${result[i]!.length})`,
+      );
+    }
+  });
 });
 
 describe("renderModule", () => {
   it("有効な ES モジュールを生成する", () => {
     const output = renderModule(["ユーザ", "メモリー"]);
-    assert.match(output, /export const wrongForms = new Set\(/);
+    assert.match(output, /export const wrongForms = \[/);
     assert.match(output, /"ユーザ"/);
     assert.match(output, /"メモリー"/);
   });

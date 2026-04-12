@@ -7,9 +7,10 @@ for (const { name } of CATEGORIES) {
   const source = sourceByCategory.get(name);
   if (!source) continue;
   for (const key of ['requireMark', 'requireNoMark', 'allowBoth'] as const) {
-    const words = source[key];
-    if (!words) continue;
-    for (const word of words) {
+    const entries = source[key];
+    if (!entries) continue;
+    for (const entry of entries) {
+      const word = typeof entry === 'string' ? entry : entry.word;
       wordMap.set(word, { category: name, key });
     }
   }
