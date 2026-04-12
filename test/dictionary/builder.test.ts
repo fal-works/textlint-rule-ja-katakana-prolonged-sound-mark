@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import type { DictSource } from "../../dictionary/types.ts";
-import { validate, generateWrongForms, renderModule } from "../../dictionary/builder.ts";
+import { validate, generateForms, renderModule } from "../../dictionary/builder.ts";
 
 /** テスト用の sources Map を構築するヘルパー。 */
 function sources(entries: Record<string, DictSource> = {}): Map<string, DictSource> {
@@ -232,61 +232,96 @@ describe("validate", () => {
   });
 });
 
-describe("generateWrongForms", () => {
+describe("generateForms", () => {
   it("requireMark の語は長音符を削って誤表記にする", () => {
-    const result = generateWrongForms(sources({
+    const result = generateForms(sources({
       src: { requireMark: ["ユーザー"] },
     }));
-    assert.deepEqual(result, ["ユーザ"]);
+    assert.deepEqual(result, {
+      wrongForms: ["ユーザ"],
+      correctForms: ["ユーザー"],
+    });
   });
 
   it("requireNoMark の語は長音符を足して誤表記にする", () => {
-    const result = generateWrongForms(sources({
+    const result = generateForms(sources({
       src: { requireNoMark: ["メモリ"] },
     }));
-    assert.deepEqual(result, ["メモリー"]);
+    assert.deepEqual(result, {
+      wrongForms: ["メモリー"],
+      correctForms: ["メモリ"],
+    });
   });
 
   it("allowBoth は含まない", () => {
-    const result = generateWrongForms(sources({
+    const result = generateForms(sources({
       src: { allowBoth: ["スカラ"] },
     }));
-    assert.deepEqual(result, []);
+    assert.deepEqual(result, {
+      wrongForms: [],
+      correctForms: ["スカラー", "スカラ"],
+    });
   });
 
   it("DictEntry の派生語・偽同定防止語の誤表記も含む", () => {
-    const result = generateWrongForms(sources({
+    const result = generateForms(sources({
       src: {
         requireMark: [
-          { word: "インストーラー", derived: ["アンインストーラー"] },
+          { word: "インストーラー", derived: ["アンインストーラー"], falsePositives: ["ブリーダー"] },
         ],
       },
     }));
-    // 文字数降順: アンインストーラ(8) > インストーラ(6)
-    assert.deepEqual(result, ["アンインストーラ", "インストーラ"]);
+    assert.deepEqual(result.wrongForms, ["アンインストーラ", "インストーラ", "ブリーダ"]);
+    assert.deepEqual(result.correctForms, ["アンインストーラー", "インストーラー"]);
+  });
+
+  it("correctForms はトップレベル語・derived・allowBoth 両形を含む", () => {
+    const result = generateForms(sources({
+      src: {
+        requireMark: [{ word: "インストーラー", derived: ["アンインストーラー"] }],
+        requireNoMark: ["メモリ"],
+        allowBoth: ["スカラ"],
+      },
+    }));
+    assert.deepEqual(result.correctForms, [
+      "アンインストーラー",
+      "インストーラー",
+      "スカラー",
+      "メモリ",
+      "スカラ",
+    ]);
   });
 
   it("結果が文字数の降順でソートされる", () => {
-    const result = generateWrongForms(sources({
+    const result = generateForms(sources({
       src: {
         requireMark: ["サーバー", "インストーラー"],
         requireNoMark: ["メモリ"],
+        allowBoth: ["スカラ"],
       },
     }));
-    for (let i = 1; i < result.length; i++) {
-      assert.ok(
-        result[i - 1]!.length >= result[i]!.length,
-        `${result[i - 1]} (${result[i - 1]!.length}) should be >= ${result[i]} (${result[i]!.length})`,
-      );
+    for (const forms of [result.wrongForms, result.correctForms]) {
+      for (let i = 1; i < forms.length; i++) {
+        assert.ok(
+          forms[i - 1]!.length >= forms[i]!.length,
+          `${forms[i - 1]} (${forms[i - 1]!.length}) should be >= ${forms[i]} (${forms[i]!.length})`,
+        );
+      }
     }
   });
 });
 
 describe("renderModule", () => {
   it("有効な ES モジュールを生成する", () => {
-    const output = renderModule(["ユーザ", "メモリー"]);
+    const output = renderModule({
+      wrongForms: ["ユーザ", "メモリー"],
+      correctForms: ["ユーザー", "メモリ"],
+    });
     assert.match(output, /export const wrongForms = \[/);
+    assert.match(output, /export const correctForms = \[/);
     assert.match(output, /"ユーザ"/);
     assert.match(output, /"メモリー"/);
+    assert.match(output, /"ユーザー"/);
+    assert.match(output, /"メモリ"/);
   });
 });

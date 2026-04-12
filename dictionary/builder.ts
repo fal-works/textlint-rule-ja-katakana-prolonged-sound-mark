@@ -134,29 +134,54 @@ export function validate(sources: Map<string, DictSource>): string[] {
 }
 
 /**
- * 各ソースの語の長音符をトグルし、誤表記の配列を生成する。
- * "allow-both" のソースは登録対象外（正誤の区別がないため）。
- * 結果は文字数の降順でソートされる。
+ * 各ソースから runtime 用の誤表記・正表記配列を生成する。
+ *
+ * - `wrongForms`: requireMark / requireNoMark の語と付随語のトグル形
+ * - `correctForms`: requireMark / requireNoMark の語と derived の正表記、
+ *   および allowBoth の両形
+ *
+ * いずれも文字数の降順でソートされる。
  */
-export function generateWrongForms(sources: Map<string, DictSource>): string[] {
-  const result: string[] = [];
+export function generateForms(sources: Map<string, DictSource>): {
+  wrongForms: string[];
+  correctForms: string[];
+} {
+  const wrongForms: string[] = [];
+  const correctForms: string[] = [];
   for (const [_name, { requireMark = [], requireNoMark = [] }] of sources) {
     for (const entry of [...requireMark, ...requireNoMark]) {
-      result.push(toggleProlongedSoundMark(entryWord(entry)));
+      wrongForms.push(toggleProlongedSoundMark(entryWord(entry)));
+      correctForms.push(entryWord(entry));
       for (const assoc of associatedWords(entry)) {
-        result.push(toggleProlongedSoundMark(assoc));
+        wrongForms.push(toggleProlongedSoundMark(assoc));
+      }
+      if (typeof entry !== 'string') {
+        for (const derived of entry.derived ?? []) {
+          correctForms.push(derived);
+        }
       }
     }
   }
-  result.sort((a, b) => b.length - a.length);
-  return result;
+  for (const [_name, { allowBoth = [] }] of sources) {
+    for (const entry of allowBoth) {
+      const word = entryWord(entry);
+      correctForms.push(word, toggleProlongedSoundMark(word));
+    }
+  }
+  wrongForms.sort((a, b) => b.length - a.length);
+  correctForms.sort((a, b) => b.length - a.length);
+  return { wrongForms, correctForms };
 }
 
 /**
  * lib/dictionary.js の内容を文字列として生成する。
  */
-export function renderModule(wrongForms: string[]): string {
-  const entries = wrongForms.map((w) => `  "${w}",`).join("\n");
+export function renderModule(forms: {
+  wrongForms: string[];
+  correctForms: string[];
+}): string {
+  const wrongEntries = forms.wrongForms.map((w) => `  "${w}",`).join("\n");
+  const correctEntries = forms.correctForms.map((w) => `  "${w}",`).join("\n");
   return `\
 // このファイルは辞書ビルド処理により自動生成されています。
 // 手動で編集しないでください。
@@ -165,7 +190,14 @@ export function renderModule(wrongForms: string[]): string {
  * 誤表記とみなすカタカナ語の一覧（文字数の降順）。
  */
 export const wrongForms = [
-${entries}
+${wrongEntries}
+];
+
+/**
+ * 正表記として保護するカタカナ語の一覧（文字数の降順）。
+ */
+export const correctForms = [
+${correctEntries}
 ];
 `;
 }
