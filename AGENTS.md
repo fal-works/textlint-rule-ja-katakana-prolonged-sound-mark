@@ -29,4 +29,4 @@ npm scripts:
   作業後の削除は不要だが、いつ削除されてもよいものを配置すること。
 
 For Codex:
-- `pnpm run prepublishOnly` や `pnpm pack` / `npm install` を含むE2Eテストがsandbox内で失敗した場合は、ユーザーに許可を求めて同じコマンドをsandbox外で再実行すること。
+- `pnpm run prepublishOnly` や `pnpm pack`/`npm install` を含むE2Eテストがsandbox内で失敗した場合は、ユーザーに許可を求めて同じコマンドをsandbox外で再実行すること。
