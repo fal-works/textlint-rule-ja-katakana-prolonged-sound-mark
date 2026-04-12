@@ -7,72 +7,72 @@ import type { DictSource } from "./types.ts";
  */
 const dict: DictSource = {
   requireMark: [
-    "アイデンティティー", // identity (-ty) Microsoft のドキュメントでも揺れているので自然なほうを選択
-    "キャパシティー", // capacity (-ty) 同上
+    "アイデンティティー", // identity / Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "キャパシティー", // capacity / 同上
   ],
   requireNoMark: [
     // -ty
-    "プロパティ", // property (-ty)
-    "セキュリティ", // security (-ty)
-    "コミュニティ", // community (-ty)
-    "プライオリティ", // priority (-ty)
-    "インテグリティ", // integrity (-ty)
-    "クオリティ", // quality (-ty)
-    "オーソリティ", // authority (-ty)
-    "ベロシティ", // velocity (-ty)
-    { word: "アクティビティ", variants: ["リアクティビティ"] }, // activity (-ty)
-    "エンティティ", // entity (-ty)
-    "ユーティリティ", // utility (-ty)
-    "ファシリティ", // facility (-ty)
-    "パリティ", // parity (-ty)
-    "オーセンティシティ", // authenticity (-ty)
-    "アジリティ", // agility (-ty)
-    "ダイバーシティ", // diversity (-ty)
-    "リアリティ", // reality (-ty)
-    "プロダクティビティ", // productivity (-ty)
-    "クリエイティビティ", // creativity (-ty)
-    "スペシャリティ", // specialty (-ty)
-    "サステナビリティ", // sustainability (-ty)
-    "アベイラビリティ", // availability (-ty)
-    "コネクティビティ", // connectivity (-ty)
-    "エラスティシティ", // elasticity (-ty)
-    "ケイパビリティ", // capability (-ty)
-    "アフィニティ", // affinity (-ty)
-    "グラニュラリティ", // granularity (-ty)
-    "コモディティ", // commodity (-ty)
-    "インタラクティビティ", // interactivity (-ty)
-    "コンフィデンシャリティ", // confidentiality (-ty)
-    "ファンクショナリティ", // functionality (-ty)
+    "プロパティ", // property
+    "セキュリティ", // security
+    "コミュニティ", // community
+    "プライオリティ", // priority
+    "インテグリティ", // integrity
+    "クオリティ", // quality
+    "オーソリティ", // authority
+    "ベロシティ", // velocity
+    { word: "アクティビティ", variants: ["リアクティビティ"] }, // activity
+    "エンティティ", // entity
+    "ユーティリティ", // utility
+    "ファシリティ", // facility
+    "パリティ", // parity
+    "オーセンティシティ", // authenticity
+    "アジリティ", // agility
+    "ダイバーシティ", // diversity
+    "リアリティ", // reality
+    "プロダクティビティ", // productivity
+    "クリエイティビティ", // creativity
+    "スペシャリティ", // specialty
+    "サステナビリティ", // sustainability
+    "アベイラビリティ", // availability
+    "コネクティビティ", // connectivity
+    "エラスティシティ", // elasticity
+    "ケイパビリティ", // capability
+    "アフィニティ", // affinity
+    "グラニュラリティ", // granularity
+    "コモディティ", // commodity
+    "インタラクティビティ", // interactivity
+    "コンフィデンシャリティ", // confidentiality
+    "ファンクショナリティ", // functionality
 
     // -bility
-    "アクセシビリティ", // accessibility (-bility)
-    "スケーラビリティ", // scalability (-bility)
-    { word: "ユーザビリティ", variants: ["リユーザビリティ"] }, // usability (-bility)
-    { word: "ポータビリティ", falsePositives: ["サポータビリティ"] }, // portability (-bility) / 偽同定防止: supportability
-    "サポータビリティ", // supportability (-bility)
-    "リライアビリティ", // reliability (-bility)
-    "コンパティビリティ", // compatibility (-bility)
-    "フレキシビリティ", // flexibility (-bility)
-    "レスポンシビリティ", // responsibility (-bility)
-    "アカウンタビリティ", // accountability (-bility)
-    "オブザーバビリティ", // observability (-bility)
-    { word: "ミュータビリティ", variants: ["イミュータビリティ"] }, // mutability (-bility)
-    "リーダビリティ", // readability (-bility)
-    "メンテナビリティ", // maintainability (-bility)
-    "トレーサビリティ", // traceability (-bility)
-    "エクステンシビリティ", // extensibility (-bility)
-    "テスタビリティ", // testability (-bility)
-    "コンポーザビリティ", // composability (-bility)
-    "ディペンダビリティ", // dependability (-bility)
-    "モニタラビリティ", // monitorability (-bility)
-    "デバッガビリティ", // debuggability (-bility)
-    "ヴァルネラビリティ", // vulnerability (-bility)
-    "ディスカバラビリティ", // discoverability (-bility)
-    "アダプタビリティ", // adaptability (-bility)
-    "デュラビリティ", // durability (-bility)
-    { word: "オペラビリティ", variants: ["インターオペラビリティ"] }, // operability (-bility)
-    "リピータビリティ", // repeatability (-bility)
-    "プレディクタビリティ", // predictability (-bility)
+    "アクセシビリティ", // accessibility
+    "スケーラビリティ", // scalability
+    { word: "ユーザビリティ", variants: ["リユーザビリティ"] }, // usability
+    { word: "ポータビリティ", falsePositives: ["サポータビリティ"] }, // portability / 偽同定防止: supportability
+    "サポータビリティ", // supportability
+    "リライアビリティ", // reliability
+    "コンパティビリティ", // compatibility
+    "フレキシビリティ", // flexibility
+    "レスポンシビリティ", // responsibility
+    "アカウンタビリティ", // accountability
+    "オブザーバビリティ", // observability
+    { word: "ミュータビリティ", variants: ["イミュータビリティ"] }, // mutability
+    "リーダビリティ", // readability
+    "メンテナビリティ", // maintainability
+    "トレーサビリティ", // traceability
+    "エクステンシビリティ", // extensibility
+    "テスタビリティ", // testability
+    "コンポーザビリティ", // composability
+    "ディペンダビリティ", // dependability
+    "モニタラビリティ", // monitorability
+    "デバッガビリティ", // debuggability
+    "ヴァルネラビリティ", // vulnerability
+    "ディスカバラビリティ", // discoverability
+    "アダプタビリティ", // adaptability
+    "デュラビリティ", // durability
+    { word: "オペラビリティ", variants: ["インターオペラビリティ"] }, // operability
+    "リピータビリティ", // repeatability
+    "プレディクタビリティ", // predictability
   ],
 };
 export default dict;

@@ -8,43 +8,43 @@ import type { DictSource } from "./types.ts";
 const dict: DictSource = {
   requireMark: [
     // -ry
-    "サマリー", // summary (-ry) スタイルガイドに例外として明記
-    "バッテリー", // battery (-ry) Microsoft のドキュメントでも揺れているので自然なほうを選択
-    "デリバリー", // delivery (-ry) 同上
-    "リカバリー", // recovery (-ry) 同上
-    "ギャラリー", // gallery (-ry) Microsoft のドキュメントでも末尾長音符あり
-    "ディスカバリー", // discovery (-ry) 同上
-    "インダストリー", // industry (-ry) 同上
-    "ドキュメンタリー", // documentary (-ry) 同上
-    "ジオメトリー", // geometry (-ry) Microsoft のドキュメントでは末尾長音符なしだけがヒットするが不自然
-    "ディクショナリー", // dictionary (-ry) Microsoft のドキュメントでは末尾長音符なしだけがヒットするが不自然
+    "サマリー", // summary / スタイルガイドに例外として明記
+    "バッテリー", // battery / Microsoft のドキュメントでも揺れているので自然なほうを選択
+    "デリバリー", // delivery / 同上
+    "リカバリー", // recovery / 同上
+    "ギャラリー", // gallery / Microsoft のドキュメントでも末尾長音符あり
+    "ディスカバリー", // discovery / 同上
+    "インダストリー", // industry / 同上
+    "ドキュメンタリー", // documentary / 同上
+    "ジオメトリー", // geometry / Microsoft のドキュメントでは末尾長音符なしだけがヒットするが不自然
+    "ディクショナリー", // dictionary / Microsoft のドキュメントでは末尾長音符なしだけがヒットするが不自然
   ],
   requireNoMark: [
     // -ory
-    "メモリ", // memory (-ory)
-    "ディレクトリ", // directory (-ory)
-    "リポジトリ", // repository (-ory)
-    "カテゴリ", // category (-ory)
-    "アクセサリ", // accessory (-ory)
-    "ヒストリ", // history (-ory)
-    "インベントリ", // inventory (-ory)
-    "ファクトリ", // factory (-ory)
+    "メモリ", // memory
+    "ディレクトリ", // directory
+    "リポジトリ", // repository
+    "カテゴリ", // category
+    "アクセサリ", // accessory
+    "ヒストリ", // history
+    "インベントリ", // inventory
+    "ファクトリ", // factory
 
     // -ary
-    "ライブラリ", // library (-ary)
-    "バイナリ", // binary (-ary)
-    "プライマリ", // primary (-ary)
-    "セカンダリ", // secondary (-ary)
-    "バウンダリ", // boundary (-ary)
-    "テンポラリ", // temporary (-ary)
-    "プロプライエタリ", // proprietary (-ary)
-    "アドバーサリ", // adversary (-ary)
+    "ライブラリ", // library
+    "バイナリ", // binary
+    "プライマリ", // primary
+    "セカンダリ", // secondary
+    "バウンダリ", // boundary
+    "テンポラリ", // temporary
+    "プロプライエタリ", // proprietary
+    "アドバーサリ", // adversary
 
     // -ry
-    "レジストリ", // registry (-ry)
-    "エントリ", // entry (-ry)
-    "クエリ", // query (-ry)
-    "テレメトリ", // telemetry (-ry)
+    "レジストリ", // registry
+    "エントリ", // entry
+    "テレメトリ", // telemetry
+    "クエリ", // query
   ],
 };
 export default dict;

@@ -7,17 +7,17 @@ import type { DictSource } from "./types.ts";
  */
 const dict: DictSource = {
   requireMark: [
-    "フォトグラフィー", // photography (-phy) スタイルガイドに例外として明記
+    "フォトグラフィー", // photography / スタイルガイドに例外として明記
   ],
   requireNoMark: [
-    "タイポグラフィ", // typography (-phy)
-    "クリプトグラフィ", // cryptography (-phy)
-    "デモグラフィ", // demography (-phy)
-    "トポグラフィ", // topography (-phy)
-    "ステガノグラフィ", // steganography (-phy)
-    "バイオグラフィ", // biography (-phy)
-    "フィロソフィ", // philosophy (-phy)
-    "ビブリオグラフィ", // bibliography (-phy)
+    "タイポグラフィ", // typography
+    "クリプトグラフィ", // cryptography
+    "デモグラフィ", // demography
+    "トポグラフィ", // topography
+    "ステガノグラフィ", // steganography
+    "バイオグラフィ", // biography
+    "フィロソフィ", // philosophy
+    "ビブリオグラフィ", // bibliography
   ],
 };
 export default dict;

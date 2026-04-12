@@ -9,229 +9,229 @@ import type { DictSource } from "./types.ts";
 const dict: DictSource = {
   requireMark: [
     // -er （プログラミング・開発）
-    "ユーザー", // user (-er)
-    "パーサー", // parser (-er)
-    "ハンドラー", // handler (-er)
-    "リスナー", // listener (-er)
-    "プロバイダー", // provider (-er)
-    "ビルダー", // builder (-er)
-    { word: "ローダー", variants: ["ダウンローダー", "アップローダー"] }, // loader (-er)
-    { word: "リーダー", falsePositives: ["ブリーダー"] }, // reader (-er) / 偽同定防止: breeder
-    { word: "ライター", variants: ["ハイライター"] }, // writer (-er) / highlighter
-    "レンダラー", // renderer (-er)
-    "トリガー", // trigger (-er)
-    "ヘッダー", // header (-er)
-    "フッター", // footer (-er)
-    "フィルター", // filter (-er)
-    "エンコーダー", // encoder (-er)
-    "デコーダー", // decoder (-er)
-    "バッファー", // buffer (-er)
-    "リンカー", // linker (-er)
-    "デバッガー", // debugger (-er)
-    "マネージャー", // manager (-er)
-    "プレースホルダー", // placeholder (-er)
-    "プロファイラー", // profiler (-er)
-    "トレーサー", // tracer (-er)
-    "ランチャー", // launcher (-er)
-    "オブザーバー", // observer (-er)
-    "パブリッシャー", // publisher (-er)
-    "コンシューマー", // consumer (-er)
-    "プロデューサー", // producer (-er)
-    "コンピューター", // computer (-er)
-    "トランスフォーマー", // transformer (-er)
-    "マーカー", // marker (-er)
-    "ブローカー", // broker (-er)
-    { word: "ビューアー", variants: ["レビューアー"] }, // viewer (-er)
-    { word: "テスター", falsePositives: ["プロテスター"] }, // tester (-er) / 偽同定防止: protester
-    "レコーダー", // recorder (-er)
-    { word: "インストーラー", variants: ["アンインストーラー"] }, // installer (-er)
-    "サブスクライバー", // subscriber (-er)
-    "レシーバー", // receiver (-er)
-    "スケーラー", // scaler (-er)
-    "プロビジョナー", // provisioner (-er)
-    "フォワーダー", // forwarder (-er)
-    "アナライザー", // analyzer (-er)
-    "トークナイザー", // tokenizer (-er)
-    "ビジュアライザー", // visualizer (-er)
-    "ノーマライザー", // normalizer (-er)
-    "ローカライザー", // localizer (-er)
-    "カスタマイザー", // customizer (-er)
-    "サニタイザー", // sanitizer (-er)
-    "エクスプローラー", // explorer (-er)
-    { word: "ランナー", falsePositives: ["プランナー"] }, // runner (-er) / 偽同定防止: planner
-    "チェッカー", // checker (-er)
-    "ラッパー", // wrapper (-er)
-    "セッター", // setter (-er)
-    "ゲッター", // getter (-er)
-    "マッパー", // mapper (-er)
-    "ソーター", // sorter (-er)
-    "スプリッター", // splitter (-er)
-    "トラッカー", // tracker (-er)
-    "ウォーカー", // walker (-er)
-    "クローラー", // crawler (-er)
-    "スクレイパー", // scraper (-er)
-    "バンドラー", // bundler (-er)
-    "リゾルバー", // resolver (-er)
-    "デプロイヤー", // deployer (-er)
-    "スターター", // starter (-er)
-    "レキサー", // lexer (-er)
+    "ユーザー", // user
+    "パーサー", // parser
+    "ハンドラー", // handler
+    "リスナー", // listener
+    "プロバイダー", // provider
+    "ビルダー", // builder
+    { word: "ローダー", variants: ["ダウンローダー", "アップローダー"] }, // loader
+    { word: "リーダー", falsePositives: ["ブリーダー"] }, // reader / 偽同定防止: breeder
+    { word: "ライター", variants: ["ハイライター"] }, // writer / highlighter
+    "レンダラー", // renderer
+    "トリガー", // trigger
+    "ヘッダー", // header
+    "フッター", // footer
+    "フィルター", // filter
+    "エンコーダー", // encoder
+    "デコーダー", // decoder
+    "バッファー", // buffer
+    "リンカー", // linker
+    "デバッガー", // debugger
+    "マネージャー", // manager
+    "プレースホルダー", // placeholder
+    "プロファイラー", // profiler
+    "トレーサー", // tracer
+    "ランチャー", // launcher
+    "オブザーバー", // observer
+    "パブリッシャー", // publisher
+    "コンシューマー", // consumer
+    "プロデューサー", // producer
+    "コンピューター", // computer
+    "トランスフォーマー", // transformer
+    "マーカー", // marker
+    "ブローカー", // broker
+    { word: "ビューアー", variants: ["レビューアー"] }, // viewer
+    { word: "テスター", falsePositives: ["プロテスター"] }, // tester / 偽同定防止: protester
+    "レコーダー", // recorder
+    { word: "インストーラー", variants: ["アンインストーラー"] }, // installer
+    "サブスクライバー", // subscriber
+    "レシーバー", // receiver
+    "スケーラー", // scaler
+    "プロビジョナー", // provisioner
+    "フォワーダー", // forwarder
+    "アナライザー", // analyzer
+    "トークナイザー", // tokenizer
+    "ビジュアライザー", // visualizer
+    "ノーマライザー", // normalizer
+    "ローカライザー", // localizer
+    "カスタマイザー", // customizer
+    "サニタイザー", // sanitizer
+    "エクスプローラー", // explorer
+    { word: "ランナー", falsePositives: ["プランナー"] }, // runner / 偽同定防止: planner
+    "チェッカー", // checker
+    "ラッパー", // wrapper
+    "セッター", // setter
+    "ゲッター", // getter
+    "マッパー", // mapper
+    "ソーター", // sorter
+    "スプリッター", // splitter
+    "トラッカー", // tracker
+    "ウォーカー", // walker
+    "クローラー", // crawler
+    "スクレイパー", // scraper
+    "バンドラー", // bundler
+    "リゾルバー", // resolver
+    "デプロイヤー", // deployer
+    "スターター", // starter
+    "レキサー", // lexer
     {
-      word: "ポーター", // porter (-er)
+      word: "ポーター", // porter
       variants: ["エクスポーター", "インポーター", "トランスポーター"], // exporter, importer, transporter
       falsePositives: ["レポーター", "サポーター"], // reporter, supporter
     },
-    { word: "パッチャー", falsePositives: ["ディスパッチャー"] }, // patcher (-er) / 偽同定防止: dispatcher
-    "ヘルパー", // helper (-er)
-    "デベロッパー", // developer (-er)
-    "ウォッチャー", // watcher (-er)
-    "マッチャー", // matcher (-er)
-    "プレーヤー", // player (-er)
-    "シェーダー", // shader (-er)
-    "ファインダー", // finder (-er)
-    "パッケージャー", // packager (-er)
-    "ストリーマー", // streamer (-er)
-    "チューナー", // tuner (-er)
-    "クリッパー", // clipper (-er)
-    "ピッカー", // picker (-er)
-    "スライダー", // slider (-er)
-    "スピナー", // spinner (-er)
-    "エミッター", // emitter (-er) Microsoft のドキュメントでも末尾長音符あり
-    "シンセサイザー", // synthesizer (-er) Microsoft のドキュメントでも末尾長音符あり
-    "イコライザー", // equalizer (-er)
-    "スタビライザー", // stabilizer (-er)
-    "ミニマイザー", // minimizer (-er)
-    "マキシマイザー", // maximizer (-er)
-    "ランダマイザー", // randomizer (-er)
-    "トランスパイラー", // transpiler (-er)
-    "コンデンサー", // condenser (-er)
-    "インバーター", // inverter (-er)
-    "デマルチプレクサー", // demultiplexer (-er)
+    { word: "パッチャー", falsePositives: ["ディスパッチャー"] }, // patcher / 偽同定防止: dispatcher
+    "ヘルパー", // helper
+    "デベロッパー", // developer
+    "ウォッチャー", // watcher
+    "マッチャー", // matcher
+    "プレーヤー", // player
+    "シェーダー", // shader
+    "ファインダー", // finder
+    "パッケージャー", // packager
+    "ストリーマー", // streamer
+    "チューナー", // tuner
+    "クリッパー", // clipper
+    "ピッカー", // picker
+    "スライダー", // slider
+    "スピナー", // spinner
+    "エミッター", // emitter / Microsoft のドキュメントでも末尾長音符あり
+    "シンセサイザー", // synthesizer / Microsoft のドキュメントでも末尾長音符あり
+    "イコライザー", // equalizer
+    "スタビライザー", // stabilizer
+    "ミニマイザー", // minimizer
+    "マキシマイザー", // maximizer
+    "ランダマイザー", // randomizer
+    "トランスパイラー", // transpiler
+    "コンデンサー", // condenser
+    "インバーター", // inverter
+    "フェイルオーバー", // failover
 
     // -er （インフラ・ネットワーク）
-    "サーバー", // server (-er)
-    "ルーター", // router (-er)
-    "ブラウザー", // browser (-er)
-    "フォルダー", // folder (-er)
-    { word: "プリンター", falsePositives: ["スプリンター"] }, // printer (-er) / 偽同定防止: sprinter
-    "スキャナー", // scanner (-er)
-    "コンテナー", // container (-er)
-    "バランサー", // balancer (-er)
-    "ワーカー", // worker (-er)
-    "クラスター", // cluster (-er)
-    "マスター", // master (-er)
-    "レイヤー", // layer (-er)
-    "ドライバー", // driver (-er)
+    "サーバー", // server
+    "ルーター", // router
+    "ブラウザー", // browser
+    "フォルダー", // folder
+    { word: "プリンター", falsePositives: ["スプリンター"] }, // printer / 偽同定防止: sprinter
+    "スキャナー", // scanner
+    "コンテナー", // container
+    "バランサー", // balancer
+    "ワーカー", // worker
+    "クラスター", // cluster
+    "マスター", // master
+    "レイヤー", // layer
+    "ドライバー", // driver
 
     // -er （ハードウェア・デバイス）
-    "カウンター", // counter (-er)
-    "タイマー", // timer (-er)
-    "ポインター", // pointer (-er)
-    "パラメーター", // parameter (-er)
-    "キャラクター", // character (-er)
-    "メンバー", // member (-er)
-    "ディスクリプター", // descriptor (-er)
+    "カウンター", // counter
+    "タイマー", // timer
+    "ポインター", // pointer
+    "パラメーター", // parameter
+    "キャラクター", // character
+    "メンバー", // member
+    "ディスクリプター", // descriptor
 
     // -er （一般）
-    "ナンバー", // number (-er)
-    "オーナー", // owner (-er)
-    "リマインダー", // reminder (-er)
-    "メッセンジャー", // messenger (-er)
-    "デザイナー", // designer (-er)
-    "パートナー", // partner (-er)
-    "プランナー", // planner (-er)
-    "サポーター", // supporter (-er)
-    "レポーター", // reporter (-er)
-    "ディスパッチャー", // dispatcher (-er)
+    "ナンバー", // number
+    "オーナー", // owner
+    "リマインダー", // reminder
+    "メッセンジャー", // messenger
+    "デザイナー", // designer
+    "パートナー", // partner
+    "プランナー", // planner
+    "サポーター", // supporter
+    "レポーター", // reporter
+    "ディスパッチャー", // dispatcher
 
     // -or
-    "モニター", // monitor (-or)
-    "エディター", // editor (-or)
-    "セレクター", // selector (-or)
-    "コントローラー", // controller (-or)
-    "アダプター", // adapter (-or)
-    "ジェネレーター", // generator (-or)
-    "イテレーター", // iterator (-or)
-    "オペレーター", // operator (-or)
-    "バリデーター", // validator (-or)
-    "シミュレーター", // simulator (-or)
-    "エミュレーター", // emulator (-or)
-    "デコレーター", // decorator (-or)
-    "インスペクター", // inspector (-or)
-    "コレクター", // collector (-or)
-    "エグゼキューター", // executor (-or)
-    "インタプリター", // interpreter (-or)
-    "アグリゲーター", // aggregator (-or)
-    "コンパレーター", // comparator (-or)
-    "セパレーター", // separator (-or)
-    "アロケーター", // allocator (-or)
-    "コンバーター", // converter (-or)
-    "インターセプター", // interceptor (-or)
-    "オーケストレーター", // orchestrator (-or)
-    "コーディネーター", // coordinator (-or)
-    "アクセサー", // accessor (-or)
-    "インジケーター", // indicator (-or)
-    "インジェクター", // injector (-or)
-    "レプリケーター", // replicator (-or)
-    "マイグレーター", // migrator (-or)
-    "コンフィギュレーター", // configurator (-or)
-    "アノテーター", // annotator (-or)
-    "ナビゲーター", // navigator (-or)
-    "オーサー", // author (-or)
-    "ビジター", // visitor (-or)
-    "コントリビューター", // contributor (-or)
-    "コンストラクター", // constructor (-or) Microsoft のドキュメントでも末尾長音符あり
-    "デストラクター", // destructor (-or)
-    "スーパーバイザー", // supervisor (-or)
-    "モデレーター", // moderator (-or)
-    "ファシリテーター", // facilitator (-or)
-    "レギュレーター", // regulator (-or)
-    "ディストリビューター", // distributor (-or)
-    "カリキュレーター", // calculator (-or)
-    "プロジェクター", // projector (-or)
-    "メディエーター", // mediator (-or)
-    "ネゴシエーター", // negotiator (-or)
-    "インキュベーター", // incubator (-or)
-    "エスティメーター", // estimator (-or)
-    { word: "センサー", falsePositives: ["ライセンサー"] }, // sensor (-or) / 偽同定防止: licenser
-    "ライセンサー", // licenser (-or)
-    "ベクター", // vector (-or)
+    "モニター", // monitor
+    "エディター", // editor
+    "セレクター", // selector
+    "コントローラー", // controller
+    "アダプター", // adapter
+    "ジェネレーター", // generator
+    "イテレーター", // iterator
+    "オペレーター", // operator
+    "バリデーター", // validator
+    "シミュレーター", // simulator
+    "エミュレーター", // emulator
+    "デコレーター", // decorator
+    "インスペクター", // inspector
+    "コレクター", // collector
+    "エグゼキューター", // executor
+    "インタプリター", // interpreter
+    "アグリゲーター", // aggregator
+    "コンパレーター", // comparator
+    "セパレーター", // separator
+    "アロケーター", // allocator
+    "コンバーター", // converter
+    "インターセプター", // interceptor
+    "オーケストレーター", // orchestrator
+    "コーディネーター", // coordinator
+    "アクセサー", // accessor
+    "インジケーター", // indicator
+    "インジェクター", // injector
+    "レプリケーター", // replicator
+    "マイグレーター", // migrator
+    "コンフィギュレーター", // configurator
+    "アノテーター", // annotator
+    "ナビゲーター", // navigator
+    "オーサー", // author
+    "ビジター", // visitor
+    "コントリビューター", // contributor
+    "コンストラクター", // constructor Microsoft のドキュメントでも末尾長音符あり
+    "デストラクター", // destructor
+    "スーパーバイザー", // supervisor
+    "モデレーター", // moderator
+    "ファシリテーター", // facilitator
+    "レギュレーター", // regulator
+    "ディストリビューター", // distributor
+    "カリキュレーター", // calculator
+    "プロジェクター", // projector
+    "メディエーター", // mediator
+    "ネゴシエーター", // negotiator
+    "インキュベーター", // incubator
+    "エスティメーター", // estimator
+    { word: "センサー", falsePositives: ["ライセンサー"] }, // sensor / 偽同定防止: licenser
+    "ライセンサー", // licenser
+    "ベクター", // vector
 
     // -ar
-    "カレンダー", // calendar (-ar)
-    { word: "レーダー", falsePositives: ["トレーダー"] }, // radar (-ar) / 偽同定防止: trader
-    "トレーダー", // trader (-ar)
-
-    // -over
-    "フェイルオーバー", // failover (-over)
+    "カレンダー", // calendar
+    { word: "レーダー", falsePositives: ["トレーダー"] }, // radar / 偽同定防止: trader
+    "トレーダー", // trader
   ],
   requireNoMark: [
     // -er
-    "コンパイラ", // compiler (-er)
-    "プログラマ", // programmer (-er)
-    "フォーマッタ", // formatter (-er)
-    "スケジューラ", // scheduler (-er)
-    "レジスタ", // register (-er)
-    "イニシャライザ", // initializer (-er)
-    "オプティマイザ", // optimizer (-er)
-    { word: "シリアライザ", variants: ["デシリアライザ"] }, // serializer (-er)
-    "インデクサ", // indexer (-er)
-    "コンプレッサ", // compressor (-er) Microsoft のドキュメントでも揺れているので慣例に従う
-    { word: "マルチプレクサ", falsePositives: ["デマルチプレクサー"] }, // multiplexer (-er) / 偽同定防止: demultiplexer
+    "コンパイラ", // compiler
+    "プログラマ", // programmer
+    "フォーマッタ", // formatter
+    "スケジューラ", // scheduler
+    "レジスタ", // register
+    "イニシャライザ", // initializer
+    "オプティマイザ", // optimizer
+    { word: "シリアライザ", variants: ["デシリアライザ"] }, // serializer
+    "インデクサ", // indexer
+    "コンプレッサ", // compressor Microsoft のドキュメントでも揺れているので慣例に従う
+    { word: "マルチプレクサ", variants: ["デマルチプレクサ"] }, // multiplexer
 
     // -or
-    "アクセラレータ", // accelerator (-or)
-    "プロセッサ", // processor (-or)
-    "コネクタ", // connector (-or)
-    "ラジエータ", // radiator (-or)
-    "ターミネータ", // terminator (-or)
-    "トランジスタ", // transistor (-or)
-    "アクチュエータ", // actuator (-or) Microsoft のドキュメントでも揺れているので慣例に従う
+    "アクセラレータ", // accelerator
+    "プロセッサ", // processor
+    "コネクタ", // connector
+    "ラジエータ", // radiator
+    "ターミネータ", // terminator
+    "トランジスタ", // transistor
+    "アクチュエータ", // actuator / Microsoft のドキュメントでも揺れているので慣例に従う
   ],
   allowBoth: [
-    "スカラ", // scalar (-ar) DQかもしれん
-    "ブリーダー", // breeder (-er)
-    "プロテスター", // protester (-er)
-    "スプリンター", // sprinter (-er)
+    // 固有名詞
+    "スカラ", // scalar
+
+    // 偽同定防止
+    "ブリーダー", // breeder
+    "プロテスター", // protester
+    "スプリンター", // sprinter
   ],
 };
 export default dict;

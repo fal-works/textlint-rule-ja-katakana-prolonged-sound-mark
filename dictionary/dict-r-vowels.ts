@@ -8,23 +8,23 @@ import type { DictSource } from "./types.ts";
 const dict: DictSource = {
   requireNoMark: [
     // -eer
-    "エンジニア", // engineer (-eer)
+    "エンジニア", // engineer
 
     // -ear
-    "リニア", // linear (-ear)
-    { word: "クリア", falsePositives: ["ニュークリア"] }, // clear (-ear) / 偽同定防止: nuclear
-    "ギア", // gear (-ear)
+    "リニア", // linear
+    { word: "クリア", falsePositives: ["ニュークリア"] }, // clear / 偽同定防止: nuclear
+    "ギア", // gear
 
     // -ier
-    "バリア", // barrier (-ier)
-    "キャリア", // carrier (-ier)
+    "バリア", // barrier
+    "キャリア", // carrier
 
     // -oor
-    "ドア", // door (-oor)
-    "フロア", // floor (-oor)
+    "ドア", // door
+    "フロア", // floor
   ],
   allowBoth: [
-    "ニュークリア", // nuclear (-ear)
+    "ニュークリア", // nuclear
   ],
 };
 export default dict;
