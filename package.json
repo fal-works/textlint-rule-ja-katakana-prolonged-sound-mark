@@ -37,13 +37,13 @@
   },
   "devDependencies": {
     "@fal-works/textlint-rule-ja-katakana-prolonged-sound-mark": "file:",
-    "@textlint/types": "^15.5.2",
-    "@types/mocha": "^10",
+    "@textlint/types": "^15.6.0",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^22",
     "mocha": "^11.7.5",
-    "textlint": "^15.5.2",
-    "textlint-tester": "^15.5.2",
-    "typescript": "^6.0.2"
+    "textlint": "^15.6.0",
+    "textlint-tester": "^15.6.0",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "textlint": ">=15"
