@@ -14,7 +14,7 @@ const dict: DictSource = {
     "アーキテクチャ", // architecture
     "シグネチャ", // signature
     "プロシージャ", // procedure
-    { word: "クロージャ", variants: ["ディスクロージャ"] }, // closure
+    { word: "クロージャ", variants: ["ディスクロージャ", "エンクロージャ"] }, // closure / disclosure / enclosure
     { word: "ストラクチャ", variants: ["インフラストラクチャ"] }, // structure
     "フィクスチャ", // fixture
     "ピクチャ", // picture

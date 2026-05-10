@@ -39,7 +39,7 @@ const dict: DictSource = {
     "プロデューサー", // producer
     "コンピューター", // computer
     "トランスフォーマー", // transformer
-    "マーカー", // marker
+    { word: "マーカー", variants: ["ベンチマーカー"] }, // marker / benchmarker
     "ブローカー", // broker
     { word: "ビューアー", variants: ["レビューアー"] }, // viewer
     { word: "テスター", falsePositives: ["プロテスター"] }, // tester / 偽同定防止: protester
@@ -75,6 +75,14 @@ const dict: DictSource = {
     "デプロイヤー", // deployer
     "スターター", // starter
     "レキサー", // lexer
+    "モッカー", // mocker
+    "モデラー", // modeler / Microsoft のドキュメントでも末尾長音符あり
+    { word: "パッカー", variants: ["アンパッカー"] }, // packer / unpacker
+    "タガー", // tagger
+    "ステマー", // stemmer
+    "スイッチャー", // switcher / Microsoft のドキュメントでも末尾長音符あり
+    "インクリメンター", // incrementer
+    "デクリメンター", // decrementer
     {
       word: "ポーター", // porter
       variants: ["エクスポーター", "インポーター", "トランスポーター"], // exporter, importer, transporter
@@ -122,6 +130,7 @@ const dict: DictSource = {
     "マスター", // master
     "レイヤー", // layer
     "ドライバー", // driver
+    "リピーター", // repeater
 
     // -er （ハードウェア・デバイス）
     "カウンター", // counter
@@ -131,6 +140,9 @@ const dict: DictSource = {
     "キャラクター", // character
     "メンバー", // member
     "ディスクリプター", // descriptor
+    "ブースター", // booster
+    "アービター", // arbiter / Microsoft のドキュメントでも末尾長音符あり
+    "ディスペンサー", // dispenser
 
     // -er （一般）
     "ナンバー", // number
@@ -196,6 +208,12 @@ const dict: DictSource = {
     { word: "センサー", falsePositives: ["ライセンサー"] }, // sensor / 偽同定防止: licenser
     "ライセンサー", // licenser
     "ベクター", // vector
+    "ハイパーバイザー", // hypervisor / Microsoft のドキュメントでも末尾長音符あり
+    "イニシエーター", // initiator / Microsoft のドキュメントでも末尾長音符あり
+    "ナレーター", // narrator / Windows の支援技術製品名としても末尾長音符あり
+    "インストラクター", // instructor
+    { word: "モジュレーター", variants: ["デモジュレーター"] }, // modulator / demodulator
+    "オシレーター", // oscillator
 
     // -ar
     "カレンダー", // calendar

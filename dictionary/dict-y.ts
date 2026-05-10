@@ -58,6 +58,9 @@ const dict: DictSource = {
     // -ly
     "ファミリー", // family / Microsoft のドキュメントでも揺れているので自然なほうを選択
     "アノマリー", // anomaly / 同上
+
+    // -chy
+    "ヒエラルキー", // hierarchy
   ],
   requireNoMark: [
     "プロキシ", // proxy / 技術用語として長音符なしで定着

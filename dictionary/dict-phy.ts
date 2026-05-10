@@ -18,6 +18,8 @@ const dict: DictSource = {
     "バイオグラフィ", // biography
     "フィロソフィ", // philosophy
     "ビブリオグラフィ", // bibliography
+    "ジオグラフィ", // geography
+    "カートグラフィ", // cartography
   ],
 };
 export default dict;
