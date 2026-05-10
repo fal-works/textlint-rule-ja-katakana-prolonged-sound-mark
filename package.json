@@ -33,7 +33,7 @@
     "typecheck": "tsc",
     "build:dict": "node dictionary/index.ts",
     "test": "pnpm run typecheck && pnpm run build:dict && mocha 'test/**/*.test.{js,ts}' --ignore 'test/prepublish/**'",
-    "prepublishOnly": "pnpm test && mocha --timeout 30000 'test/prepublish/**/*.test.{js,ts}'"
+    "prepublishOnly": "pnpm audit && pnpm test && mocha --timeout 30000 'test/prepublish/**/*.test.{js,ts}'"
   },
   "devDependencies": {
     "@fal-works/textlint-rule-ja-katakana-prolonged-sound-mark": "file:",
